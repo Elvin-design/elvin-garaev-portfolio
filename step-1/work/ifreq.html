@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>IFREQ Football App and Scouting Dashboard · Elvin Garaev</title>
+  <meta name="description" content="Case study: a new onboarding, one family account and travel packages for IFREQ, the football platform where young players get tested, rated and scouted by pro clubs.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://elvin-garaev-portfolio.vercel.app/work/ifreq">
+  <meta property="og:title" content="IFREQ Football App and Scouting Dashboard · Elvin Garaev">
+  <meta property="og:description" content="Case study: a new onboarding, one family account and travel packages for IFREQ, the football platform where young players get tested, rated and scouted by pro clubs.">
+  <meta property="og:image" content="https://elvin-garaev-portfolio.vercel.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#141413">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@1,700&display=block">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../case.css">
+  <script>
+    document.documentElement.classList.add('js');
+    var t = null; try { t = localStorage.getItem('eg-theme'); } catch (e) {}
+    /* без ручного выбора тема берётся из настроек системы и браузера, сразу, до первой отрисовки */
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-scheme', t);
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#141413');
+    /* страница всегда открывается с начала, до первой отрисовки: и в обычном браузере, и в окне предпросмотра,
+       где прокручивается внешняя страница (scrollIntoView прокручивает и её) */
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var go = null; try { go = sessionStorage.getItem('eg-goto'); } catch (e) {}
+    if (!location.hash && !go) { try { document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {} }
+    setTimeout(function () { if (!window.__egReady) document.documentElement.classList.remove('js'); }, 3000);
+  </script>
+  <script src="../script.js" defer></script>
+  <script src="../case.js" defer></script>
+  <script src="../live.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3l2 5-2 1a12 12 0 0 0 6 6l1-2 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M4 13 6 5h12l2 8v6H4z"/><path d="M4 13h5l1 2h4l1-2h5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .6 3.4 2.4 3.7 5.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20 11l-8 8a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-6 16-3-7z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 7.5 3.8 2.8-1.5 4.4H9.7l-1.5-4.4z"/><path d="M12 7.5V3.2M15.8 10.3l4.1-1.4M14.3 14.7l2.6 3.6M9.7 14.7l-2.6 3.6M8.2 10.3 4.1 8.9"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.3C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18M7 14.5h4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M10.5 13.5 3 11l1.2-1.6 8.3.9 4.6-5.1a1.9 1.9 0 0 1 2.7 2.7l-5.1 4.6.9 8.3L14 22l-2.5-7.5"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M9 4 4.5 6.3l1.7 3.9L8 9.4V20h8V9.4l1.8.8 1.7-3.9L15 4a3 3 0 0 1-6 0z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="m16 10.5 5-3v9l-5-3"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4M8.2 13.2l7.6 4"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V10M10 2.5h4M18.5 6.5 20 5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4.5" y="5" width="15" height="10.5" rx="1.5"/><path d="M2.5 19h19"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V6M6.5 11.5 12 6l5.5 5.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4 3.5 7.5 7 11M3.5 7.5H17M17 13l3.5 3.5L17 20M20.5 16.5H7"/></symbol>
+  <symbol id="i-finger" viewBox="0 0 24 24"><path d="M7.5 18.5a10 10 0 0 0 1-4.5v-2a3.5 3.5 0 0 1 7 0v1.5M12 12v2.5a14 14 0 0 1-1.5 6.5M15.5 16a17 17 0 0 1-1 4.5M5 15.5a12 12 0 0 0 .5-3.5V12a6.5 6.5 0 0 1 12.2-3.1M19 12.5v1a20 20 0 0 1-.4 4"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M16 13.5h1.5"/></symbol>
+  <symbol id="i-sale" viewBox="0 0 24 24"><path d="M3 14h3.5l3 2h5a1.5 1.5 0 0 0 0-3H11"/><path d="M6.5 14v6H3"/><path d="M14.5 16l4.4-2.5a1.5 1.5 0 0 1 1.6 2.5L15 19.5H9.5"/><circle cx="14" cy="7" r="3.5"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><path d="M4.5 14v-2.5a7.5 7.5 0 0 1 15 0V14"/><rect x="3" y="13" width="4" height="6" rx="1.6"/><rect x="17" y="13" width="4" height="6" rx="1.6"/><path d="M19 19c0 1.4-1.8 2.3-4.5 2.3"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M10 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20H10"/><path d="M15 8l4 4-4 4M19 12H9.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-node" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="16" height="6.5" rx="1.6"/><path d="M8 7.3h.01M8 16.8h.01M12 7.3h4M12 16.8h4"/></symbol>
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3M14.5 10h4M14.5 13.5h3"/></symbol>
+  <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.2-2.3L4.6 15a1.5 1.5 0 0 1 2.4-1.8L9 15"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6.5" rx="5.5" ry="2.5"/><path d="M3.5 6.5v4c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5v-4"/><path d="M9.5 15.4c.9 1 2.9 1.6 5 1.6 3 0 5.5-1.1 5.5-2.5v-4c0-1.2-1.9-2.2-4.4-2.4"/><path d="M3.5 10.5v4c0 1.4 2.5 2.5 5.5 2.5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol>
+</svg>
+<div class="light" aria-hidden="true"></div>
+<div class="frame" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-label="Site navigation">
+  <div class="side-scroll">
+    <a class="item" href="../"><span class="mark">EG</span>Home</a>
+    <div class="side-label">Cases</div>
+    <details class="group" open>
+      <summary><img src="../images/icons/ukrsib.png" alt="" width="22" height="22">UKRSIBBANK<i class="chev"></i></summary>
+      <div class="sub"><a href="ukrsibbank">Omnichannel CRM</a><a href="safe">Banking Safe</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/ifreq.png" alt="" width="22" height="22">IFREQ<i class="chev"></i></summary>
+      <div class="sub"><a class="on" href="ifreq" aria-current="page">Football App and Dashboard</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/barva.png" alt="" width="22" height="22">BARVA.TECH<i class="chev"></i></summary>
+      <div class="sub"><a href="p3-wealth">P3 Wealth × BlackRock</a><a href="p3-marine">P3 Marine</a><a href="cryptoswift">CryptoSwift</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/milli.png" alt="" width="22" height="22">Milli Digital<i class="chev"></i></summary>
+      <div class="sub"><a href="xgo">XGo Wallet</a></div>
+    </details>
+    <a class="item side-xp" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
+  </div>
+
+  <!-- переключатель светлой и тёмной темы -->
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>Light</button>
+    <button type="button" data-set="dark" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>Dark</button>
+  </div>
+
+  <!-- профиль внизу: по нажатию открывается меню -->
+  <div class="profile">
+    <div class="pop" id="pop" hidden>
+      <button type="button" id="open-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c.9-3.6 3.7-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>About</button>
+      <div class="sep"></div>
+      <a class="mail" href="mailto:e.garaev.dg55@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><span>Email<small>e.garaev.dg55@gmail.com</small></span></a>
+      <a href="https://www.linkedin.com/in/elvin-garaev-4798ba255/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><path d="M8 10.5V16M8 7.6v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.4-2.6s2.1.9 2.1 2.6V16"/></svg>LinkedIn<span class="ext" aria-hidden="true">↗</span></a>
+      <a href="https://t.me/el13xx" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 4.5 3.8 11.1c-.8.3-.8 1.4 0 1.7l4.1 1.4 1.6 4.9c.2.7 1.1.9 1.6.4l2.3-2.2 4.2 3.1c.6.4 1.4.1 1.6-.6L21.6 5.6c.2-.8-.4-1.4-1.1-1.1Z"/><path d="m8 14.2 9-6.6"/></svg>Telegram<span class="ext" aria-hidden="true">↗</span></a>
+    </div>
+    <button class="me" type="button" id="me" aria-expanded="false" aria-controls="pop">
+      <img src="../images/elvin/avatar.jpg" alt="" width="40" height="40"><span class="who"><b>Elvin Garaev</b><small>Product Designer</small></span><svg class="updown" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 6 3-3 3 3M5 10l3 3 3-3"/></svg>
+    </button>
+  </div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+<header class="topbar">
+  <a class="logo" href="../" aria-label="Elvin Garaev, back to top">EG</a>
+  <button class="burger" type="button" id="menu-open" aria-expanded="false" aria-controls="sidebar"><span></span><b class="sr">Open menu</b></button>
+</header>
+<div class="about" id="about" role="dialog" aria-modal="true" aria-label="About Elvin Garaev" hidden>
+  <div class="about-scroll">
+  <div class="letter-wrap">
+    <figure class="snap snap-left"><img src="../images/elvin/about-antalya.jpg" alt="Elvin at sunset in Antalya" width="480" height="640"></figure>
+    <figure class="snap snap-right"><img src="../images/elvin/about-child.jpg" alt="Elvin as a child" width="480" height="600"></figure>
+    <div class="close-row"><button class="close-about" type="button" id="close-about" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <article class="letter">
+      <p class="hello">Hi, I’m Elvin Garaev, a Product Designer originally from Azerbaijan.</p>
+      <p>When I was five, my family moved to Kharkiv, Ukraine, where I spent most of my childhood and school years. I later studied <b>International Economics and Business</b> at V. N. Karazin Kharkiv National University, where I spent six years building a strong foundation in economics and business.</p>
+      <p>Before design, sports were a huge part of my life. I competed professionally in both <b>judo and football</b>, which taught me discipline, consistency, and how to work toward long-term goals.</p>
+      <p>I’ve been working in digital and product design for over five years. Today, I focus mainly on <b>FinTech, Banking, Web3, and AI</b> products. With my background in economics and business, I’ve always been especially interested in products connected to finance, where design has to work together with complex business logic and real user needs.</p>
+      <p>Outside of work, I enjoy an active lifestyle, playing football, going to the gym, traveling, and reading books about marketing and economics.</p>
+    </article>
+  </div>
+  </div>
+</div>
+
+<div class="page" id="top">
+<main class="col cs ifreq" id="main">
+
+  <nav class="crumbs" aria-label="Case navigation"><a href="../#cases"><svg><use href="#i-back"/></svg>All cases</a><a href="xgo">Next: XGo Wallet<svg><use href="#i-next"/></svg></a></nav>
+
+  <!-- ============ ОБЛОЖКА ============ -->
+  <header class="cs-hero">
+    <div class="cs-brand">
+      <img class="for-dark" src="../images/logos/ifreq.png" alt="IFREQ">
+      <img class="for-light" src="../images/logos/ifreq-light.png" alt="IFREQ">
+      <div class="cs-tags"><span>Sports tech</span><span>Mobile app</span><span>B2C</span><span>Scouting CRM</span></div>
+    </div>
+    <h1>IFREQ Football<span class="g">From a test day to a pro club trial</span></h1>
+    <p class="cs-lede">IFREQ runs test days for young footballers aged <b>6 to 21</b> in Belgium, France and with partner clubs across Europe. Players sign up in the app, take tests for shooting, passing and mental strength, and get a player card with a rating, just like in FIFA. Scouts from top academies see the cards and the videos and invite the best players to trials. I led design for the <b>app, the scouting dashboard and the website</b>, and a team of designers, marketers and developers.</p>
+    <div class="cs-meta">
+      <div><small>Role</small><b>Lead Product Designer</b></div>
+      <div><small>Company</small><b>IFREQ, Brussels</b></div>
+      <div><small>Timeline</small><b>2025 to 2026</b></div>
+      <div><small>Platform</small><b>iOS, Android, web</b></div>
+      <div><small>Status</small><b>Live</b></div>
+    </div>
+  </header>
+
+  <div class="stage zoomable phz rv" style="height: 640px" tabindex="0" role="button" aria-label="IFREQ app screens, click to zoom in">
+    <div class="glow"></div>
+    <div class="stage-in stage-fade">
+      <div class="shot bare">
+        <div class="fan">
+          <div class="iph side l"><div class="scr"><img src="../images/cases/ifreq/app-welcome.jpg" alt="IFREQ app: welcome screen" width="390" height="844" decoding="async"></div></div>
+          <div class="iph mid"><div class="scr"><img src="../images/cases/ifreq/app-card.jpg" alt="IFREQ app: player card" width="387" height="841" decoding="async"></div></div>
+          <div class="iph side r"><div class="scr"><img src="../images/cases/ifreq/app-ranking.jpg" alt="IFREQ app: ranking" width="387" height="841" decoding="async"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc" style="left: 22px; top: 118px; --fd: 0.7s"><i style="background:#f3fbd2;color:#5a7f00"><svg><use href="#i-flag"/></svg></i><span><b>Test day booked</b><small>Saturday at 09:00</small></span></div>
+    <div class="fc" style="right: 22px; top: 92px; --fd: 0.85s"><i style="background:#e6eefc;color:#2f6fde"><svg><use href="#i-video"/></svg></i><span><b>Dribble test</b><small>5 of 5 hits, video saved</small></span></div>
+    <div class="fc" style="left: 34px; top: 418px; --fd: 1s"><i style="background:#efeafd;color:#6b57d0"><svg><use href="#i-link"/></svg></i><span><b>Family account</b><small>Parent linked</small></span></div>
+    <div class="fc" style="right: 30px; top: 388px; --fd: 1.15s"><i style="background:#fbf0dc;color:#b8740c"><svg><use href="#i-star"/></svg></i><span><b>Trial invitation</b><small>From a pro academy</small></span></div>
+    <span class="hint"><svg><use href="#i-search"/></svg>Click to zoom</span>
+  </div>
+  <p class="note">Screens from the IFREQ app.</p>
+
+  <!-- ============ ЗАЧЕМ ============ -->
+  <section class="sec" style="margin-top: 96px">
+    <div class="label">Why it matters</div>
+    <h2>A fair chance for the player. Peace of mind for the parent. Real data for the scout.</h2>
+    <div class="triad rv">
+      <div class="tr lime" style="--t: 232, 251, 81"><span class="ico"><svg><use href="#i-ball"/></svg></span><small>For the player</small><h3>A fair chance</h3><p>The same tests for everyone, wherever they live. A rating and a video a scout can trust, instead of one lucky afternoon in front of the right person.</p></div>
+      <div class="tr" style="--t: 230, 165, 60"><span class="ico"><svg><use href="#i-heart"/></svg></span><small>For the parent</small><h3>Peace of mind</h3><p>One family account, a clear price for the whole trip and the option to pay in parts. Parents see every result their child gets.</p></div>
+      <div class="tr" style="--t: 91, 141, 239"><span class="ico"><svg><use href="#i-eye"/></svg></span><small>For the scout</small><h3>Real data</h3><p>Comparable cards, test videos, rating and speed for every player in one dashboard, so scouts spend their time on players, not on paperwork.</p></div>
+    </div>
+    <div class="stats rv">
+      <div class="st"><b>6 <em>to 21</em></b><span>the ages of the players IFREQ tests</span></div>
+      <div class="st"><b data-to="50" data-suf="+">50+</b><span>players on trials at top clubs</span></div>
+      <div class="st"><b data-to="20" data-suf="+">20+</b><span>players already signed</span></div>
+      <div class="st"><b data-to="3">3</b><span>products I led design for: the app, the dashboard and the website</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ПРОБЛЕМА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>01</i>The problem</div>
+        <h2>One sign up for four very different people</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">The app treated everyone who downloaded it the same way. But that person could be a coach getting ready to run a test day, a 17 year old with their own bank card, a 10 year old who can't pay for anything, or a parent paying for their child.</p>
+        <p class="t">Families ended up with <b>two separate accounts</b>, one for the parent and one for the child, even though for IFREQ they were one customer. The person who paid and the person who played were not connected.</p>
+        <p class="t">And then there was the trip. Test days happen in a few cities, while players come from all over Europe. For many families the real price was <b>getting there</b>, not the test itself.</p>
+      </div>
+    </div>
+    <div class="idea bad rv">
+      <div class="idea-in" data-fit="1072" data-flow>
+        <svg class="wires" viewBox="0 0 1072 440" aria-hidden="true">
+          <path class="wire" d="M256 94 C 318 94, 326 220, 380 220"/>
+          <path class="wire" d="M256 178 C 318 178, 326 220, 380 220"/>
+          <path class="wire" d="M256 262 C 318 262, 326 220, 380 220"/>
+          <path class="wire" d="M256 346 C 318 346, 326 220, 380 220"/>
+          <path class="wire" d="M692 220 C 742 220, 748 110, 790 110"/>
+          <path class="wire" d="M692 220 C 742 220, 748 212, 790 212"/>
+          <path class="wire" d="M692 220 C 742 220, 748 314, 790 314"/>
+        </svg>
+        <div class="ch" style="top: 66px; --fd: 0.1s"><i style="background:rgba(240,195,107,.16);color:#e0a94a"><svg><use href="#i-timer"/></svg></i><span><b>Coach</b><small>Runs test days</small></span></div>
+        <div class="ch" style="top: 150px; --fd: 0.2s"><i style="background:rgba(91,141,239,.16);color:#6f97ee"><svg><use href="#i-card"/></svg></i><span><b>Player, 16 and over</b><small>Pays with their own card</small></span></div>
+        <div class="ch" style="top: 234px; --fd: 0.3s"><i style="background:rgba(170,200,40,.16);color:#9ab82a"><svg><use href="#i-ball"/></svg></i><span><b>Young player</b><small>Can't pay yet</small></span></div>
+        <div class="ch" style="top: 318px; --fd: 0.4s"><i style="background:rgba(149,133,224,.18);color:#9686e6"><svg><use href="#i-users"/></svg></i><span><b>Parent</b><small>Pays for a child</small></span></div>
+        <div class="hub" style="top: 52px">
+          <header><img src="../images/icons/ifreq.png" alt="">Create account</header>
+          <div class="fld2">Full name<span></span></div>
+          <div class="fld2">Email<span></span></div>
+          <div class="fld2">Password<span></span></div>
+          <div class="fld2">Date of birth<span></span></div>
+          <div class="warn"><svg><use href="#i-alert"/></svg>Who is this account for?</div>
+          <div class="btn2">Continue</div>
+        </div>
+        <div class="out" style="top: 70px; --fd: 0.6s"><b>Two accounts, one family</b><small>Parent and child signed up separately and were never linked.</small></div>
+        <div class="out" style="top: 172px; --fd: 0.7s"><b>The payer and the player apart</b><small>Parents paid from one account, results landed in another.</small></div>
+        <div class="out" style="top: 274px; --fd: 0.8s"><b>Coaches lost in a player app</b><small>Nothing showed them the tools they would use on a test day.</small></div>
+      </div>
+    </div>
+    <p class="note">How sign up worked before, as a schematic.</p>
+  </section>
+
+  <!-- ============ ИССЛЕДОВАНИЕ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>02</i>Research</div>
+        <h2>We called the people who pay and the people who play</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">I ran about 20 interviews with parents and players. Every call covered the same three questions, and the answers kept pointing at the same few problems.</p>
+    </div>
+    <div class="calls rv">
+      <div class="calls-n"><b>≈20</b><span>video calls with parents and players</span></div>
+      <div class="calls-dots" aria-hidden="true"><i style="--fd: 0.10s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.15s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.19s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.24s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.28s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.32s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.37s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.42s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.46s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.51s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.55s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.59s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.64s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.68s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.73s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.77s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.82s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.86s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.91s"><svg><use href="#i-phone"/></svg></i><i style="--fd: 0.95s"><svg><use href="#i-phone"/></svg></i></div>
+      <ol class="calls-q">
+        <li style="--fd: 0.5s"><small>Question 1</small>What works for you today?</li>
+        <li style="--fd: 0.6s"><small>Question 2</small>What gets in your way?</li>
+        <li style="--fd: 0.7s"><small>Question 3</small>Where should IFREQ go next?</li>
+      </ol>
+    </div>
+    <div class="heard rv">
+      <div class="hd-row"><span>What we heard</span><span></span><span>What we built</span></div>
+      <div class="hd-row" style="--fd: 0.2s"><p>Parents decide and pay. Kids play and want to see their rating.</p><svg><use href="#i-next"/></svg><p class="b">One family account with a clear role for everyone in it</p></div>
+      <div class="hd-row" style="--fd: 0.35s"><p>Getting to a test day is the hardest part.</p><svg><use href="#i-next"/></svg><p class="b">Packages with food, hotel and flight, and paying in parts</p></div>
+      <div class="hd-row" style="--fd: 0.5s"><p>Players come back to improve their results.</p><svg><use href="#i-next"/></svg><p class="b">Retests, progress on the player card and easy sharing</p></div>
+    </div>
+    <div class="insight rv">
+      <h3>The customer was never one person.</h3>
+      <p>For IFREQ a customer can be a family, a coach or a 17 year old paying for themselves. Each of them needs a different first step, and the old sign up gave everyone the same one. That became the brief: <b style="color:var(--text);font-weight:500">ask who you are first, then show only what that person needs</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ ОНБОРДИНГ И СЕМЬЯ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>03</i>Onboarding</div>
+        <h2>Four roles and one honest first question</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">The new onboarding starts by asking who you are, and every answer gets its own short path. Nobody sees steps that were meant for someone else.</p>
+    </div>
+    <div class="rolebox rv">
+      <div class="ph-col"><div class="iph"><div class="scr"><div class="rs" data-fit="390" aria-label="Recreated screen: who are you?"><div class="rs-sb"><b>5:13</b><span><i></i><i></i><i></i><em></em></span></div><img class="rs-logo" src="../images/cases/ifreq/ifreq-mark.png" alt="" width="86" height="24"><h4>Who are you?</h4><p>We will show you only the steps you need.</p><div class="rs-o"><span class="rs-i"><svg><use href="#i-timer"/></svg></span><span><b>Coach</b><small>I run test days</small></span></div><div class="rs-o"><span class="rs-i"><svg><use href="#i-card"/></svg></span><span><b>Player, 16+</b><small>I pay for myself</small></span></div><div class="rs-o"><span class="rs-i"><svg><use href="#i-ball"/></svg></span><span><b>Young player</b><small>My parent pays</small></span></div><div class="rs-o on"><span class="rs-i"><svg><use href="#i-users"/></svg></span><span><b>Parent</b><small>I sign up my child</small></span><i class="rs-ck"></i></div><div class="rs-btn">Continue</div></div></div></div></div>
+      <div class="roles">
+        <div class="role" style="--fd: 0.3s"><span class="ico"><svg><use href="#i-timer"/></svg></span><h3>Coach</h3><small>Runs test days</small><p>Sees how the app works before a test day: timers, video recording and results.</p></div>
+        <div class="role" style="--fd: 0.4s"><span class="ico"><svg><use href="#i-card"/></svg></span><h3>Player, 16 and over</h3><small>Pays for themselves</small><p>Signs up and pays for the test day with their own bank card.</p></div>
+        <div class="role" style="--fd: 0.5s"><span class="ico"><svg><use href="#i-ball"/></svg></span><h3>Young player</h3><small>Can't pay yet</small><p>Gets a profile linked to a parent, who pays and follows the results.</p></div>
+        <div class="role" style="--fd: 0.6s"><span class="ico"><svg><use href="#i-users"/></svg></span><h3>Parent</h3><small>Pays for a child</small><p>Creates the family account, adds the future star and books the test day.</p></div>
+      </div>
+    </div>
+    <p class="note">The first step of the new onboarding, recreated for the portfolio.</p>
+    <div class="family rv">
+      <div class="fam-side"><span class="who">Parent</span><div class="iph"><div class="scr"><img src="../images/cases/ifreq/app-register.jpg" alt="IFREQ app: sign up the future star" width="390" height="844" decoding="async"></div></div></div>
+      <div class="fam-link"><span class="lk"><svg><use href="#i-link"/></svg></span><b>One family account</b><small>The parent signs up the future star and books the test day. The player sees the same tests and results.</small></div>
+      <div class="fam-side"><span class="who">Player</span><div class="iph"><div class="scr"><img src="../images/cases/ifreq/app-tests.jpg" alt="IFREQ app: my tests" width="387" height="841" decoding="async"></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ ПАКЕТЫ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>04</i>Getting there</div>
+        <h2>The trip was the real price, so we priced the trip</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">Many players lived far from the nearest test day and had to travel from other cities and countries. Families sorted out food, hotels and flights on their own, and for many that decided whether they came at all. So I designed three packages and the option to pay in parts.</p>
+    </div>
+    <div class="tierbox rv">
+      <div class="tiers">
+        <article class="tier" style="--fd: 0.2s"><span class="ico"><svg><use href="#i-flag"/></svg></span><header><h3>Standard</h3><small>The test day</small></header><ul><li><svg><use href="#i-check"/></svg>Entry to the test day</li><li><svg><use href="#i-check"/></svg>Shooting, passing and mental strength tests</li><li><svg><use href="#i-check"/></svg>Player card with rating and video</li></ul></article>
+        <article class="tier" style="--fd: 0.32s"><span class="ico"><svg><use href="#i-shirt"/></svg></span><header><h3>Plus</h3><small>A full day, taken care of</small></header><ul><li><svg><use href="#i-check"/></svg>Everything in Standard</li><li class="add"><svg><use href="#i-check"/></svg>Food on the test day</li><li class="add"><svg><use href="#i-check"/></svg>IFREQ merch</li></ul></article>
+        <article class="tier pro" style="--fd: 0.44s"><span class="ico"><svg><use href="#i-plane"/></svg></span><header><h3>Pro<span class="badge">Travel included</span></h3><small>For players from far away</small></header><ul><li><svg><use href="#i-check"/></svg>Everything in Plus</li><li class="add"><svg><use href="#i-check"/></svg>Hotel</li><li class="add"><svg><use href="#i-check"/></svg>Flight</li></ul></article>
+        <div class="parts"><span class="tg"><i>Pay in full</i><i class="on">Pay in parts</i></span><p>Families can pay in parts, so the cost of the trip doesn't decide who gets tested.</p></div>
+      </div>
+      <div class="ph-col"><div class="iph"><div class="scr"><img src="../images/cases/ifreq/app-session.jpg" alt="IFREQ app: test day page" width="390" height="844" decoding="async"></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ ДЕНЬ ТЕСТОВ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>05</i>Test day</div>
+        <h2>From the pitch to a player card</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">On the day, coaches run every test from the app. Players take tests for shooting, passing and mental strength, every attempt is filmed, and the results become a player card with a rating, just like in FIFA. That card is what scouts see.</p>
+    </div>
+    <div class="route six rv">
+      <div class="line"></div>
+      <ol>
+        <li style="--fd: 0.1s"><b>01</b><span>Sign up</span><small>Pick your role</small></li>
+        <li style="--fd: 0.3s"><b>02</b><span>Package</span><small>Standard, Plus or Pro</small></li>
+        <li style="--fd: 0.5s"><b>03</b><span>Test day</span><small>On the pitch</small></li>
+        <li style="--fd: 0.7s"><b>04</b><span>Tests</span><small>Shooting, passing, mental strength</small></li>
+        <li style="--fd: 0.9s"><b>05</b><span>Player card</span><small>Rating and video</small></li>
+        <li style="--fd: 1.1s"><b>06</b><span>Trial</span><small>At a pro club</small></li>
+      </ol>
+    </div>
+    <div class="rolebox flip rv">
+      <div class="roles">
+        <div class="role" style="--fd: 0.3s"><span class="ico"><svg><use href="#i-timer"/></svg></span><h3>Tools for coaches</h3><p>Timers, video recording and results in one place, so a test day runs the same way in every city.</p></div>
+        <div class="role" style="--fd: 0.42s"><span class="ico"><svg><use href="#i-video"/></svg></span><h3>Every attempt on video</h3><p>Players see each test with the score and the clip, and can save or share it straight away.</p></div>
+        <div class="role" style="--fd: 0.54s"><span class="ico"><svg><use href="#i-star"/></svg></span><h3>A card scouts trust</h3><p>Technical, tactical, mental and physical scores roll up into one rating on the player card.</p></div>
+      </div>
+      <div class="ph-col"><div class="iph"><div class="scr"><img src="../images/cases/ifreq/app-share.jpg" alt="IFREQ app: test video" width="387" height="841" decoding="async"></div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ ДАШБОРД СКАУТА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>06</i>For scouts</div>
+        <h2>Every tested player, ready to compare</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">The other side of IFREQ is a dashboard for coaches and scouts from top academies. They open a player's card, watch the test videos, compare scores side by side and invite the best players to trials.</p>
+        <p class="t">The new scouting CRM brought player profiles, evaluations, events and video tools together. Scout productivity grew by <b>35%</b>, and AI tagging cut the time spent on reports <b>in half</b>.</p>
+      </div>
+    </div>
+    <div class="stage zoomable rv" style="height: 640px" tabindex="0" role="button" aria-label="Scouting dashboard, click to zoom in">
+      <div class="glow"></div>
+      <div class="stage-in stage-fade">
+        <div class="shot"><img src="../images/cases/ifreq/dashboard.jpg" alt="IFREQ scouting dashboard with the compare view" width="1440" height="1560" decoding="async" style="display:block;width:100%;height:auto"></div>
+      </div>
+      <span class="hint"><svg><use href="#i-search"/></svg>Click to zoom</span>
+    </div>
+    <p class="note">Scouting dashboard with the compare view. Club and player names are demo data.</p>
+    <div class="vw rv" data-auto="5200" style="--vh: 600px; --vhm: 400px">
+      <div class="tabs2" role="group" aria-label="Dashboard screens">
+        <button type="button" aria-pressed="true" data-cap="<b>Club overview.</b> Every tested player of the club in one table, with filters by category, country and position.">Club overview</button>
+        <button type="button" aria-pressed="false" data-cap="<b>Player profile.</b> Score, physical, technical, mental and tactical ratings, speed with and without the ball, and every test video.">Player profile</button>
+      </div>
+      <div class="win2"><div class="win2-bar"><i></i><i></i><i></i><span>IFREQ · Dashboard</span></div>
+        <div class="vw-view">
+          <figure class="vw-f on"><img class="pan" src="../images/cases/ifreq/dash-club.webp" alt="Club overview with the player table and a filter by category, country and position" width="1800" height="1950" loading="lazy" decoding="async"></figure>
+          <figure class="vw-f"><img class="pan" src="../images/cases/ifreq/dash-player.webp" alt="Player profile with ratings, speed tests and test videos" width="1800" height="2853" loading="lazy" decoding="async"></figure>
+        </div>
+        <span class="scroll-hint"><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Scroll inside</span>
+      </div>
+      <p class="vw-cap"></p>
+    </div>
+    <p class="note">Screens from the product. Contacts replaced with demo data.</p>
+  </section>
+
+  <!-- ============ РОСТ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>07</i>Growth</div>
+        <h2>Players come back to beat their own score</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">The strongest growth loop was built into the product. Players return to retake tests and improve their rating, and every new card is something to show friends and teammates. Word of mouth did the rest.</p>
+    </div>
+    <div class="loop rv">
+      <ol>
+        <li class="lp" style="--fd: 0.1s"><span class="ico"><svg><use href="#i-check"/></svg></span><b>Take the tests</b><small>Shooting, passing, mental strength</small></li>
+        <li class="lp" style="--fd: 0.25s"><span class="ico"><svg><use href="#i-star"/></svg></span><b>Get the card</b><small>Rating, scores and video</small></li>
+        <li class="lp" style="--fd: 0.4s"><span class="ico"><svg><use href="#i-bolt"/></svg></span><b>Train in the app</b><small>Training modules with AI guidance</small></li>
+        <li class="lp" style="--fd: 0.55s"><span class="ico"><svg><use href="#i-refresh"/></svg></span><b>Retest</b><small>At the next test day</small></li>
+        <li class="lp" style="--fd: 0.7s"><span class="ico"><svg><use href="#i-share"/></svg></span><b>Share the progress</b><small>Friends and teammates join</small></li>
+      </ol>
+      <div class="ret"><span>And again, to beat their own score</span></div>
+    </div>
+    <div class="doors rv">
+      <div class="door-row">
+        <span class="door" style="--fd: 0.1s"><svg><use href="#i-share"/></svg>Instagram</span>
+        <span class="door" style="--fd: 0.18s"><svg><use href="#i-globe"/></svg>Website</span>
+        <span class="door" style="--fd: 0.26s"><svg><use href="#i-shield"/></svg>Partner academies</span>
+        <span class="door" style="--fd: 0.34s"><svg><use href="#i-users"/></svg>Friends</span>
+        <span class="door" style="--fd: 0.42s"><svg><use href="#i-down"/></svg>App Store and Google Play</span>
+      </div>
+      <svg class="conv" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M100 0 C 100 40, 500 30, 500 70"/><path d="M300 0 C 300 40, 500 30, 500 70"/><path d="M500 0 L 500 70"/><path d="M700 0 C 700 40, 500 30, 500 70"/><path d="M900 0 C 900 40, 500 30, 500 70"/>
+      </svg>
+      <div class="story"><b>Get tested. Get rated. Get scouted.</b><small>Every way in tells the same story, which meant working closely with marketing. A sales team of about 12 people then helps each family choose a package.</small></div>
+    </div>
+    <div class="store rv">
+      <figure><img src="../images/cases/ifreq/store-tested.jpg" alt="Store screenshot: Get tested, get rated, get scouted" width="617" height="1096"></figure>
+      <figure><img src="../images/cases/ifreq/store-card.jpg" alt="Store screenshot: Your player card, your identity" width="618" height="1096"></figure>
+      <figure><img src="../images/cases/ifreq/store-challenge.jpg" alt="Store screenshot: The ultimate football challenge" width="618" height="1096"></figure>
+      <figure><img src="../images/cases/ifreq/store-pro.jpg" alt="Store screenshot: From IFREQ to pro clubs" width="617" height="1096"></figure>
+      <figure><img src="../images/cases/ifreq/store-clubs.jpg" alt="Store screenshot: Trusted by professional clubs" width="617" height="1096"></figure>
+      <figure><img src="../images/cases/ifreq/store-compete.jpg" alt="Store screenshot: Compete with the best" width="617" height="1096"></figure>
+      <figure><img src="../images/cases/ifreq/store-data.jpg" alt="Store screenshot: Turn data into progress" width="617" height="1096"></figure>
+    </div>
+    <p class="note">Store screenshots I designed to sell the app and the test day together.</p>
+  </section>
+
+  <!-- ============ КОМАНДА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>08</i>Leadership</div>
+        <h2>One design voice across product, marketing and sales</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">As Lead Product Designer I ran a mixed team of designers, marketers and the mobile developers who built the app. I worked side by side with the sales team, because they talked to families every day, and I took part in the expansion strategy as IFREQ grew across Europe.</p>
+    </div>
+    <div class="ifq-team rv">
+      <div class="lead"><img src="../images/elvin/avatar.jpg" alt="" width="160" height="160"><span><b>Elvin Garaev</b><small>Lead Product Designer</small></span></div>
+      <div>
+        <div class="grp"><small>I led</small><div class="chips2"><span style="--fd: 0.15s"><i></i>Product designers</span><span style="--fd: 0.22s"><i></i>Graphic designers</span><span style="--fd: 0.29s"><i></i>Motion designers</span><span style="--fd: 0.36s"><i></i>Marketers</span><span style="--fd: 0.43s"><i></i>Mobile developers</span></div></div>
+        <div class="grp"><small>Worked closely with</small><div class="chips2 soft"><span style="--fd: 0.5s"><i></i>Sales team, about 12 people</span><span style="--fd: 0.57s"><i></i>Marketing team</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ РЕЗУЛЬТАТ ============ -->
+  <section class="sec">
+    <div class="label"><i>09</i>Impact</div>
+    <h2>What changed</h2>
+    <div class="stats six rv">
+      <div class="st"><b data-to="32" data-pre="+" data-suf="%">+32%</b><span>user activation after the new sign up and onboarding</span></div>
+      <div class="st"><b data-to="27" data-pre="−" data-suf="%">−27%</b><span>churn across the player journey</span></div>
+      <div class="st"><b data-to="41" data-pre="+" data-suf="%">+41%</b><span>completion of training modules</span></div>
+      <div class="st"><b data-to="35" data-pre="+" data-suf="%">+35%</b><span>scout productivity with the new scouting CRM</span></div>
+      <div class="st"><b data-to="50" data-pre="−" data-suf="%">−50%</b><span>time scouts spend on reports, thanks to AI tagging</span></div>
+      <div class="st"><b data-to="50" data-suf="+">50+</b><span>players on trials at top clubs, and 20+ already signed</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ВЫВОДЫ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>10</i>Reflection</div>
+        <h2>What I learned</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">In products for kids, the parent is part of the experience even when the child holds the phone. The family account and the travel packages mattered more than any screen polish.</p>
+        <p class="t">If I started again, I would treat the whole family journey as one funnel from day one, from the first ad to the trial invitation, and measure it together with marketing and sales.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ НАВИГАЦИЯ ВНИЗУ ============ -->
+  <nav class="pager rv" aria-label="More cases">
+    <a class="pg pg-prev" style="--c: 40, 170, 110" href="ukrsibbank">
+      <span class="pg-th wide" aria-hidden="true"><img src="../images/cases/ukrsib-crm.jpg" alt="" width="1100" height="715"></span>
+      <span><span class="pg-l"><svg><use href="#i-back"/></svg>Previous case</span><b>UKRSIBBANK<br>Omnichannel CRM</b></span>
+    </a>
+    <a class="pg pg-next" style="--c: 255, 140, 185" href="xgo">
+      <span><span class="pg-l">Next case<svg><use href="#i-next"/></svg></span><b>XGo Wallet<br>Crypto and Fiat Mobile Wallet</b></span>
+      <span class="pg-th" aria-hidden="true"><img src="../images/cases/xgo-wallet.jpg" alt="" width="360" height="752"></span>
+    </a>
+  </nav>
+</main>
+<footer class="col" style="margin-top: 72px"><span>© Elvin Garaev</span><span>Senior/Lead Product Designer</span></footer>
+</div>
+</body>
+</html>
