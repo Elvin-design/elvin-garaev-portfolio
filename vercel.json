@@ -1,3 +1,149 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/images/cases/p3-marine.jpg",
+      "destination": "/add/cases/p3-marine.jpg"
+    },
+    {
+      "source": "/images/cases/xgo/banners/2320x130-wallet-1.webp",
+      "destination": "/add/cases/xgo/banners/2320x130-wallet-1.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/600x400.webp",
+      "destination": "/add/cases/xgo/banners/600x400.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/600x500-1.webp",
+      "destination": "/add/cases/xgo/banners/600x500-1.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/600x500-wallet-2-1.webp",
+      "destination": "/add/cases/xgo/banners/600x500-wallet-2-1.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/600x500-wallet-2.webp",
+      "destination": "/add/cases/xgo/banners/600x500-wallet-2.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/746x790-2.webp",
+      "destination": "/add/cases/xgo/banners/746x790-2.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/746x790.webp",
+      "destination": "/add/cases/xgo/banners/746x790.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/780x500-2.webp",
+      "destination": "/add/cases/xgo/banners/780x500-2.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/780x500-3.webp",
+      "destination": "/add/cases/xgo/banners/780x500-3.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/780x500-4.webp",
+      "destination": "/add/cases/xgo/banners/780x500-4.webp"
+    },
+    {
+      "source": "/images/cases/xgo/banners/780x500-5.webp",
+      "destination": "/add/cases/xgo/banners/780x500-5.webp"
+    },
+    {
+      "source": "/images/cases/xgo/ecosystem.jpg",
+      "destination": "/add/cases/xgo/ecosystem.jpg"
+    },
+    {
+      "source": "/images/cases/xgo/landing.webp",
+      "destination": "/add/cases/xgo/landing.webp"
+    },
+    {
+      "source": "/images/cases/xgo/research-board.jpg",
+      "destination": "/add/cases/xgo/research-board.jpg"
+    },
+    {
+      "source": "/images/icons/barva.png",
+      "destination": "/add/icons/barva.png"
+    },
+    {
+      "source": "/images/icons/ifreq.png",
+      "destination": "/add/icons/ifreq.png"
+    },
+    {
+      "source": "/images/icons/milli.png",
+      "destination": "/add/icons/milli.png"
+    },
+    {
+      "source": "/images/icons/ukrsib.png",
+      "destination": "/add/icons/ukrsib.png"
+    },
+    {
+      "source": "/images/icons/xgo.png",
+      "destination": "/add/icons/xgo.png"
+    },
+    {
+      "source": "/images/light-desktop.jpg",
+      "destination": "/add/light-desktop.jpg"
+    },
+    {
+      "source": "/images/light-phone.jpg",
+      "destination": "/add/light-phone.jpg"
+    },
+    {
+      "source": "/images/logos/blackrock.svg",
+      "destination": "/add/logos/blackrock.svg"
+    },
+    {
+      "source": "/images/logos/cryptoswift-color-light.png",
+      "destination": "/add/logos/cryptoswift-color-light.png"
+    },
+    {
+      "source": "/images/logos/cryptoswift-color.png",
+      "destination": "/add/logos/cryptoswift-color.png"
+    },
+    {
+      "source": "/images/logos/ifreq-light.png",
+      "destination": "/add/logos/ifreq-light.png"
+    },
+    {
+      "source": "/images/logos/ifreq.png",
+      "destination": "/add/logos/ifreq.png"
+    },
+    {
+      "source": "/images/logos/p3-marine-light.png",
+      "destination": "/add/logos/p3-marine-light.png"
+    },
+    {
+      "source": "/images/logos/p3-marine.png",
+      "destination": "/add/logos/p3-marine.png"
+    },
+    {
+      "source": "/images/logos/p3-wealth-light.png",
+      "destination": "/add/logos/p3-wealth-light.png"
+    },
+    {
+      "source": "/images/logos/p3-wealth.png",
+      "destination": "/add/logos/p3-wealth.png"
+    },
+    {
+      "source": "/images/logos/ukrsibbank-light.png",
+      "destination": "/add/logos/ukrsibbank-light.png"
+    },
+    {
+      "source": "/images/logos/ukrsibbank.png",
+      "destination": "/add/logos/ukrsibbank.png"
+    },
+    {
+      "source": "/images/logos/xgo-light.png",
+      "destination": "/add/logos/xgo-light.png"
+    },
+    {
+      "source": "/images/logos/xgo.png",
+      "destination": "/add/logos/xgo.png"
+    },
+    {
+      "source": "/images/:path*",
+      "destination": "/:path*"
+    }
+  ]
 }
