@@ -320,7 +320,7 @@
       root.classList.add('ready');
       setTimeout(function () {
         document.querySelectorAll('.tile, .reveal').forEach(function (el) { io.observe(el); });
-                tiles.forEach(function (t) { away.observe(t); });
+  
       }, 900);
     }
     if (document.fonts && document.fonts.ready) {
