@@ -1,3 +1,12 @@
+/* Статистика посещений Vercel Web Analytics: сколько людей, из каких стран, с каких устройств и откуда пришли */
+(function () {
+  if (location.protocol === 'file:') return;
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = '/_vercel/insights/script.js';
+  document.head.appendChild(s);
+})();
 /*
   Поведение сайта: меню на узких экранах, меню профиля, окно About, выбор кейса в сайдбаре
   и анимация «Подъём» при прокрутке. Библиотеки не нужны.
