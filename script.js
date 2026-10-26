@@ -1,6 +1,19 @@
 /* Статистика посещений Vercel Web Analytics: сколько людей, из каких стран, с каких устройств и откуда пришли */
 (function () {
   if (location.protocol === 'file:') return;
+  /* свои заходы не считаем: статистика не отправляется с устройств, где стоит часовой пояс Турции,
+     и из браузеров, где сайт один раз открыли по ссылке с ?notrack (вернуть подсчёт: ссылка с ?track) */
+  var skip = false;
+  try {
+    if (/[?&]notrack\b/.test(location.search)) localStorage.setItem('va-disable', '1');
+    if (/[?&]track\b/.test(location.search)) localStorage.removeItem('va-disable');
+    skip = !!localStorage.getItem('va-disable');
+  } catch (e) {}
+  try {
+    var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz === 'Europe/Istanbul' || tz === 'Asia/Istanbul') skip = true;
+  } catch (e) {}
+  if (skip) return;
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   var s = document.createElement('script');
   s.defer = true;
