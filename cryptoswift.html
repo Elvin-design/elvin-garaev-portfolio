@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CryptoSwift, Crypto Payments for Merchants · Elvin Garaev</title>
+  <meta name="description" content="Case study: CryptoSwift, a B2B platform where merchants accept crypto and get paid in pounds, dollars or euros. A full redesign with fiat first pricing, status first sales, invoices, analytics and five breakpoints.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://elvin-garaev-portfolio.vercel.app/work/cryptoswift">
+  <meta property="og:title" content="CryptoSwift, Crypto Payments for Merchants · Elvin Garaev">
+  <meta property="og:description" content="Case study: CryptoSwift, a B2B platform where merchants accept crypto and get paid in pounds, dollars or euros. A full redesign with fiat first pricing, status first sales, invoices, analytics and five breakpoints.">
+  <meta property="og:image" content="https://elvin-garaev-portfolio.vercel.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#10100f">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preload" href="../fonts/inter-tight-700i-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../case.css">
+  <script>
+    document.documentElement.classList.add('js');
+    var t = null; try { t = localStorage.getItem('eg-theme'); } catch (e) {}
+    /* без ручного выбора тема берётся из настроек системы и браузера, сразу, до первой отрисовки */
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-scheme', t);
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
+    /* страница всегда открывается с начала, до первой отрисовки: и в обычном браузере, и в окне предпросмотра,
+       где прокручивается внешняя страница (scrollIntoView прокручивает и её) */
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var go = null; try { go = sessionStorage.getItem('eg-goto'); } catch (e) {}
+    if (!location.hash && !go) { try { document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {} }
+    setTimeout(function () { if (!window.__egReady) document.documentElement.classList.remove('js'); }, 3000);
+  </script>
+  <script src="../script.js" defer></script>
+  <script src="../case.js" defer></script>
+  <script src="../live.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3l2 5-2 1a12 12 0 0 0 6 6l1-2 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M4 13 6 5h12l2 8v6H4z"/><path d="M4 13h5l1 2h4l1-2h5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .6 3.4 2.4 3.7 5.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20 11l-8 8a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-6 16-3-7z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 7.5 3.8 2.8-1.5 4.4H9.7l-1.5-4.4z"/><path d="M12 7.5V3.2M15.8 10.3l4.1-1.4M14.3 14.7l2.6 3.6M9.7 14.7l-2.6 3.6M8.2 10.3 4.1 8.9"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.3C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18M7 14.5h4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M10.5 13.5 3 11l1.2-1.6 8.3.9 4.6-5.1a1.9 1.9 0 0 1 2.7 2.7l-5.1 4.6.9 8.3L14 22l-2.5-7.5"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M9 4 4.5 6.3l1.7 3.9L8 9.4V20h8V9.4l1.8.8 1.7-3.9L15 4a3 3 0 0 1-6 0z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="m16 10.5 5-3v9l-5-3"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4M8.2 13.2l7.6 4"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V10M10 2.5h4M18.5 6.5 20 5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4.5" y="5" width="15" height="10.5" rx="1.5"/><path d="M2.5 19h19"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V6M6.5 11.5 12 6l5.5 5.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4 3.5 7.5 7 11M3.5 7.5H17M17 13l3.5 3.5L17 20M20.5 16.5H7"/></symbol>
+  <symbol id="i-finger" viewBox="0 0 24 24"><path d="M7.5 18.5a10 10 0 0 0 1-4.5v-2a3.5 3.5 0 0 1 7 0v1.5M12 12v2.5a14 14 0 0 1-1.5 6.5M15.5 16a17 17 0 0 1-1 4.5M5 15.5a12 12 0 0 0 .5-3.5V12a6.5 6.5 0 0 1 12.2-3.1M19 12.5v1a20 20 0 0 1-.4 4"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M16 13.5h1.5"/></symbol>
+  <symbol id="i-sale" viewBox="0 0 24 24"><path d="M3 14h3.5l3 2h5a1.5 1.5 0 0 0 0-3H11"/><path d="M6.5 14v6H3"/><path d="M14.5 16l4.4-2.5a1.5 1.5 0 0 1 1.6 2.5L15 19.5H9.5"/><circle cx="14" cy="7" r="3.5"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><path d="M4.5 14v-2.5a7.5 7.5 0 0 1 15 0V14"/><rect x="3" y="13" width="4" height="6" rx="1.6"/><rect x="17" y="13" width="4" height="6" rx="1.6"/><path d="M19 19c0 1.4-1.8 2.3-4.5 2.3"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M10 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20H10"/><path d="M15 8l4 4-4 4M19 12H9.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-node" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="16" height="6.5" rx="1.6"/><path d="M8 7.3h.01M8 16.8h.01M12 7.3h4M12 16.8h4"/></symbol>
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3M14.5 10h4M14.5 13.5h3"/></symbol>
+  <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.2-2.3L4.6 15a1.5 1.5 0 0 1 2.4-1.8L9 15"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6.5" rx="5.5" ry="2.5"/><path d="M3.5 6.5v4c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5v-4"/><path d="M9.5 15.4c.9 1 2.9 1.6 5 1.6 3 0 5.5-1.1 5.5-2.5v-4c0-1.2-1.9-2.2-4.4-2.4"/><path d="M3.5 10.5v4c0 1.4 2.5 2.5 5.5 2.5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol>
+</svg>
+<div class="light" aria-hidden="true"></div>
+<div class="frame" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-label="Site navigation">
+  <div class="side-scroll">
+    <a class="item" href="../"><span class="mark">EG</span>Home</a>
+    <div class="side-label">Cases</div>
+    <details class="group" open>
+      <summary><img src="../images/icons/ukrsib.png" alt="" width="22" height="22">UKRSIBBANK<i class="chev"></i></summary>
+      <div class="sub"><a href="ukrsibbank">Omnichannel CRM</a><a href="safe">Banking Safe</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/ifreq.png" alt="" width="22" height="22">IFREQ<i class="chev"></i></summary>
+      <div class="sub"><a href="ifreq">Football App and Dashboard</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/barva.png" alt="" width="22" height="22">BARVA.TECH<i class="chev"></i></summary>
+      <div class="sub"><a href="p3-wealth">P3 Wealth × BlackRock</a><a href="p3-marine">P3 Marine</a><a class="on" href="cryptoswift" aria-current="page">CryptoSwift</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/milli.png" alt="" width="22" height="22">Milli Digital<i class="chev"></i></summary>
+      <div class="sub"><a href="xgo">XGo Wallet</a></div>
+    </details>
+    <a class="item side-xp" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
+  </div>
+
+  <!-- переключатель светлой и тёмной темы -->
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>Light</button>
+    <button type="button" data-set="dark" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>Dark</button>
+  </div>
+
+  <!-- профиль внизу: по нажатию открывается меню -->
+  <div class="profile">
+    <div class="pop" id="pop" hidden>
+      <button type="button" id="open-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c.9-3.6 3.7-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>About</button>
+      <div class="sep"></div>
+      <a class="mail" href="mailto:e.garaev.dg55@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><span>Email<small>e.garaev.dg55@gmail.com</small></span></a>
+      <a href="https://www.linkedin.com/in/elvin-garaev-4798ba255/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><path d="M8 10.5V16M8 7.6v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.4-2.6s2.1.9 2.1 2.6V16"/></svg>LinkedIn<span class="ext" aria-hidden="true">↗</span></a>
+      <a href="https://t.me/el13xx" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 4.5 3.8 11.1c-.8.3-.8 1.4 0 1.7l4.1 1.4 1.6 4.9c.2.7 1.1.9 1.6.4l2.3-2.2 4.2 3.1c.6.4 1.4.1 1.6-.6L21.6 5.6c.2-.8-.4-1.4-1.1-1.1Z"/><path d="m8 14.2 9-6.6"/></svg>Telegram<span class="ext" aria-hidden="true">↗</span></a>
+    </div>
+    <button class="me" type="button" id="me" aria-expanded="false" aria-controls="pop">
+      <img src="../images/elvin/avatar.jpg" alt="" width="40" height="40"><span class="who"><b>Elvin Garaev</b><small>Product Designer</small></span><svg class="updown" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 6 3-3 3 3M5 10l3 3 3-3"/></svg>
+    </button>
+  </div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+<header class="topbar">
+  <a class="logo" href="../" aria-label="Elvin Garaev, back to top">EG</a>
+  <button class="burger" type="button" id="menu-open" aria-expanded="false" aria-controls="sidebar"><span></span><b class="sr">Open menu</b></button>
+</header>
+<div class="about" id="about" role="dialog" aria-modal="true" aria-label="About Elvin Garaev" hidden>
+  <div class="about-scroll">
+  <div class="letter-wrap">
+    <figure class="snap snap-left"><img src="../images/elvin/about-antalya.jpg" alt="Elvin at sunset in Antalya" width="480" height="640"></figure>
+    <figure class="snap snap-right"><img src="../images/elvin/about-child.jpg" alt="Elvin as a child" width="480" height="600"></figure>
+    <div class="close-row"><button class="close-about" type="button" id="close-about" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <article class="letter">
+      <p class="hello">Hi, I’m Elvin Garaev, a Product Designer originally from Azerbaijan.</p>
+      <p>When I was five, my family moved to Kharkiv, Ukraine, where I spent most of my childhood and school years. I later studied <b>International Economics and Business</b> at V. N. Karazin Kharkiv National University, where I spent six years building a strong foundation in economics and business.</p>
+      <p>Before design, sports were a huge part of my life. I competed professionally in both <b>judo and football</b>, which taught me discipline, consistency, and how to work toward long-term goals.</p>
+      <p>I’ve been working in digital and product design for over five years. Today, I focus mainly on <b>FinTech, Banking, Web3, and AI</b> products. With my background in economics and business, I’ve always been especially interested in products connected to finance, where design has to work together with complex business logic and real user needs.</p>
+      <p>Outside of work, I enjoy an active lifestyle, playing football, going to the gym, traveling, and reading books about marketing and economics.</p>
+    </article>
+  </div>
+  </div>
+</div>
+
+<div class="page" id="top">
+<main class="col cs crypto" id="main">
+
+  <nav class="crumbs" aria-label="Case navigation"><a href="../#cases"><svg><use href="#i-back"/></svg>All cases</a><a href="ukrsibbank">Next: UKRSIBBANK CRM<svg><use href="#i-next"/></svg></a></nav>
+
+  <!-- ============ ОБЛОЖКА ============ -->
+  <header class="cs-hero">
+    <div class="cs-brand">
+      <img class="for-dark" src="../images/logos/cryptoswift-color.png" alt="CryptoSwift" width="101" height="27">
+      <img class="for-light" src="../images/logos/cryptoswift-color-light.png" alt="CryptoSwift" width="101" height="27">
+      <div class="cs-tags"><span>Fintech</span><span>Crypto payments</span><span>B2B</span><span>Web and mobile</span></div>
+    </div>
+    <h1>CryptoSwift<span class="g">Crypto payments for merchants who don't speak crypto</span></h1>
+    <p class="cs-lede">CryptoSwift lets car dealers, galleries and shops <b>accept crypto and get paid in pounds, dollars or euros</b>. The customer pays in BTC, ETH, USDT or USDC, and the platform locks the price, sells the crypto and sends the money to the merchant's bank. The first version worked for people who understood crypto. I redesigned the whole platform <b>for merchants who don't</b>, from the sale screen to the design system.</p>
+    <div class="cs-meta">
+      <div><small>Role</small><b>UX/UI Designer</b></div>
+      <div><small>Company</small><b>BARVA.TECH</b></div>
+      <div><small>Timeline</small><b>2023</b></div>
+      <div><small>Platform</small><b>Web, desktop and mobile</b></div>
+      <div><small>Status</small><b>Live</b></div>
+    </div>
+  </header>
+
+  <div class="stage live rv">
+    <div class="glow"></div>
+    <div class="stage-in">
+      <div class="shot"><div class="cxm"><div class="cx cx-ns" data-fit="1000" data-flow><div class="cx-top" aria-hidden="true"><img src="../images/cases/cryptoswift/globe.webp" alt="" width="28" height="28">New sale<i>RM</i></div><nav class="cx-nav" aria-hidden="true"><img class="cx-logo" src="../images/cases/cryptoswift/globe.webp" alt="" width="40" height="40"><span class="on"><svg><use href="#i-sale"/></svg>New sale</span><span><svg><use href="#i-chart"/></svg>Dashboard</span><span><svg><use href="#i-file"/></svg>Sales</span><span class="ntf"><svg><use href="#i-bell"/></svg>Notifications</span><span class="x"><svg><use href="#i-help"/></svg>Help</span><i class="sp"></i><span class="x"><svg><use href="#i-gear"/></svg>Settings</span><span class="x"><svg><use href="#i-out"/></svg>Log out</span></nav><div class="cx-main"><div class="cx-hd"><h4>New sale</h4><div class="cx-mer">Riviera Motors<i>RM</i></div></div><div class="cx-card"><h6>Choose payment method</h6><div class="cx-radios" role="group" aria-label="Payment method"><button type="button" data-mode="person" aria-pressed="true">In person sale</button><button type="button" data-mode="invoice" aria-pressed="false">Send an invoice</button></div><div class="cx-lb">Price</div><div class="cx-row two cx-pair"><div><div class="cx-in"><label for="cx-price">Price in GBP <b>*</b></label><span class="cx-cur">£<input id="cx-price" class="cx-price" type="text" inputmode="numeric" value="300,000" autocomplete="off" spellcheck="false"></span></div><div class="cx-hint cx-ph">Minimum £50, maximum £500,000</div><div class="cx-chips" role="group" aria-label="Example prices"><button type="button" data-p="1250">£1,250</button><button type="button" data-p="18500">£18,500</button><button type="button" data-p="38900">£38,900</button><button type="button" class="on" data-p="300000">£300,000</button></div></div><div><div class="cx-in"><small>Crypto currency <b>*</b></small><div class="cx-coins" role="group" aria-label="Crypto currency"><button type="button" data-coin="BTC" aria-pressed="true"><i style="--cc:#f7931a">₿</i>BTC</button><button type="button" data-coin="ETH" aria-pressed="false"><i style="--cc:#627eea">Ξ</i>ETH</button><button type="button" data-coin="USDT" aria-pressed="false"><i style="--cc:#26a17b">₮</i>USDT</button><button type="button" data-coin="USDC" aria-pressed="false"><i style="--cc:#2775ca">$</i>USDC</button></div></div><div class="cx-hint">Indicative price ≈ <span class="cx-ind cx-tick">8.66551 BTC</span></div></div></div><div class="cx-lb">Customer's information</div><div class="cx-row three"><div class="cx-in"><small>Customer's name <b>*</b></small>Sofia Martin</div><div class="cx-in"><small class="cx-rec">Send receipt to (Optional)</small>sofia@martin.co</div><div class="cx-in"><small>Phone number (Optional)</small>+44 7700 900123</div></div><div class="cx-lb">Detailed information</div><div class="cx-desc"><div class="cx-in"><small>Description <b>*</b></small>Riviera GT, 2021, full payment</div><span class="cx-att"><svg><use href="#i-clip"/></svg>Attach photo <small>(Optional)</small></span></div><div class="cx-foot"><b>Indicative price in cryptocurrency</b><span><span class="cx-fc cx-tick">≈ 8.66551 BTC</span><em class="cx-ff">300,000.00 GBP</em></span></div><button type="button" class="cx-go">Make the sale</button></div><div class="cx-view" aria-live="polite"><div class="cx-crumb">Dashboard › Sales › <b class="cx-sid">Sale 48213</b></div><div class="cx-vh"><div class="cx-dh"><button type="button" class="cx-bk" aria-label="Back to the new sale"><svg><use href="#i-back"/></svg></button><h4>Details</h4><span class="cx-badge">Waiting for payment</span></div><div class="cx-acts"><button type="button" class="cx-btn2 ghost cx-cancel">Cancel</button><button type="button" class="cx-btn2 dark cx-again">New sale</button></div></div><div class="cx-steps"><span><i><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></i>AML check</span><span><i><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></i>Crypto received</span><span><i><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></i>Sent to exchange</span><span><i><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></i>Crypto sold</span><span><i><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></i>Paid out</span></div><div class="cx-state wait"><i class="si"><svg><use href="#i-timer"/></svg></i><span><b class="cx-st1">Waiting for payment</b><small class="cx-st2">Show the code to the customer. The price is held for 15 minutes.</small></span><em class="cx-timer"><svg><use href="#i-clock"/></svg><span class="cx-tm">15:00</span></em></div><div class="cx-card cx-pay"><div class="cx-qrw"><div class="cx-qr"></div><div class="cx-qok"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg>Paid</div></div><dl class="cx-dgrid"><div><dt>Sale ID</dt><dd class="v-id">48213</dd></div><div><dt>Payment method</dt><dd class="v-m">In person</dd></div><div><dt>Full name</dt><dd>Sofia Martin</dd></div><div><dt>Fiat</dt><dd class="v-f">£300,000.00</dd></div><div><dt>Crypto</dt><dd class="v-c">8.66551 BTC</dd></div><div><dt>Rate held</dt><dd class="v-r">1 BTC = £34,620</dd></div><div><dt>Date created</dt><dd class="v-d">12 Oct 2023, 14:31</dd></div><div><dt class="v-rl">Receipt sent to</dt><dd>sofia@martin.co</dd></div><div><dt>Fee</dt><dd class="v-fee">£1,500.00</dd></div><div class="cx-more"><div><dt>Description</dt><dd>Riviera GT, 2021, full payment</dd></div><div class="cx-ph3" aria-hidden="true"><span><svg viewBox="0 0 48 32"><path d="M5 22v-4.5l4-6.5h17l7 6.5 9 1.8V22"/><circle cx="13" cy="23" r="3.6"/><circle cx="35" cy="23" r="3.6"/><path d="M16.6 23h14.8M9 17h31"/></svg></span><span><svg viewBox="0 0 48 32"><path d="M8 24V12l8-5h16l8 5v12z"/><path d="M8 16h32M16 24v-4h16v4"/></svg></span><span><svg viewBox="0 0 48 32"><rect x="9" y="5" width="30" height="22" rx="2"/><path d="M14 22h20M14 17h12M14 12h20"/></svg></span></div></div></dl></div></div></div></div></div></div>
+    </div>
+    <span class="hint try"><svg><use href="#i-tap"/></svg>Try it: set a price and make the sale</span>
+  </div>
+  <p class="note">Interactive recreation of the New sale screen. The merchant, the customer and the exchange rates are demo data.</p>
+
+  <!-- ============ КАК УСТРОЕН ============ -->
+  <section class="sec" style="margin-top: 96px">
+    <div class="label">How it works</div>
+    <h2>The customer pays in crypto, the merchant gets paid in pounds</h2>
+    <p class="t">A customer wants to pay for a car, a painting or a watch in crypto. The merchant enters the price in their own currency, the customer scans a code and pays from any wallet, and CryptoSwift does the rest: it checks the payment, sells the crypto at the locked price and sends the money to the merchant's bank within minutes.</p>
+    <div class="flow3 rv">
+      <div class="fn" style="--fd: 0.1s"><span class="ico"><svg><use href="#i-users"/></svg></span><b>Customer</b><small>Pays in BTC, ETH, USDT or USDC from any wallet</small></div>
+      <div class="fa" style="--fd: 0.3s"><span>Crypto</span></div>
+      <div class="fn core" style="--fd: 0.4s"><span class="lg"><img class="for-dark" src="../images/logos/cryptoswift-color.png" alt="CryptoSwift" width="112" height="30"><img class="for-light" src="../images/logos/cryptoswift-color-light.png" alt="CryptoSwift" width="112" height="30"></span><b>CryptoSwift</b><small>Screens the payment, locks the rate and sells the crypto</small></div>
+      <div class="fa" style="--fd: 0.6s"><span>Fiat</span></div>
+      <div class="fn" style="--fd: 0.7s"><span class="ico"><svg><use href="#i-bank"/></svg></span><b>Merchant</b><small>Gets GBP, USD or EUR in the bank within minutes</small></div>
+      <div class="fret" style="--fd: 0.9s">The customer gets the goods, and <b>the merchant never carries the crypto risk</b>: the price is locked at the moment of sale</div>
+    </div>
+  </section>
+
+  <!-- ============ ЧТО Я СДЕЛАЛ ============ -->
+  <section class="sec">
+    <div class="label">What I designed</div>
+    <h2>A full redesign, from the audit to the last breakpoint</h2>
+    <div class="roles6 scope rv">
+      <div class="role" style="--fd: 0.1s"><span class="ico"><svg><use href="#i-search"/></svg></span><h3>Audit</h3><p>Every screen and state reviewed, with more than 60 inconsistencies logged and prioritised.</p></div>
+      <div class="role" style="--fd: 0.18s"><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Design system</h3><p>Tokens, type and components from scratch, built on navy and white.</p></div>
+      <div class="role" style="--fd: 0.26s"><span class="ico"><svg><use href="#i-sale"/></svg></span><h3>New sale</h3><p>In person and invoice sales on one screen, with the price in fiat first.</p></div>
+      <div class="role" style="--fd: 0.34s"><span class="ico"><svg><use href="#i-check"/></svg></span><h3>Statuses</h3><p>One readable status for every sale, from the AML check to the payout.</p></div>
+      <div class="role" style="--fd: 0.42s"><span class="ico"><svg><use href="#i-chart"/></svg></span><h3>Invoices and analytics</h3><p>Two new features: payment links for remote sales and a dashboard for the business.</p></div>
+      <div class="role" style="--fd: 0.5s"><span class="ico"><svg><use href="#i-laptop"/></svg></span><h3>Five breakpoints</h3><p>Desktop, two tablet sizes and two phone layouts, each one built for its context.</p></div>
+    </div>
+    <div class="stats rv">
+      <div class="st"><b data-to="3">3</b><span>core flows redesigned from scratch</span></div>
+      <div class="st"><b>2 <em>→ 1</em></b><span>sale modes on one screen</span></div>
+      <div class="st"><b data-to="4">4</b><span>coins in one sale flow</span></div>
+      <div class="st"><b data-to="3">3</b><span>payout currencies</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ПРОБЛЕМА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>01</i>The problem</div>
+        <h2>Built feature first, used by people who don't speak crypto</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">The platform worked, but it was built feature first and UX last. Merchants without blockchain knowledge were lost within minutes of signing up, and a sale for a car or a painting felt like a leap of faith.</p>
+    </div>
+    <div class="fails rv">
+      <div class="fail" style="--fd: 0.1s"><span>1</span><b>Onboarding without guidance</b><small>New merchants were left alone with wallets, networks and settings.</small></div>
+      <div class="fail" style="--fd: 0.2s"><span>2</span><b>Volatility without context</b><small>No fiat equivalent and no rate on screen while the price moved.</small></div>
+      <div class="fail" style="--fd: 0.3s"><span>3</span><b>Desktop only</b><small>No responsive layouts, though sales happen at counters and in showrooms.</small></div>
+      <div class="fail" style="--fd: 0.4s"><span>4</span><b>No design system</b><small>The same element looked and behaved differently from screen to screen.</small></div>
+      <div class="fail" style="--fd: 0.5s"><span>5</span><b>No invoices or analytics</b><small>Remote sales and any view of the business lived outside the product.</small></div>
+    </div>
+  </section>
+
+  <!-- ============ ИССЛЕДОВАНИЕ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>02</i>Research</div>
+        <h2>Merchants don't want crypto. They want to get paid.</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">I interviewed merchants, audited the platform screen by screen and studied BitPay, CoinGate and Coinbase Commerce. The competitors had solid infrastructure and shared one weak spot: the human layer between the blockchain and the person at the counter.</p>
+    </div>
+    <div class="rs4 rv">
+      <div class="role" style="--fd: 0.1s"><span class="ico"><svg><use href="#i-chat"/></svg></span><h3>Merchant interviews</h3><p>With merchants, an art dealer among them, about how a crypto sale really goes.</p></div>
+      <div class="role" style="--fd: 0.2s"><span class="ico"><svg><use href="#i-search"/></svg></span><h3>Platform audit</h3><p>Every screen and state, with more than 60 inconsistencies catalogued.</p></div>
+      <div class="role" style="--fd: 0.3s"><span class="ico"><svg><use href="#i-eye"/></svg></span><h3>Competitive review</h3><p>BitPay, CoinGate and Coinbase Commerce, compared flow by flow.</p></div>
+      <div class="role" style="--fd: 0.4s"><span class="ico"><svg><use href="#i-check"/></svg></span><h3>Usability tests</h3><p>A simplified version against the old one, with far better comprehension.</p></div>
+    </div>
+    <div class="thought rv">
+      <div class="was" style="--fd: 0.2s"><small>The user the first version assumed</small><h3>Crypto natives who want the details</h3><p>Wallet addresses, networks and confirmations on screen, as if everyone read them.</p></div>
+      <div class="is" style="--fd: 0.35s"><small>The user we actually had</small><h3>Merchants who think in pounds</h3><p>They wanted three answers: how much, did it work, and when the money arrives.</p></div>
+    </div>
+    <div class="quote rv">
+      <div class="qm">“</div>
+      <div><blockquote>I had no idea if it worked. The screen said something. I didn't know if I should wait or do something else.</blockquote><cite>Art dealer, merchant interview, 2023</cite></div>
+    </div>
+    <div class="insight rv">
+      <h3>Merchants care about getting paid and having a paper trail, not about the blockchain.</h3>
+      <p>That became the north star for every screen: speak in fiat, show one status anyone can read and keep a record of every sale. <b style="color:var(--text);font-weight:500">The blockchain stays in the background.</b></p>
+    </div>
+  </section>
+
+  <!-- ============ ФИАТ ПРЕЖДЕ ВСЕГО ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>03</i>Fiat first</div>
+        <h2>The price in pounds never moves</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">Crypto prices move every second, and a merchant shouldn't have to watch them. The price is entered in fiat and locked for the sale, and the crypto amount became a secondary line that updates itself.</p>
+        <p class="t">Fiat is primary and crypto is secondary on every screen, from the new sale to the receipt.</p>
+      </div>
+    </div>
+    <div class="fx rv">
+      <div class="fx-c before">
+        <small>Before</small>
+        <div class="fx-k">The merchant saw</div>
+        <div class="fx-big">8.66551 BTC</div>
+        <div class="fx-sm">In pounds: <b>not shown</b></div>
+        <svg class="fx-spark" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M0 32 L300 32"/></svg>
+        <p>A crypto amount that changed while the customer was still at the counter, and <b>no way to tell what it meant in pounds</b>.</p>
+      </div>
+      <div class="fx-c after">
+        <small>After</small>
+        <div class="fx-k">The merchant sees</div>
+        <div class="fx-big">£300,000.00<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg></div>
+        <div class="fx-sm">≈ <b class="fx-c2">8.66551 BTC</b> at the current rate</div>
+        <svg class="fx-spark" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 32 L300 32"/><path d="M0 32 L300 32"/></svg>
+        <p>The price in pounds is fixed, and <b>the crypto line follows the market</b> on its own, so nobody has to do the maths.</p>
+      </div>
+    </div>
+    <p class="note">Live comparison with demo rates.</p>
+    <div class="feats rv">
+      <article class="ft">
+        <div class="pic"><div class="dmx" data-flip="2600">
+          <div class="dmx-r"><span>In person sale</span><span>Send an invoice</span></div>
+          <div class="dmx-f"><small class="a">Send receipt to (Optional)</small><small class="b">Send invoice to <i>*</i></small><b>sofia@martin.co</b></div>
+          <div class="dmx-btn"><span class="a">Make the sale</span><span class="b">Send the invoice</span></div>
+        </div></div>
+        <div class="tx"><h3>In person or invoice, one screen</h3><p>The same form serves the counter and remote sales. One switch changes the receipt field and the button.</p></div>
+      </article>
+      <article class="ft">
+        <div class="pic"><div class="phx">
+          <div class="phx-f"><small>Description</small><b>Riviera GT, 2021, full payment</b></div>
+          <div class="phx-att"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach photo</div>
+          <div class="phx-g">
+            <span><svg viewBox="0 0 48 32"><path d="M5 22v-4.5l4-6.5h17l7 6.5 9 1.8V22"/><circle cx="13" cy="23" r="3.6"/><circle cx="35" cy="23" r="3.6"/><path d="M16.6 23h14.8M9 17h31"/></svg></span>
+            <span><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="7.5"/><path d="M12.5 9.2 13.5 3h5l1 6.2M12.5 22.8l1 6.2h5l1-6.2M16 12v4l2.5 2"/></svg></span>
+            <span><svg viewBox="0 0 40 32"><rect x="5" y="4" width="30" height="24" rx="1.5"/><path d="M5 23l9-8 7 6 5-4 9 7"/><circle cx="27" cy="11" r="2.5"/></svg></span>
+          </div>
+        </div></div>
+        <div class="tx"><h3>A photo as proof</h3><p>For high value goods, merchants attach photos of what was sold, so every record shows what the money was for.</p></div>
+      </article>
+      <article class="ft">
+        <div class="pic"><div class="rcx">
+          <div class="rcx-h"><i>RM</i>Riviera Motors<small>Receipt</small></div>
+          <div class="rcx-b"><b>£18,500.00</b><small>0.53437 BTC</small>
+            <dl><div><dt>Rate</dt><dd>1 BTC = £34,620</dd></div><div><dt>Paid</dt><dd>9 Oct 2023, 15:04</dd></div><div><dt>Status</dt><dd class="g">Completed</dd></div></dl>
+          </div>
+        </div></div>
+        <div class="tx"><h3>A receipt with both numbers</h3><p>Customers get a receipt by email or text with the price in pounds and the amount in crypto side by side.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ СТАТУС ПРЕЖДЕ ВСЕГО ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>04</i>Status first</div>
+        <h2>One status anyone can read</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">Behind every sale there are five technical steps: the AML check, the crypto arriving, the transfer to the exchange, the sale and the payout. Merchants see them as one line of progress under a single status.</p>
+        <p class="t">The most visible thing on the screen is a <b>green Completed</b> when the money is on its way, and the sales history keeps the paper trail merchants asked for.</p>
+      </div>
+    </div>
+    <div class="stage live rv">
+      <div class="glow"></div>
+      <div class="stage-in">
+        <div class="shot"><div class="cxm"><div class="cx cx-sl" data-fit="1000" data-flow><div class="cx-top" aria-hidden="true"><img src="../images/cases/cryptoswift/globe.webp" alt="" width="28" height="28">Sales<i>RM</i></div><nav class="cx-nav" aria-hidden="true"><img class="cx-logo" src="../images/cases/cryptoswift/globe.webp" alt="" width="40" height="40"><span><svg><use href="#i-sale"/></svg>New sale</span><span><svg><use href="#i-chart"/></svg>Dashboard</span><span class="on"><svg><use href="#i-file"/></svg>Sales</span><span class="ntf"><svg><use href="#i-bell"/></svg>Notifications</span><span class="x"><svg><use href="#i-help"/></svg>Help</span><i class="sp"></i><span class="x"><svg><use href="#i-gear"/></svg>Settings</span><span class="x"><svg><use href="#i-out"/></svg>Log out</span></nav><div class="cx-main"><div class="cx-hd"><h4>Sales</h4><div class="cx-mer">Riviera Motors<i>RM</i></div></div><div class="cx-tools"><div class="cx-filt" role="group" aria-label="Filter sales"><button type="button" data-f="all" aria-pressed="true">All<em>8</em></button><button type="button" data-f="done" aria-pressed="false">Completed<em>5</em></button><button type="button" data-f="pend" aria-pressed="false">Pending<em>2</em></button><button type="button" data-f="exp" aria-pressed="false">Expired<em>1</em></button></div><label class="cx-search"><svg><use href="#i-search"/></svg><input type="search" placeholder="Search by name or ID" aria-label="Search sales" autocomplete="off"></label><span class="cx-exp"><svg><use href="#i-down"/></svg>Export CSV</span></div><div class="cx-tbl"><div class="cx-tr h"><span class="t-id">ID</span><span class="t-d">Date</span><span>Customer</span><span class="t-m">Method</span><span class="t-n">Fiat</span><span class="t-n t-c">Crypto</span><span>Status</span></div><button type="button" class="cx-tr" data-s="done" data-t="14:31 14:32 14:32 14:33 14:36"><span class="t-id">48213</span><span class="t-d">12 Oct, 14:31</span><b class="t-nm">Sofia Martin</b><span class="t-m">In person</span><span class="t-n">£300,000.00</span><span class="t-n t-c">8.66551 BTC</span><span class="cx-chip k-done">Completed</span></button><button type="button" class="cx-tr" data-s="done" data-t="11:19 11:20 11:20 11:21 11:24"><span class="t-id">48207</span><span class="t-d">12 Oct, 11:05</span><b class="t-nm">Daniel Reyes</b><span class="t-m">Invoice</span><span class="t-n">£38,900.00</span><span class="t-n t-c">49,209.36 USDT</span><span class="cx-chip k-done">Completed</span></button><button type="button" class="cx-tr" data-s="wait" data-t=""><span class="t-id">48199</span><span class="t-d">11 Oct, 17:48</span><b class="t-nm">Amira Haddad</b><span class="t-m">Invoice</span><span class="t-n">£12,450.00</span><span class="t-n t-c">6.8709 ETH</span><span class="cx-chip k-wait">Waiting for payment</span></button><button type="button" class="cx-tr" data-s="done" data-t="10:13 10:14 10:14 10:15 10:18"><span class="t-id">48188</span><span class="t-d">11 Oct, 10:12</span><b class="t-nm">Lucas Moreau</b><span class="t-m">In person</span><span class="t-n">£5,000.00</span><span class="t-n t-c">0.14443 BTC</span><span class="cx-chip k-done">Completed</span></button><button type="button" class="cx-tr" data-s="exp" data-t=""><span class="t-id">48176</span><span class="t-d">10 Oct, 16:20</span><b class="t-nm">Hannah Weber</b><span class="t-m">Invoice</span><span class="t-n">£1,250.00</span><span class="t-n t-c">1,581.88 USDC</span><span class="cx-chip k-exp">Expired</span></button><button type="button" class="cx-tr" data-s="run" data-t="12:38 12:39 12:39"><span class="t-id">48170</span><span class="t-d">10 Oct, 12:37</span><b class="t-nm">Tom Okafor</b><span class="t-m">In person</span><span class="t-n">£64,000.00</span><span class="t-n t-c">35.3201 ETH</span><span class="cx-chip k-run">Converting</span></button><button type="button" class="cx-tr" data-s="done" data-t="15:03 15:04 15:04 15:05 15:08"><span class="t-id">48161</span><span class="t-d">9 Oct, 15:03</span><b class="t-nm">Elena Rossi</b><span class="t-m">In person</span><span class="t-n">£18,500.00</span><span class="t-n t-c">0.53437 BTC</span><span class="cx-chip k-done">Completed</span></button><button type="button" class="cx-tr" data-s="done" data-t="10:02 10:03 10:03 10:04 10:07"><span class="t-id">48152</span><span class="t-d">9 Oct, 09:41</span><b class="t-nm">Marco Bianchi</b><span class="t-m">Invoice</span><span class="t-n">£2,300.00</span><span class="t-n t-c">2,909.55 USDT</span><span class="cx-chip k-done">Completed</span></button><div class="cx-empty" hidden>No sales match the search</div></div><aside class="cx-drw" aria-label="Sale details"><header><span>Sale <b class="d-id">48213</b></span><button type="button" class="cx-x" aria-label="Close"><svg><use href="#i-x"/></svg></button></header><div class="cx-big"><span class="cx-chip k-done d-chip">Completed</span><b class="d-f">£300,000.00</b><small class="d-c">8.66551 BTC</small></div><ol class="cx-tl"><li><i></i><span>AML check</span><em></em></li><li><i></i><span>Crypto received</span><em></em></li><li><i></i><span>Sent to exchange</span><em></em></li><li><i></i><span>Crypto sold</span><em></em></li><li><i></i><span>Paid out</span><em></em></li></ol><dl class="cx-dl2"><div><dt>Customer</dt><dd class="d-n">Sofia Martin</dd></div><div><dt>Method</dt><dd class="d-m">In person</dd></div><div><dt>Created</dt><dd class="d-d">12 Oct, 14:31</dd></div></dl><div class="cx-dact"><span>Receipt</span><span>Export PDF</span></div></aside></div></div></div></div>
+      </div>
+      <span class="hint try"><svg><use href="#i-tap"/></svg>Try it: filter the sales or open one</span>
+    </div>
+    <p class="note">Interactive recreation of the sales history with demo sales.</p>
+  </section>
+
+  <!-- ============ СТОРОНА ПОКУПАТЕЛЯ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>05</i>The customer's side</div>
+        <h2>Paying should feel as simple as a card</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">A sale has two sides. Here is a concept of the customer's payment page, drawn for this portfolio to show how both sides tell the same story: the price in pounds first, one code to scan, a timer for the locked price and one green status for both people.</p>
+    </div>
+    <div class="payx rv">
+      <div class="payx-side">
+        <h3>What the customer sees</h3>
+        <p>A payment page that opens from the link in an invoice.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg>The price in pounds first, the crypto second</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg>Four coins, one tap to switch</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg>One code and one address, nothing to type</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg>A timer that shows how long the price is held</li>
+        </ul>
+      </div>
+      <div class="iph"><div class="scr"><div class="pg2">
+        <div class="pg2-m"><i>RM</i>Riviera Motors<small>Invoice 48199</small></div>
+        <div class="pg2-amt"><small>Amount to pay</small><b>£12,450.00</b><span class="pg2-c">6.8709 ETH</span></div>
+        <div class="pg2-coins" role="group" aria-label="Pay with">
+          <button type="button" data-coin="BTC" aria-pressed="false"><i style="--cc:#f7931a">₿</i>BTC</button>
+          <button type="button" data-coin="ETH" aria-pressed="true"><i style="--cc:#627eea">Ξ</i>ETH</button>
+          <button type="button" data-coin="USDT" aria-pressed="false"><i style="--cc:#26a17b">₮</i>USDT</button>
+          <button type="button" data-coin="USDC" aria-pressed="false"><i style="--cc:#2775ca">$</i>USDC</button>
+        </div>
+        <div class="pg2-qr"><div class="pg2-q"></div><div class="pg2-ok"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg>Payment received</div></div>
+        <div class="pg2-addr"><span>0x7a3F…c91E</span><b>Copy</b></div>
+        <div class="pg2-t"><span>Network</span><b class="net pg2-net">Ethereum</b></div>
+        <div class="pg2-t"><span class="pg2-tl">Price held for</span><b class="pg2-tm">14:59</b></div>
+        <div class="pg2-how"><span><i>1</i>Open your wallet</span><span><i>2</i>Scan the code</span><span><i>3</i>Confirm the payment</span></div>
+        <button type="button" class="pg2-btn">Pay with wallet</button>
+      </div></div></div>
+      <div class="payx-side">
+        <h3>What the merchant sees</h3>
+        <p>The same sale in the merchant's history, updating while the customer pays.</p>
+        <div class="mm">
+          <header><span><b>Sale 48199</b><small>Amira Haddad · Invoice</small></span><span class="mm-st">Waiting for payment</span></header>
+          <div class="mm-bar"><i></i><i></i><i></i><i></i><i></i></div>
+          <p>£12,450.00 · <b class="mm-c">6.8709 ETH</b></p>
+        </div>
+      </div>
+    </div>
+    <p class="note">Concept drawn for the portfolio with demo rates. Switch the coin or pay with the wallet button.</p>
+  </section>
+
+  <!-- ============ ДОВЕРИЕ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>06</i>Trust and compliance</div>
+        <h2>Compliance that doesn't feel like paperwork</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">Accepting crypto comes with rules. Every payment is screened, every merchant is verified and no address is ever used twice. The design job was to keep all of it visible and none of it in the way.</p>
+    </div>
+    <div class="trust rv">
+      <div class="trow" style="--fd: 0.1s"><i><svg><use href="#i-shield"/></svg></i><b>AML check on every payment</b><p>Incoming payments are screened with Elliptic before a sale moves on. Merchants see it as the first step of the sale, not as a risk report.</p></div>
+      <div class="trow" style="--fd: 0.18s"><i><svg><use href="#i-id"/></svg></i><b>Verified merchants</b><p>Every business passes KYC through an identity verification partner before its first sale.</p></div>
+      <div class="trow" style="--fd: 0.26s"><i><svg><use href="#i-wallet"/></svg></i><b>A new address for every sale</b><p>Single use wallets mean a payment can never land on the wrong sale.</p></div>
+      <div class="trow" style="--fd: 0.34s"><i><svg><use href="#i-node"/></svg></i><b>Own blockchain nodes</b><p>Payments are tracked on CryptoSwift's own nodes instead of a third party service.</p></div>
+      <div class="trow" style="--fd: 0.42s"><i><svg><use href="#i-target"/></svg></i><b>Penetration testing</b><p>The platform is tested by independent security specialists.</p></div>
+      <div class="trow" style="--fd: 0.5s"><i><svg><use href="#i-bank"/></svg></i><b>Money in the bank within minutes</b><p>Funds move to the merchant's bank account automatically, with no manual withdrawal.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ СЧЕТА И АНАЛИТИКА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>07</i>Invoices and analytics</div>
+        <h2>Two features the business was missing</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">Merchants sell remotely too, so invoices became the second mode of the same sale screen: the customer gets a link and pays from anywhere.</p>
+        <p class="t">The analytics dashboard shows sales volume in fiat, the coins customers pay with and how sales move over time.</p>
+      </div>
+    </div>
+    <div class="stage live rv">
+      <div class="glow"></div>
+      <div class="stage-in">
+        <div class="shot"><div class="anx" data-fit="1000" data-flow>
+          <div class="anx-h"><h4>Dashboard</h4>
+            <div class="anx-seg" role="group" aria-label="Period"><button type="button" data-p="week" aria-pressed="true">Week</button><button type="button" data-p="month" aria-pressed="false">Month</button><button type="button" data-p="year" aria-pressed="false">Year</button></div>
+          </div>
+          <div class="anx-k">
+            <div><small>Sales volume</small><b class="k-vol">£0</b><em class="k-vd">+0%</em></div>
+            <div><small>Sales</small><b class="k-cnt">0</b><em class="k-cd">+0%</em></div>
+            <div><small>Average sale</small><b class="k-avg">£0</b><em class="k-ad">+0%</em></div>
+            <div><small>Paid out</small><b class="k-out">£0</b><em class="k-od">to the bank</em></div>
+          </div>
+          <div class="anx-g">
+            <div class="anx-ch"><header><span>Sales volume by coin</span><small class="anx-sub">Last 7 days, in GBP</small></header>
+              <div class="anx-plot"><div class="anx-yl"><span>£0</span><span>£0</span><span>£0</span><span>£0</span><span>£0</span></div><div class="anx-bars"></div></div>
+              <div class="anx-x"></div>
+              <div class="anx-leg"><span style="--cc:#f7931a">BTC</span><span style="--cc:#627eea">ETH</span><span style="--cc:#26a17b">USDT</span><span style="--cc:#2775ca">USDC</span></div>
+            </div>
+            <div class="anx-mix"><header>Paid with</header>
+              <div><i class="c" style="--cc:#f7931a">₿</i><span>Bitcoin</span><b class="m0">0%</b><div class="mbar"><span style="--cc:#f7931a"></span></div></div>
+              <div><i class="c" style="--cc:#26a17b">₮</i><span>Tether</span><b class="m2">0%</b><div class="mbar"><span style="--cc:#26a17b"></span></div></div>
+              <div><i class="c" style="--cc:#627eea">Ξ</i><span>Ethereum</span><b class="m1">0%</b><div class="mbar"><span style="--cc:#627eea"></span></div></div>
+              <div><i class="c" style="--cc:#2775ca">$</i><span>USD Coin</span><b class="m3">0%</b><div class="mbar"><span style="--cc:#2775ca"></span></div></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <span class="hint try"><svg><use href="#i-tap"/></svg>Try it: switch the period</span>
+    </div>
+    <p class="note">Recreated with demo data.</p>
+  </section>
+
+  <!-- ============ ДИЗАЙН-СИСТЕМА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>08</i>Design system</div>
+        <h2>Navy, white and five breakpoints</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">I built the design system from scratch: color and type tokens, inputs with every state, buttons, coin selectors, status chips and the navigation. It resolved more than 60 inconsistencies from the audit.</p>
+        <p class="t">Two versions of the navigation went through an A/B test with merchants. They preferred the dark one, so the dark one shipped.</p>
+      </div>
+    </div>
+    <div class="navx rv">
+      <div class="navx-v"><div class="cx" data-fit="760" inert><nav class="cx-nav" aria-hidden="true"><img class="cx-logo" src="../images/cases/cryptoswift/globe.webp" alt="" width="40" height="40"><span class="on"><svg><use href="#i-sale"/></svg>New sale</span><span><svg><use href="#i-chart"/></svg>Dashboard</span><span><svg><use href="#i-file"/></svg>Sales</span><span class="ntf"><svg><use href="#i-bell"/></svg>Notifications</span><i class="sp"></i></nav><div class="cx-main"><div class="cx-hd"><h4>New sale</h4><div class="cx-mer">Riviera Motors<i>RM</i></div></div><div class="cx-card"><h6>Choose payment method</h6><div class="cx-radios"><button type="button" aria-pressed="true">In person sale</button><button type="button" aria-pressed="false">Send an invoice</button></div><div class="cx-row two" style="margin-top:14px"><div class="cx-in"><small>Price in GBP <b>*</b></small>£ 300,000</div><div class="cx-in"><small>Crypto currency <b>*</b></small><div class="cx-coins"><button type="button" data-coin="BTC" aria-pressed="true"><i style="--cc:#f7931a">₿</i>BTC</button><button type="button" data-coin="ETH" aria-pressed="false"><i style="--cc:#627eea">Ξ</i>ETH</button><button type="button" data-coin="USDT" aria-pressed="false"><i style="--cc:#26a17b">₮</i>USDT</button><button type="button" data-coin="USDC" aria-pressed="false"><i style="--cc:#2775ca">$</i>USDC</button></div></div></div><button type="button" class="cx-go">Make the sale</button></div></div></div></div>
+      <div class="navx-side">
+        <h3>Dark or light navigation</h3>
+        <p>Both versions of the New sale screen went to merchants in an A/B test.</p>
+        <div class="tabs2" role="group" aria-label="Navigation version"><button type="button" data-nav="dark" aria-pressed="true">Dark</button><button type="button" data-nav="light" aria-pressed="false">Light</button></div>
+        <div class="navx-res"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg>Merchants preferred dark, and it shipped</div>
+      </div>
+    </div>
+    <div class="win2 dsw rv"><div class="win2-bar"><i></i><i></i><i></i><span>CryptoSwift · Design system</span></div><div class="dsx" data-fit="1040" data-flow><div><h6>Color</h6><div class="dsx-sw"><div class="" style="background:#10132c"><b>Navy</b><span>#10132c</span><span>Navigation</span></div><div class="lt" style="background:#c9cdf8"><b>Lavender</b><span>#c9cdf8</span><span>Active</span></div><div class="" style="background:#4661ff"><b>Blue</b><span>#4661ff</span><span>Selection</span></div><div class="lt" style="background:#f2f3f7"><b>Mist</b><span>#f2f3f7</span><span>Background</span></div><div class="" style="background:#1f9d57"><b>Green</b><span>#1f9d57</span><span>Completed</span></div><div class="" style="background:#e5484d"><b>Red</b><span>#e5484d</span><span>Errors</span></div></div><h6 class="gap">Type</h6><div class="dsx-ty"><div><small>H1</small><span style="font-size:28px;font-weight:600;letter-spacing:-0.015em">New sale</span><em>30 Semibold</em></div><div><small>H2</small><span style="font-size:21px;font-weight:600">Details</span><em>22 Semibold</em></div><div><small>Body</small><span style="font-size:14px">Sofia Martin</span><em>14 Regular</em></div><div><small>Label</small><span style="font-size:11px;font-weight:600;letter-spacing:0.06em;color:#5b5f86">PRICE</span><em>11 Semibold</em></div><div><small>Figures</small><span style="font-size:16px;font-weight:600;font-variant-numeric:tabular-nums">£300,000.00</span><em>16 Tabular</em></div></div></div><div><h6>Inputs</h6><div class="dsx-in"><div class="cx-in"><small>Customer's name <b>*</b></small>Sofia Martin</div><div class="cx-in foc"><small>Send receipt to (Optional)</small>sofia@martin.co</div><div class="cx-in err"><small>Price in GBP <b>*</b></small>£ 25</div><div class="cx-hint err">Minimum £50, maximum £500,000</div><div class="cx-in dis"><small>Crypto currency</small>Enter the price first</div></div><h6 class="gap">Coins</h6><div class="dsx-coins"><span class="on"><i style="--cc:#f7931a">₿</i>BTC</span><span class=""><i style="--cc:#627eea">Ξ</i>ETH</span><span class=""><i style="--cc:#26a17b">₮</i>USDT</span><span class=""><i style="--cc:#2775ca">$</i>USDC</span></div></div><div><h6>Buttons</h6><div class="dsx-btns"><span class="dsx-btn">Make the sale</span><span class="dsx-btn h">Hover</span><span class="dsx-btn g">Cancel</span><span class="dsx-btn o">New sale</span><span class="dsx-btn d">Disabled</span><span class="dsx-btn o" style="box-shadow:none;gap:6px;display:flex;justify-content:center;align-items:center"><svg><use href="#i-clip"/></svg>Attach</span></div><h6 class="gap">Status</h6><div class="dsx-chips"><span class="cx-chip k-done">Completed</span><span class="cx-chip k-wait">Waiting for payment</span><span class="cx-chip k-run">Converting</span><span class="cx-chip k-exp">Expired</span></div><h6 class="gap">Progress</h6><div class="dsx-prog"><span class="ok"></span><span class="ok"></span><span class="now"></span><span></span><span></span></div></div></div></div>
+    <p class="note">Redrawn from the original system.</p>
+    <div class="split" style="margin-top: 72px">
+      <div><h2 style="font-size: 22px">Five breakpoints, one sale</h2></div>
+      <p class="t" style="margin-top: 0">Sales happen at a desk, on a showroom floor and at the door. Each breakpoint got its own layout instead of a scaled down copy: the landscape tablet works as a point of sale, and on a phone the menu moves under the thumb.</p>
+    </div>
+    <div class="bpc rv">
+      <div class="tabs2" role="group" aria-label="Screen width">
+        <button type="button" data-w="1440" data-h="900" data-dev="desk" aria-pressed="true" data-cap="<b>Desktop 1440.</b> The form and the day's sales side by side, for the back office.">Desktop <b>1440</b></button>
+        <button type="button" data-w="1024" data-h="768" data-dev="tablet" aria-pressed="false" data-cap="<b>Tablet 1024.</b> A point of sale on the showroom floor, with a keypad for the price.">Tablet <b>1024</b></button>
+        <button type="button" data-w="768" data-h="1024" data-dev="tablet" aria-pressed="false" data-cap="<b>Tablet 768.</b> A slimmer menu and the customer fields in two rows.">Tablet <b>768</b></button>
+        <button type="button" data-w="390" data-h="844" data-dev="phone" aria-pressed="false" data-cap="<b>Phone 390.</b> One column, and the menu moves down under the thumb.">Phone <b>390</b></button>
+        <button type="button" data-w="360" data-h="760" data-dev="phone" aria-pressed="false" data-cap="<b>Phone 360.</b> Tighter spacing for smaller Android phones, with the same order of fields.">Phone <b>360</b></button>
+      </div>
+      <div class="bpc-stage"><div class="bpc-frame" data-dev="desk"><div class="cx cx-r" inert><div class="cx-top" aria-hidden="true"><img src="../images/cases/cryptoswift/globe.webp" alt="" width="28" height="28">New sale<i>RM</i></div><nav class="cx-nav" aria-hidden="true"><img class="cx-logo" src="../images/cases/cryptoswift/globe.webp" alt="" width="40" height="40"><span class="on"><svg><use href="#i-sale"/></svg>New sale</span><span><svg><use href="#i-chart"/></svg>Dashboard</span><span><svg><use href="#i-file"/></svg>Sales</span><span class="ntf"><svg><use href="#i-bell"/></svg>Notifications</span><span class="x"><svg><use href="#i-help"/></svg>Help</span><i class="sp"></i><span class="x"><svg><use href="#i-gear"/></svg>Settings</span><span class="x"><svg><use href="#i-out"/></svg>Log out</span></nav><div class="cx-main"><div class="cx-hd"><h4>New sale</h4><div class="cx-mer">Riviera Motors<i>RM</i></div></div><div class="cx-card"><h6>Choose payment method</h6><div class="cx-radios" role="group" aria-label="Payment method"><button type="button" data-mode="person" aria-pressed="true">In person sale</button><button type="button" data-mode="invoice" aria-pressed="false">Send an invoice</button></div><div class="cx-lb">Price</div><div class="cx-row two cx-pair"><div><div class="cx-in"><label for="cx-price-r">Price in GBP <b>*</b></label><span class="cx-cur">£<input id="cx-price-r" class="cx-price" type="text" inputmode="numeric" value="300,000" autocomplete="off" spellcheck="false"></span></div><div class="cx-hint cx-ph">Minimum £50, maximum £500,000</div><div class="cx-chips" role="group" aria-label="Example prices"><button type="button" data-p="1250">£1,250</button><button type="button" data-p="18500">£18,500</button><button type="button" data-p="38900">£38,900</button><button type="button" class="on" data-p="300000">£300,000</button></div></div><div><div class="cx-in"><small>Crypto currency <b>*</b></small><div class="cx-coins" role="group" aria-label="Crypto currency"><button type="button" data-coin="BTC" aria-pressed="true"><i style="--cc:#f7931a">₿</i>BTC</button><button type="button" data-coin="ETH" aria-pressed="false"><i style="--cc:#627eea">Ξ</i>ETH</button><button type="button" data-coin="USDT" aria-pressed="false"><i style="--cc:#26a17b">₮</i>USDT</button><button type="button" data-coin="USDC" aria-pressed="false"><i style="--cc:#2775ca">$</i>USDC</button></div></div><div class="cx-hint">Indicative price ≈ <span class="cx-ind cx-tick">8.66551 BTC</span></div></div></div><div class="cx-lb">Customer's information</div><div class="cx-row three"><div class="cx-in"><small>Customer's name <b>*</b></small>Sofia Martin</div><div class="cx-in"><small class="cx-rec">Send receipt to (Optional)</small>sofia@martin.co</div><div class="cx-in"><small>Phone number (Optional)</small>+44 7700 900123</div></div><div class="cx-lb">Detailed information</div><div class="cx-desc"><div class="cx-in"><small>Description <b>*</b></small>Riviera GT, 2021, full payment</div><span class="cx-att"><svg><use href="#i-clip"/></svg>Attach photo <small>(Optional)</small></span></div><div class="cx-foot"><b>Indicative price in cryptocurrency</b><span><span class="cx-fc cx-tick">≈ 8.66551 BTC</span><em class="cx-ff">300,000.00 GBP</em></span></div><button type="button" class="cx-go">Make the sale</button></div><div class="cx-pad"><div class="cx-pd"><small>Price in GBP</small><b>£300,000</b></div><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>00</span><span>0</span><span>⌫</span><em>Make the sale</em></div><aside class="cx-aside"><h6>Today</h6><div class="cx-tot"><b>£323,400.00</b><small>3 sales · 2 completed</small></div><div class="cx-ai"><span><b>Sofia Martin</b><small>£300,000.00</small></span><span class="cx-chip k-done">Completed</span></div><div class="cx-ai"><span><b>Daniel Reyes</b><small>£18,500.00</small></span><span class="cx-chip k-done">Completed</span></div><div class="cx-ai"><span><b>Amira Haddad</b><small>£4,900.00</small></span><span class="cx-chip k-wait">Waiting</span></div></aside></div></div></div></div>
+      <p class="bpc-cap"><b>Desktop 1440.</b> The form and the day's sales side by side, for the back office.</p>
+    </div>
+    <p class="note">Live recreation: the same screen reflows at every width.</p>
+  </section>
+
+  <!-- ============ РЕЗУЛЬТАТ ============ -->
+  <section class="sec">
+    <div class="label"><i>09</i>Impact</div>
+    <h2>What changed</h2>
+    <div class="stats six rv">
+      <div class="st"><b data-to="28" data-pre="+" data-suf="%">+28%</b><span>merchant onboarding completion after the sale flow was simplified</span></div>
+      <div class="st"><b data-to="40" data-pre="−" data-suf="%">−40%</b><span>support requests about conversion, projected</span></div>
+      <div class="st"><b data-to="60" data-suf="+">60+</b><span>UI inconsistencies resolved by the design system</span></div>
+      <div class="st"><b data-to="5">5</b><span>breakpoints, each with its own layout</span></div>
+      <div class="st"><b data-to="2">2</b><span>new features: invoices and analytics</span></div>
+      <div class="st"><b class="live">Live</b><span>in production, with real high value sales</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ВЫВОДЫ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>10</i>Reflection</div>
+        <h2>What I learned</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">Designing for crypto taught me that the best interface for a complex technology hides it. Merchants never needed to understand a blockchain. They needed a number they could trust and a clear yes.</p>
+        <p class="t">Fiat first and status first did more for confidence than any explanation could. When the price stopped moving and the status turned green, the questions stopped too.</p>
+        <p class="t">If I started again, I would invest in analytics from day one. Merchants soon asked for conversion by coin and for their peak sale hours, and those insights would have helped them sell more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ НАВИГАЦИЯ ВНИЗУ ============ -->
+  <nav class="pager rv" aria-label="More cases">
+    <a class="pg pg-prev" style="--c: 25, 150, 160" href="safe">
+      <span class="pg-th" aria-hidden="true"><img src="../images/cases/safe-goal.jpg" alt="" width="360" height="779"></span>
+      <span><span class="pg-l"><svg><use href="#i-back"/></svg>Previous case</span><b>Banking Safe<br>Goal Based Savings</b></span>
+    </a>
+    <a class="pg pg-next" style="--c: 40, 170, 110" href="ukrsibbank">
+      <span><span class="pg-l">Back to the first case<svg><use href="#i-next"/></svg></span><b>UKRSIBBANK<br>Omnichannel CRM</b></span>
+      <span class="pg-th wide" aria-hidden="true"><img src="../images/cases/ukrsib-crm.jpg" alt="" width="1100" height="715"></span>
+    </a>
+  </nav>
+</main>
+<footer class="col" style="margin-top: 72px"><span>© Elvin Garaev</span><span>Senior Product Designer</span></footer>
+</div>
+</body>
+</html>

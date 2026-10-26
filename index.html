@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Elvin Garaev · Product Designer</title>
-  <meta name="description" content="Senior/Lead Product Designer with 5+ years of experience designing banking, investing and crypto products for 2M+ users. Fintech, Banking, Crypto, Web3 and AI.">
-  <meta name="theme-color" content="#141413">
+  <meta name="description" content="Senior Product Designer at BNP Paribas Group. I turn business problems into simple products, from research to launch. 5+ years, teams of 12 and 7, AI every day.">
+  <meta name="theme-color" content="#10100f">
   <meta name="color-scheme" content="dark">
 
   <!-- Превью, когда ссылку присылают в LinkedIn, Telegram и т. д.
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elvin-garaev-portfolio.vercel.app/">
   <meta property="og:title" content="Elvin Garaev · Product Designer">
-  <meta property="og:description" content="Senior/Lead Product Designer for Fintech, Banking, Crypto, Web3 and AI. 5+ years, 2M+ users.">
+  <meta property="og:description" content="Senior Product Designer at BNP Paribas Group. I turn business problems into simple products, from research to launch. 5+ years, teams of 12 and 7, AI every day.">
   <meta property="og:image" content="https://elvin-garaev-portfolio.vercel.app/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -23,9 +23,7 @@
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@1,700&display=block">
+  <link rel="preload" href="fonts/inter-tight-700i-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script>
     document.documentElement.classList.add('js');
@@ -33,7 +31,7 @@
     /* без ручного выбора тема берётся из настроек системы и браузера, сразу, до первой отрисовки */
     if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     document.documentElement.setAttribute('data-scheme', t);
-    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#141413');
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
     /* страница всегда открывается с начала, до первой отрисовки: и в обычном браузере, и в окне предпросмотра,
        где прокручивается внешняя страница (scrollIntoView прокручивает и её) */
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -104,8 +102,8 @@
 <div class="about" id="about" role="dialog" aria-modal="true" aria-label="About Elvin Garaev" hidden>
   <div class="about-scroll">
   <div class="letter-wrap">
-    <figure class="snap snap-left"><img src="images/elvin/about-antalya.jpg" alt="Elvin at sunset in Antalya" width="480" height="640"></figure>
-    <figure class="snap snap-right"><img src="images/elvin/about-child.jpg" alt="Elvin as a child" width="480" height="600"></figure>
+    <figure class="snap snap-left"><img loading="lazy" src="images/elvin/about-antalya.jpg" alt="Elvin at sunset in Antalya" width="480" height="640"></figure>
+    <figure class="snap snap-right"><img loading="lazy" src="images/elvin/about-child.jpg" alt="Elvin as a child" width="480" height="600"></figure>
     <div class="close-row"><button class="close-about" type="button" id="close-about" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <article class="letter">
       <p class="hello">Hi, I’m Elvin Garaev, a Product Designer originally from Azerbaijan.</p>
@@ -123,8 +121,8 @@
 
     <!-- ============ ПЕРВЫЙ ЭКРАН ============ -->
     <section class="hero" id="intro" aria-label="Intro">
-      <h1><span class="l1">Hi, I'm <span class="gr">Elvin</span>,<br class="mbr"> a&nbsp;Product Designer</span><span class="dirs">Fintech, Banking,<br class="mbr"> Crypto, Web3 &amp; AI</span></h1>
-      <p class="lede"><b>Senior/Lead Product Designer</b> with 5+ years of experience designing banking, investing<br class="dbr"> and crypto products for <b>2M+ users</b>. Collaborated with <b>BlackRock</b> and <b>BNP Paribas Group</b>.</p>
+      <h1><span class="l1">Hi, I'm <span class="gr">Elvin</span>,<br class="mbr"> a&nbsp;Product Designer</span><span class="dirs">I turn business problems<br class="mbr"> into simple products</span></h1>
+      <p class="lede"><b>Senior Product Designer at BNP Paribas Group</b> with 5+ years in product design. I take products from research to launch and measure the result: <b>32% more activation, 27% less churn</b>. I've designed for banking, sports, investing and yacht management, led teams of 12 and 7, and use <b>AI every day</b>.</p>
     </section>
 
     <!-- ============ КЕЙСЫ ============
@@ -139,9 +137,8 @@
           <div class="glow"></div><div class="shine"></div>
           <div class="brand"><img class="for-dark" src="images/logos/ukrsibbank.png" style="height: 30px" alt="UKRSIBBANK, BNP Paribas Group"><img class="for-light" src="images/logos/ukrsibbank-light.png" style="height: 30px" alt="UKRSIBBANK, BNP Paribas Group"></div>
           <span class="go" aria-hidden="true">↗</span>
-          <div class="art fx-zoom"><div class="win" style="--w: 75%"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img src="images/cases/ukrsib-crm.jpg" alt="" width="1100" height="715" decoding="async"></div></div>
+          <div class="art fx-zoom"><div class="win" style="--w: 75%"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img src="images/cases/ukrsib-crm.jpg" alt="" width="1100" height="715" decoding="async" fetchpriority="high"></div></div>
           <div class="txt"><small>BNP Paribas Group · 2024–2026</small><h3>UKRSIBBANK Omnichannel CRM</h3><p>Unified interface for 3,000+ bank employees</p></div>
-          <div class="grain"></div>
         </a>
 
         <!-- IFREQ -->
@@ -151,60 +148,54 @@
           <span class="go" aria-hidden="true">↗</span>
           <div class="art fx-together"><div class="phones" style="--pw: 42%"><div class="poster"><img src="images/cases/ifreq-scouted.jpg" alt="" width="340" height="736" decoding="async"></div><div class="poster"><img src="images/cases/ifreq-player-card.jpg" alt="" width="340" height="736" decoding="async"></div></div></div>
           <div class="txt"><small>IFREQ, Brussels · 2025–2026</small><h3>IFREQ Football<br>Mobile App and Dashboard</h3><p>Lead design for app,<br>scouting CRM and website</p></div>
-          <div class="grain"></div>
         </a>
 
         <!-- XGo Wallet -->
         <a id="case-xgo" class="tile n" style="--c: 255, 140, 185" href="work/xgo">
           <div class="glow"></div><div class="shine"></div>
-          <div class="brand"><img class="for-dark" src="images/logos/xgo.png" style="height: 22px" alt="XGo"><img class="for-light" src="images/logos/xgo-light.png" style="height: 22px" alt="XGo"></div>
+          <div class="brand"><img loading="lazy" class="for-dark" src="images/logos/xgo.png" style="height: 22px" alt="XGo"><img loading="lazy" class="for-light" src="images/logos/xgo-light.png" style="height: 22px" alt="XGo"></div>
           <span class="go" aria-hidden="true">↗</span>
-          <div class="art fx-rise"><div class="phones" style="--pw: 48%"><div class="ph"><div class="scr"><img src="images/cases/xgo-wallet.jpg" alt="" width="360" height="752" decoding="async"></div></div></div></div>
+          <div class="art fx-rise"><div class="phones" style="--pw: 48%"><div class="ph"><div class="scr"><img loading="lazy" src="images/cases/xgo-wallet.jpg" alt="" width="360" height="752" decoding="async"></div></div></div></div>
           <div class="txt"><small>Milli Digital · 2021–2022</small><h3>XGo Wallet<br>Crypto &amp; Fiat Mobile Wallet</h3><p>Built from zero: branding,<br>research, full UX/UI</p></div>
-          <div class="grain"></div>
         </a>
 
         <!-- P3 Wealth × BlackRock -->
         <a id="case-p3wealth" class="tile" style="--c: 130, 95, 220" href="work/p3-wealth">
           <div class="glow"></div><div class="shine"></div>
-          <div class="brand"><img class="for-dark" src="images/logos/p3-wealth.png" style="height: 34px" alt="P3 Wealth"><img class="for-light" src="images/logos/p3-wealth-light.png" style="height: 34px" alt="P3 Wealth"><span class="x" aria-hidden="true">×</span><img class="white" src="images/logos/blackrock.svg" style="height: 16px" alt="BlackRock"></div>
+          <div class="brand"><img loading="lazy" class="for-dark" src="images/logos/p3-wealth.png" style="height: 34px" alt="P3 Wealth"><img loading="lazy" class="for-light" src="images/logos/p3-wealth-light.png" style="height: 34px" alt="P3 Wealth"><span class="x" aria-hidden="true">×</span><img loading="lazy" class="white" src="images/logos/blackrock.svg" style="height: 16px" alt="BlackRock"></div>
           <span class="go" aria-hidden="true">↗</span>
-          <div class="art fx-grow"><div class="win" style="--w: 75%"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img src="images/cases/p3-wealth.jpg" alt="" width="1100" height="688" decoding="async"></div></div>
+          <div class="art fx-grow"><div class="win" style="--w: 75%"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img loading="lazy" src="images/cases/p3-wealth.jpg" alt="" width="1100" height="688" decoding="async"></div></div>
           <div class="txt"><small>BARVA.TECH · 2023–2024</small><h3>P3 Wealth × BlackRock Capital Management</h3><p>Role-based platform for professional investors</p></div>
-          <div class="grain"></div>
         </a>
 
         <!-- P3 Marine -->
         <a id="case-p3marine" class="tile" style="--c: 55, 150, 235" href="work/p3-marine">
           <div class="glow"></div><div class="shine"></div>
-          <div class="brand"><img class="for-dark" src="images/logos/p3-marine.png" style="height: 36px" alt="P3 Marine"><img class="for-light" src="images/logos/p3-marine-light.png" style="height: 36px" alt="P3 Marine"></div>
+          <div class="brand"><img loading="lazy" class="for-dark" src="images/logos/p3-marine.png" style="height: 36px" alt="P3 Marine"><img loading="lazy" class="for-light" src="images/logos/p3-marine-light.png" style="height: 36px" alt="P3 Marine"></div>
           <span class="go" aria-hidden="true">↗</span>
-          <div class="art fx-zoom"><div class="win" style="--w: 75%"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img src="images/cases/p3-marine.jpg" alt="" width="1100" height="688" decoding="async"></div></div>
+          <div class="art fx-zoom"><div class="win" style="--w: 75%"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img loading="lazy" src="images/cases/p3-marine.jpg" alt="" width="1100" height="688" decoding="async"></div></div>
           <div class="txt"><small>BARVA.TECH · 2023–2024</small><h3>P3 Marine Yacht Management Platform</h3><p>Multi-role CRM for yacht owners, managers, accountants and crew</p></div>
-          <div class="grain"></div>
         </a>
 
         <!-- Banking Safe -->
         <a id="case-safe" class="tile n" style="--c: 25, 150, 160" href="work/safe">
           <div class="glow"></div><div class="shine"></div>
-          <div class="brand"><img class="for-dark" src="images/logos/ukrsibbank.png" style="height: 30px" alt="UKRSIBBANK, BNP Paribas Group"><img class="for-light" src="images/logos/ukrsibbank-light.png" style="height: 30px" alt="UKRSIBBANK, BNP Paribas Group"></div>
+          <div class="brand"><img loading="lazy" class="for-dark" src="images/logos/ukrsibbank.png" style="height: 30px" alt="UKRSIBBANK, BNP Paribas Group"><img loading="lazy" class="for-light" src="images/logos/ukrsibbank-light.png" style="height: 30px" alt="UKRSIBBANK, BNP Paribas Group"></div>
           <span class="go" aria-hidden="true">↗</span>
-          <div class="art fx-spread"><div class="phones" style="--pw: 46%"><div class="ph"><div class="scr" style="--scr: #0a4d37"><img src="images/cases/safe-goal.jpg" alt="" width="360" height="779" decoding="async"></div></div><div class="ph"><div class="scr" style="--scr: #fff"><img src="images/cases/safe-created.jpg" alt="" width="360" height="780" decoding="async"></div></div></div></div>
+          <div class="art fx-spread"><div class="phones" style="--pw: 46%"><div class="ph"><div class="scr" style="--scr: #0a4d37"><img loading="lazy" src="images/cases/safe-goal.jpg" alt="" width="360" height="779" decoding="async"></div></div><div class="ph"><div class="scr" style="--scr: #fff"><img loading="lazy" src="images/cases/safe-created.jpg" alt="" width="360" height="780" decoding="async"></div></div></div></div>
           <div class="txt"><small>UKRSIBBANK · 2024–2026</small><h3>Banking Safe<br>Goal-Based Savings</h3><p>Named savings jars tied to<br>personal goals inside Ukrsib Online</p></div>
-          <div class="grain"></div>
         </a>
 
         <!-- CryptoSwift -->
         <a id="case-cryptoswift" class="tile f" style="--c: 70, 90, 230" href="work/cryptoswift">
           <div class="glow"></div><div class="shine"></div>
-          <div class="brand"><img class="for-dark" src="images/logos/cryptoswift-color.png" style="height: 27px" alt="CryptoSwift"><img class="for-light" src="images/logos/cryptoswift-color-light.png" style="height: 27px" alt="CryptoSwift"></div>
+          <div class="brand"><img loading="lazy" class="for-dark" src="images/logos/cryptoswift-color.png" style="height: 27px" alt="CryptoSwift"><img loading="lazy" class="for-light" src="images/logos/cryptoswift-color-light.png" style="height: 27px" alt="CryptoSwift"></div>
           <span class="go" aria-hidden="true">↗</span>
           <div class="art duo">
-            <div class="win big"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img src="images/cases/cryptoswift-details.jpg" alt="" width="1194" height="910" decoding="async"></div>
-            <div class="win small"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img src="images/cases/cryptoswift-new-sale.jpg" alt="" width="860" height="621" decoding="async"></div>
+            <div class="win big"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img loading="lazy" src="images/cases/cryptoswift-details.jpg" alt="" width="1194" height="910" decoding="async"></div>
+            <div class="win small"><span class="rim"></span><div class="bar"><i></i><i></i><i></i></div><img loading="lazy" src="images/cases/cryptoswift-new-sale.jpg" alt="" width="860" height="621" decoding="async"></div>
           </div>
           <div class="txt"><small>BARVA.TECH · 2023</small><h3>CryptoSwift Merchant Payment Platform</h3><p>Full redesign across desktop, tablet and mobile</p></div>
-          <div class="grain"></div>
         </a>
 
       </div>
@@ -215,7 +206,7 @@
       <div class="sec-head reveal" style="margin-top: 110px"><h2 id="xp-title">Experience</h2></div>
       <div class="xp">
         <article class="job reveal">
-          <img class="job-logo" src="images/icons/ukrsib.png" alt="" width="40" height="40">
+          <img loading="lazy" class="job-logo" src="images/icons/ukrsib.png" alt="" width="40" height="40">
           <div>
             <h3>Senior Product Designer</h3>
             <p class="job-co">UKRSIBBANK · BNP Paribas Group</p>
@@ -224,7 +215,7 @@
           </div>
         </article>
         <article class="job reveal">
-          <img class="job-logo" src="images/icons/ifreq.png" alt="" width="40" height="40">
+          <img loading="lazy" class="job-logo" src="images/icons/ifreq.png" alt="" width="40" height="40">
           <div>
             <h3>Lead Product Designer</h3>
             <p class="job-co">IFREQ</p>
@@ -233,7 +224,7 @@
           </div>
         </article>
         <article class="job reveal">
-          <img class="job-logo" src="images/icons/barva.png" alt="" width="40" height="40">
+          <img loading="lazy" class="job-logo" src="images/icons/barva.png" alt="" width="40" height="40">
           <div>
             <h3>Middle UX/UI Designer</h3>
             <p class="job-co">BARVA.TECH</p>
@@ -242,7 +233,7 @@
           </div>
         </article>
         <article class="job reveal">
-          <img class="job-logo" src="images/icons/milli.png" alt="" width="40" height="40">
+          <img loading="lazy" class="job-logo" src="images/icons/milli.png" alt="" width="40" height="40">
           <div>
             <h3>UX/UI Designer</h3>
             <p class="job-co">Milli Digital</p>
@@ -255,7 +246,7 @@
 
     <!-- ============ КОНТАКТЫ ============ -->
     <section class="contact reveal" id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Let's build something great</h2>
+      <h2 id="contact-title">Have a product problem?<br>Let's talk.</h2>
       <div class="btns">
         <a class="btn solid" href="mailto:e.garaev.dg55@gmail.com">e.garaev.dg55@gmail.com ↗</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/elvin-garaev-4798ba255/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
@@ -264,7 +255,7 @@
     </section>
   </main>
 
-  <footer class="col"><span>© Elvin Garaev</span><span>Senior/Lead Product Designer</span></footer>
+  <footer class="col"><span>© Elvin Garaev</span><span>Senior Product Designer</span></footer>
 </div>
 </body>
 </html>

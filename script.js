@@ -36,7 +36,7 @@
   function applyTheme(t) {
     root.setAttribute('data-scheme', t);
     themeBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === t)); });
-    if (metaTheme) metaTheme.setAttribute('content', t === 'light' ? '#f8f8f8' : '#141413');
+    if (metaTheme) metaTheme.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
   }
   applyTheme(root.getAttribute('data-scheme') === 'light' ? 'light' : 'dark');
   var sysLight = window.matchMedia('(prefers-color-scheme: light)');
@@ -330,12 +330,11 @@
       setTimeout(function () {
         document.querySelectorAll('.tile, .reveal').forEach(function (el) { io.observe(el); });
   
-      }, 900);
+      }, 250);
     }
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { requestAnimationFrame(start); });
-    }
-    setTimeout(start, 1200);
+    /* анимация начинается сразу после разметки: страница не ждёт загрузки шрифтов */
+    requestAnimationFrame(start);
+    setTimeout(start, 300);
   } catch (err) {
     root.classList.remove('js');
     window.__egReady = true;
