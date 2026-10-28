@@ -649,11 +649,23 @@ html:not(.vt-theme)::view-transition-new(root) { animation: eg-page-in 0.45s cub
 :root[data-scheme="light"] .ai-tool .on-light { display: block; }
 :root[data-scheme="light"] .ai-tool .on-dark { display: none; }
 .ai-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--sub); }
+/* три светлых сообщения веером в карточке Morning brief */
+#ai-brief .bf img { position: absolute; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 70px -24px rgba(0, 0, 0, 0.65); }
+#ai-brief .art { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 110px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 110px), transparent); }
+#ai-brief .bf-c { left: 41%; width: 44%; top: 74px; z-index: 3; }
+#ai-brief .bf-l { left: 13%; width: 40%; top: 106px; z-index: 2; filter: brightness(0.9); }
+:root[data-scheme="light"] #ai-brief .bf img { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 24px 50px -24px rgba(0, 0, 0, 0.3); }
+:root[data-scheme="light"] #ai-brief .bf-l { filter: brightness(0.97); }
+.js #ai-brief .bf img { opacity: 0; translate: 0 90px; transition: opacity 0.8s var(--ease) var(--bd, 0s), translate 1.1s var(--ease) var(--bd, 0s); }
+#ai-brief .bf-c { --bd: 0.1s; } #ai-brief .bf-l { --bd: 0.24s; }
+.js #ai-brief.in .bf img { opacity: 1; translate: 0 0; }
 @media (max-width: 1279px) { .ai-st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 899px) {
   #ai .sec-head { margin-top: 64px; }
   #ai .meter .big { font-size: 72px; }
   #ai-brief { --cap: 176px; }
+  #ai-brief .bf-c { left: 36%; width: 60%; top: 68px; }
+  #ai-brief .bf-l { left: 2%; width: 52%; top: 96px; }
   .ai-flow { padding: 20px 18px 18px; }
   .ai-flow .top { flex-direction: column; gap: 4px; }
   .ai-st-grid { grid-template-columns: minmax(0, 1fr); }
