@@ -326,14 +326,12 @@
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('in');
-        /* текстовые блоки появляются один раз, карточки — при каждом возвращении */
-        if (!entry.target.classList.contains('tile')) io.unobserve(entry.target);
+        /* всё появляется один раз и дальше остаётся на месте */
+        io.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
-    /* карточка, которая целиком ушла с экрана, сбрасывается, чтобы при возвращении появиться заново */
-    var away = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) { if (!entry.isIntersecting) entry.target.classList.remove('in'); });
-    }, { threshold: 0 });
+    /* карточки больше не сбрасываются, когда уходят с экрана */
+    var away = { observe: function () {}, unobserve: function () {} };
 
     var started = false;
     function start() {

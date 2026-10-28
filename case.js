@@ -74,13 +74,13 @@
       if (!entry.isIntersecting || entry.target.classList.contains('in')) return;
       entry.target.classList.add('in');
       count(entry.target);
+      enter.unobserve(entry.target);
     });
   }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
+  /* блок появляется один раз и дальше остаётся на месте; уходя с экрана, только сбрасывает приближение */
   var away = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
-      if (entry.isIntersecting) return;
-      entry.target.classList.remove('in');
-      entry.target.classList.remove('zoomed');
+      if (!entry.isIntersecting) entry.target.classList.remove('zoomed');
     });
   }, { threshold: 0 });
   blocks.forEach(function (b) { enter.observe(b); away.observe(b); });
