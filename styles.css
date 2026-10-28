@@ -607,3 +607,54 @@ html:not(.vt-theme)::view-transition-new(root) { animation: eg-page-in 0.45s cub
 @media (prefers-reduced-motion: reduce) {
   @view-transition { navigation: none; }
 }
+
+/* ---------- AI in my work ---------- */
+.side-ic svg { width: 20px; height: 20px; flex: none; padding: 2px; color: var(--sub); }
+.item.on { background: var(--pill); color: var(--text); box-shadow: var(--pill-shadow); }
+#ai .sec-head { margin-top: 110px; }
+#ai .sec-head h2 { flex: none; }
+#ai .sec-head span { text-align: right; }
+.ai-grid .tile { height: 480px; --cap: 112px; }
+.ai-grid .tile.n { --cap: 132px; }
+#ai .state { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px 0 10px; border-radius: 999px; background: var(--glass); font-size: 12px; font-weight: 500; color: var(--text); letter-spacing: 0.01em; }
+#ai .state i { width: 7px; height: 7px; border-radius: 50%; background: var(--text); box-shadow: 0 0 0 3px var(--glass); }
+#ai .state.live i { background: #3fb67a; box-shadow: 0 0 0 3px rgba(63, 182, 122, 0.2); }
+#ai .meter { position: absolute; left: var(--inset); right: var(--inset); top: 96px; }
+#ai .meter .big { font-family: var(--font-body); font-size: 84px; line-height: 0.95; font-weight: 600; letter-spacing: -0.045em; color: var(--text); }
+#ai .meter .cap { margin-top: 10px; font-size: 13px; line-height: 18px; color: var(--sub); }
+#ai .bars { margin-top: 28px; display: grid; gap: 14px; }
+#ai .bars .row { display: grid; gap: 7px; }
+#ai .bars .row span { font-size: 12px; line-height: 14px; color: var(--dim); }
+#ai .bars .row i { position: relative; display: block; height: 8px; border-radius: 99px; background: var(--seg); overflow: hidden; }
+#ai .bars .row i::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--v); border-radius: inherit; background: var(--line-strong); }
+#ai .bars .row.ai span { color: var(--text); }
+#ai .bars .row.ai i::after { background: var(--text); }
+.ai-flow { position: relative; margin-top: 16px; padding: 24px 24px 20px; border-radius: 16px; background: var(--card); box-shadow: var(--tile-shadow); }
+.ai-flow::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px var(--stroke), inset 0 1px 0 var(--top-hl); }
+.ai-flow .top { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.ai-flow h3 { margin: 0; font-size: 20px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+.ai-flow .top p { margin: 0; font-size: 13px; line-height: 19px; color: var(--dim); }
+.ai-st-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.ai-st { padding: 14px 16px; border-radius: 12px; background: var(--glass); }
+.ai-st-h { display: flex; align-items: baseline; gap: 10px; }
+.ai-st-h .num { font-size: 12px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.ai-st-h b { font-size: 15px; line-height: 20px; font-weight: 600; color: var(--text); }
+.ai-st p { margin: 4px 0 10px; font-size: 13px; line-height: 19px; color: var(--sub); text-wrap: pretty; }
+.ai-tl { display: flex; flex-wrap: wrap; gap: 6px; }
+.ai-tool { height: 26px; padding: 0 10px 0 8px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.005em; background: #262524; color: #f1efea; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); }
+.ai-tool img { width: 16px; height: 16px; flex: none; display: block; object-fit: contain; }
+.ai-tool img.sq { border-radius: 4px; }
+.ai-tool .on-light { display: none; }
+:root[data-scheme="light"] .ai-tool { background: #ffffff; color: #1d1d1b; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05); }
+:root[data-scheme="light"] .ai-tool .on-light { display: block; }
+:root[data-scheme="light"] .ai-tool .on-dark { display: none; }
+.ai-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--sub); }
+@media (max-width: 1279px) { .ai-st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 899px) {
+  #ai .sec-head { margin-top: 64px; }
+  #ai .meter .big { font-size: 72px; }
+  #ai-brief { --cap: 176px; }
+  .ai-flow { padding: 20px 18px 18px; }
+  .ai-flow .top { flex-direction: column; gap: 4px; }
+  .ai-st-grid { grid-template-columns: minmax(0, 1fr); }
+}
