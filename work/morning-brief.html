@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Morning Brief in Slack for Finance Teams · Elvin Garaev</title>
+  <meta name="description" content="A daily Slack brief for every finance role in a treasury platform, with up to three buttons to act on it and settings for what each role sees.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://elvin-garaev-portfolio.vercel.app/work/morning-brief">
+  <meta property="og:title" content="Morning Brief in Slack for Finance Teams · Elvin Garaev">
+  <meta property="og:description" content="A daily Slack brief for every finance role in a treasury platform, with up to three buttons to act on it and settings for what each role sees.">
+  <meta property="og:image" content="https://elvin-garaev-portfolio.vercel.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#10100f">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preload" href="../inter-tight-700i-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../case.css">
+  <style>
+    /* Morning brief: accent color and the blocks only this page has */
+    .brief { --acc: 110, 140, 255; --acc-t: #8ea4ff; }
+    :root[data-scheme="light"] .brief { --acc-t: #3f5fd6; }
+    .brief .stage { --c: 90, 120, 235; }
+    .brief .cs-hero h1 .g { background: linear-gradient(100deg, #cdd6ff 0%, #8ea4ff 45%, #a98bff 100%); -webkit-background-clip: text; background-clip: text; }
+    :root[data-scheme="light"] .brief .cs-hero h1 .g { background: linear-gradient(100deg, #3550d4 0%, #4a48d2 50%, #6b3fcc 100%); -webkit-background-clip: text; background-clip: text; }
+    :root .brief .label i, :root .brief .route li b { color: var(--acc-t); }
+    .brief .route .line { background: repeating-linear-gradient(90deg, rgba(var(--acc), 0.7) 0 8px, transparent 8px 14px); }
+    .cs-anim .brief .route.in li b { box-shadow: inset 0 0 0 1px rgba(var(--acc), 0.7), 0 0 24px rgba(var(--acc), 0.22); }
+    :root .brief .insight { background: linear-gradient(135deg, rgba(var(--acc), 0.13), rgba(var(--acc), 0.02) 60%), var(--card); }
+    .mb-mark { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; flex: none; background: linear-gradient(140deg, #4c6ef5, #7b5cf0); color: #fff; }
+    .mb-mark svg { width: 15px; height: 15px; fill: currentColor; }
+    .mb-name { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+    .mb-fan { position: relative; height: 560px; }
+    .mb-fan img { position: absolute; top: 0; left: 50%; width: 360px; height: auto; border-radius: 14px; box-shadow: 0 0 0 1px var(--win-ring), 0 40px 100px -30px var(--drop); }
+    .mb-fan .mid { translate: -50% 0; z-index: 3; }
+    .mb-fan .l, .mb-fan .r { z-index: 2; scale: 0.86; filter: brightness(0.78); }
+    .mb-fan .l { translate: calc(-50% - 290px) 46px; }
+    .mb-fan .r { translate: calc(-50% + 290px) 46px; }
+    .mb-roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+    .mb-roles figure { margin: 0; }
+    .mb-roles figcaption { margin: 0 0 10px 2px; font-size: 13px; color: var(--dim); }
+    .mb-roles figcaption b { color: var(--text); font-weight: 500; }
+    .mb-roles img, .mb-shot { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 0 0 1px var(--win-ring), 0 30px 80px -30px var(--drop); }
+    .mb-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+    @media (max-width: 899px) {
+      .mb-fan { height: auto; }
+      .mb-fan .l, .mb-fan .r { display: none; }
+      .mb-fan .mid { position: relative; left: auto; translate: none; display: block; width: 100%; max-width: 360px; margin: 0 auto; }
+      .mb-roles, .mb-two { grid-template-columns: minmax(0, 1fr); }
+      .mb-roles { max-width: 420px; }
+    }
+  </style>
+  <script>
+    document.documentElement.classList.add('js');
+    var t = null; try { t = localStorage.getItem('eg-theme'); } catch (e) {}
+    /* без ручного выбора тема берётся из настроек системы и браузера, сразу, до первой отрисовки */
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-scheme', t);
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
+    /* страница всегда открывается с начала, до первой отрисовки: и в обычном браузере, и в окне предпросмотра,
+       где прокручивается внешняя страница (scrollIntoView прокручивает и её) */
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var go = null; try { go = sessionStorage.getItem('eg-goto'); } catch (e) {}
+    if (!location.hash && !go) { try { document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {} }
+    setTimeout(function () { if (!window.__egReady) document.documentElement.classList.remove('js'); }, 3000);
+  </script>
+  <script src="../script.js" defer></script>
+  <script src="../case.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3l2 5-2 1a12 12 0 0 0 6 6l1-2 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M4 13 6 5h12l2 8v6H4z"/><path d="M4 13h5l1 2h4l1-2h5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .6 3.4 2.4 3.7 5.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20 11l-8 8a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-6 16-3-7z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 7.5 3.8 2.8-1.5 4.4H9.7l-1.5-4.4z"/><path d="M12 7.5V3.2M15.8 10.3l4.1-1.4M14.3 14.7l2.6 3.6M9.7 14.7l-2.6 3.6M8.2 10.3 4.1 8.9"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.3C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18M7 14.5h4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M10.5 13.5 3 11l1.2-1.6 8.3.9 4.6-5.1a1.9 1.9 0 0 1 2.7 2.7l-5.1 4.6.9 8.3L14 22l-2.5-7.5"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M9 4 4.5 6.3l1.7 3.9L8 9.4V20h8V9.4l1.8.8 1.7-3.9L15 4a3 3 0 0 1-6 0z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="m16 10.5 5-3v9l-5-3"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4M8.2 13.2l7.6 4"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V10M10 2.5h4M18.5 6.5 20 5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4.5" y="5" width="15" height="10.5" rx="1.5"/><path d="M2.5 19h19"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V6M6.5 11.5 12 6l5.5 5.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4 3.5 7.5 7 11M3.5 7.5H17M17 13l3.5 3.5L17 20M20.5 16.5H7"/></symbol>
+  <symbol id="i-finger" viewBox="0 0 24 24"><path d="M7.5 18.5a10 10 0 0 0 1-4.5v-2a3.5 3.5 0 0 1 7 0v1.5M12 12v2.5a14 14 0 0 1-1.5 6.5M15.5 16a17 17 0 0 1-1 4.5M5 15.5a12 12 0 0 0 .5-3.5V12a6.5 6.5 0 0 1 12.2-3.1M19 12.5v1a20 20 0 0 1-.4 4"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M16 13.5h1.5"/></symbol>
+  <symbol id="i-sale" viewBox="0 0 24 24"><path d="M3 14h3.5l3 2h5a1.5 1.5 0 0 0 0-3H11"/><path d="M6.5 14v6H3"/><path d="M14.5 16l4.4-2.5a1.5 1.5 0 0 1 1.6 2.5L15 19.5H9.5"/><circle cx="14" cy="7" r="3.5"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><path d="M4.5 14v-2.5a7.5 7.5 0 0 1 15 0V14"/><rect x="3" y="13" width="4" height="6" rx="1.6"/><rect x="17" y="13" width="4" height="6" rx="1.6"/><path d="M19 19c0 1.4-1.8 2.3-4.5 2.3"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M10 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20H10"/><path d="M15 8l4 4-4 4M19 12H9.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-node" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="16" height="6.5" rx="1.6"/><path d="M8 7.3h.01M8 16.8h.01M12 7.3h4M12 16.8h4"/></symbol>
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3M14.5 10h4M14.5 13.5h3"/></symbol>
+  <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.2-2.3L4.6 15a1.5 1.5 0 0 1 2.4-1.8L9 15"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6.5" rx="5.5" ry="2.5"/><path d="M3.5 6.5v4c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5v-4"/><path d="M9.5 15.4c.9 1 2.9 1.6 5 1.6 3 0 5.5-1.1 5.5-2.5v-4c0-1.2-1.9-2.2-4.4-2.4"/><path d="M3.5 10.5v4c0 1.4 2.5 2.5 5.5 2.5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol>
+</svg>
+<div class="light" aria-hidden="true"></div>
+<div class="frame" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-label="Site navigation">
+  <div class="side-scroll">
+    <a class="item" href="../"><span class="mark">EG</span>Home</a>
+    <div class="side-label">Cases</div>
+    <details class="group" open>
+      <summary><img src="../images/icons/ukrsib.png" alt="" width="22" height="22">UKRSIBBANK<i class="chev"></i></summary>
+      <div class="sub"><a href="ukrsibbank">Omnichannel CRM</a><a href="safe">Banking Safe</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/ifreq.png" alt="" width="22" height="22">IFREQ<i class="chev"></i></summary>
+      <div class="sub"><a href="ifreq">Football App and Dashboard</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/barva.png" alt="" width="22" height="22">BARVA.TECH<i class="chev"></i></summary>
+      <div class="sub"><a href="p3-wealth">P3 Wealth × BlackRock</a><a href="p3-marine">P3 Marine</a><a href="cryptoswift">CryptoSwift</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/milli.png" alt="" width="22" height="22">Milli Digital<i class="chev"></i></summary>
+      <div class="sub"><a href="xgo">XGo Wallet</a></div>
+    </details>
+    <a class="item side-xp side-ic on" aria-current="true" href="../#ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M11 4c.6 4.3 2.7 6.4 7 7-4.3.6-6.4 2.7-7 7-.6-4.3-2.7-6.4-7-7 4.3-.6 6.4-2.7 7-7Z"/><path d="M18.5 15.2c.25 1.6.95 2.3 2.5 2.55-1.55.25-2.25.95-2.5 2.55-.25-1.6-.95-2.3-2.5-2.55 1.55-.25 2.25-.95 2.5-2.55Z"/></svg>AI in my work</a>
+    <a class="item side-ic" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
+  </div>
+
+  <!-- переключатель светлой и тёмной темы -->
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>Light</button>
+    <button type="button" data-set="dark" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>Dark</button>
+  </div>
+
+  <!-- профиль внизу: по нажатию открывается меню -->
+  <div class="profile">
+    <div class="pop" id="pop" hidden>
+      <button type="button" id="open-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c.9-3.6 3.7-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>About</button>
+      <div class="sep"></div>
+      <a class="mail" href="mailto:e.garaev.dg55@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><span>Email<small>e.garaev.dg55@gmail.com</small></span></a>
+      <a href="https://www.linkedin.com/in/elvin-garaev-4798ba255/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><path d="M8 10.5V16M8 7.6v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.4-2.6s2.1.9 2.1 2.6V16"/></svg>LinkedIn<span class="ext" aria-hidden="true">↗</span></a>
+      <a href="https://t.me/el13xx" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 4.5 3.8 11.1c-.8.3-.8 1.4 0 1.7l4.1 1.4 1.6 4.9c.2.7 1.1.9 1.6.4l2.3-2.2 4.2 3.1c.6.4 1.4.1 1.6-.6L21.6 5.6c.2-.8-.4-1.4-1.1-1.1Z"/><path d="m8 14.2 9-6.6"/></svg>Telegram<span class="ext" aria-hidden="true">↗</span></a>
+    </div>
+    <button class="me" type="button" id="me" aria-expanded="false" aria-controls="pop">
+      <img src="../images/elvin/avatar.jpg" alt="" width="40" height="40"><span class="who"><b>Elvin Garaev</b><small>Product Designer</small></span><svg class="updown" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 6 3-3 3 3M5 10l3 3 3-3"/></svg>
+    </button>
+  </div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+<header class="topbar">
+  <a class="logo" href="../" aria-label="Elvin Garaev, back to top">EG</a>
+  <button class="burger" type="button" id="menu-open" aria-expanded="false" aria-controls="sidebar"><span></span><b class="sr">Open menu</b></button>
+</header>
+<div class="about" id="about" role="dialog" aria-modal="true" aria-label="About Elvin Garaev" hidden>
+  <div class="about-scroll">
+  <div class="letter-wrap">
+    <figure class="snap snap-left"><img src="../images/elvin/about-antalya.jpg" alt="Elvin at sunset in Antalya" width="480" height="640"></figure>
+    <figure class="snap snap-right"><img src="../images/elvin/about-child.jpg" alt="Elvin as a child" width="480" height="600"></figure>
+    <div class="close-row"><button class="close-about" type="button" id="close-about" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <article class="letter">
+      <p class="hello">Hi, I’m Elvin Garaev, a Product Designer originally from Azerbaijan.</p>
+      <p>When I was five, my family moved to Kharkiv, Ukraine, where I spent most of my childhood and school years. I later studied <b>International Economics and Business</b> at V. N. Karazin Kharkiv National University, where I spent six years building a strong foundation in economics and business.</p>
+      <p>Before design, sports were a huge part of my life. I competed professionally in both <b>judo and football</b>, which taught me discipline, consistency, and how to work toward long-term goals.</p>
+      <p>I’ve been working in digital and product design for over five years. Today, I focus mainly on <b>FinTech, Banking, Web3, and AI</b> products. With my background in economics and business, I’ve always been especially interested in products connected to finance, where design has to work together with complex business logic and real user needs.</p>
+      <p>Outside of work, I enjoy an active lifestyle, playing football, going to the gym, traveling, and reading books about marketing and economics.</p>
+    </article>
+  </div>
+  </div>
+</div>
+
+<div class="page" id="top">
+<main class="col cs brief" id="main">
+
+  <nav class="crumbs" aria-label="Case navigation"><a href="../#ai"><svg><use href="#i-back"/></svg>AI in my work</a><a href="ifreq">Next: IFREQ<svg><use href="#i-next"/></svg></a></nav>
+
+  <!-- ============ ОБЛОЖКА ============ -->
+  <header class="cs-hero">
+    <div class="cs-brand">
+      <span class="mb-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5c.7 5 2.9 7.2 7.9 7.9-5 .7-7.2 2.9-7.9 7.9-.7-5-2.9-7.2-7.9-7.9 5-.7 7.2-2.9 7.9-7.9Z"/></svg></span>
+      <b class="mb-name">Morning brief</b>
+      <div class="cs-tags"><span>B2B fintech</span><span>Treasury</span><span>Slack app</span><span>AI</span></div>
+    </div>
+    <h1>Morning brief in Slack<span class="g">A different message for every finance role</span></h1>
+    <p class="cs-lede">A treasury platform helps mid-size companies pay and get paid in several currencies. In this project I designed one feature: <b>a short Slack message at 7:30</b> that tells each role what needs them today, with up to <b>three buttons</b> to act on it, and the <b>settings</b> where a company decides what each role sees.</p>
+    <div class="cs-meta">
+      <div><small>Role</small><b>Product Designer</b></div>
+      <div><small>Scope</small><b>One feature</b></div>
+      <div><small>Platform</small><b>Slack and web</b></div>
+      <div><small>Year</small><b>2026</b></div>
+      <div><small>Status</small><b>Not launched</b></div>
+    </div>
+  </header>
+
+  <div class="stage zoomable phz rv" style="height: 620px" tabindex="0" role="button" aria-label="Morning brief messages for three roles, click to zoom in">
+    <div class="glow"></div>
+    <div class="stage-in stage-fade">
+      <div class="shot bare">
+        <div class="mb-fan">
+          <img class="l" src="../images/cases/brief/msg-treasurer.webp" alt="Morning brief for the treasurer" width="888" height="1232" decoding="async">
+          <img class="mid" src="../images/cases/brief/msg-cfo.webp" alt="Morning brief for the CFO: cash today, one payment run to approve, one risk, a chart of the last 7 days and three buttons" width="888" height="1226" decoding="async" fetchpriority="high">
+          <img class="r" src="../images/cases/brief/msg-ap.webp" alt="Morning brief for accounts payable" width="888" height="1226" decoding="async">
+        </div>
+      </div>
+    </div>
+    <div class="fc" style="left: 22px; top: 110px; --fd: 0.7s"><i style="background:#e6eefc;color:#2f6fde"><svg><use href="#i-clock"/></svg></i><span><b>Every day at 7:30</b><small>Direct message or channel</small></span></div>
+    <div class="fc" style="right: 22px; top: 86px; --fd: 0.85s"><i style="background:#efeafd;color:#6b57d0"><svg><use href="#i-users"/></svg></i><span><b>A brief for each role</b><small>CFO, treasurer, payables</small></span></div>
+    <div class="fc" style="left: 34px; top: 404px; --fd: 1s"><i style="background:#e3f6ec;color:#1f9e64"><svg><use href="#i-tap"/></svg></i><span><b>Three buttons at most</b><small>Act without opening the platform</small></span></div>
+    <div class="fc" style="right: 30px; top: 376px; --fd: 1.15s"><i style="background:#fbf0dc;color:#b8740c"><svg><use href="#i-gear"/></svg></i><span><b>Customize</b><small>Each role picks what to see</small></span></div>
+    <span class="hint"><svg><use href="#i-search"/></svg>Click to zoom</span>
+  </div>
+  <p class="note">Companies, people and numbers in the screens are demo data.</p>
+
+  <!-- ============ ИДЕЯ ============ -->
+  <section class="sec" style="margin-top: 96px">
+    <div class="split">
+      <div>
+        <div class="label"><i>01</i>The idea</div>
+        <h2>Finance teams start the day in Slack, not in a dashboard</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">A treasury platform already knows a lot: cash in every bank, payment runs waiting for approval, currency exposure and policy limits. But every role needs a different part of it, and on most mornings the important part is one approval or one risk.</p>
+        <p class="t">So the brief brings that part to where people already are, before the first meeting. Anything that does not need action today stays in the platform.</p>
+      </div>
+    </div>
+    <div class="triad rv">
+      <div class="tr" style="--t: 91, 141, 239"><span class="ico"><svg><use href="#i-shield"/></svg></span><small>Approvals and risks</small><h3>CFO</h3><p>Cash against the safety buffer, the payment run waiting for approval and the limits that are close to a breach.</p></div>
+      <div class="tr" style="--t: 230, 165, 60"><span class="ico"><svg><use href="#i-swap"/></svg></span><small>Currencies and hedges</small><h3>Treasurer</h3><p>Overnight currency moves, the dollars that are not hedged yet, and the hedges and transfers to make today.</p></div>
+      <div class="tr" style="--t: 79, 194, 140"><span class="ico"><svg><use href="#i-coins"/></svg></span><small>Today's payments</small><h3>Accounts payable</h3><p>The payments that go out today, the ones flagged for a second look and the invoices on hold.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ СООБЩЕНИЕ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>02</i>The message</div>
+        <h2>One shape for every brief, built around today</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">Every brief has the same five parts, so people learn it once and then just read. The order follows one question: what do I need to do today?</p>
+    </div>
+    <div class="route rv">
+      <div class="line"></div>
+      <ol>
+        <li style="--fd: 0.1s"><b>01</b><span>Summary</span><small>One line on what matters</small></li>
+        <li style="--fd: 0.3s"><b>02</b><span>Three numbers</span><small>Each compared with yesterday</small></li>
+        <li style="--fd: 0.5s"><b>03</b><span>One chart</span><small>Last 7 days or this week</small></li>
+        <li style="--fd: 0.7s"><b>04</b><span>Today</span><small>Three things to act on</small></li>
+        <li style="--fd: 0.9s"><b>05</b><span>Buttons</span><small>Three at most</small></li>
+      </ol>
+    </div>
+    <div class="insight rv">
+      <h3>Today first. Yesterday only as context.</h3>
+      <p>Every number shows the change since yesterday, and every chart ends on today, highlighted. If something can wait, it is not in the brief. That keeps the message short enough to read in a minute.</p>
+    </div>
+  </section>
+
+  <!-- ============ РОЛИ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>03</i>Roles</div>
+        <h2>Same shape, a different brief for every role</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">The CFO gets a direct message about approvals and risks. The treasurer gets currency moves and the hedges to place. Accounts payable gets one message in their team channel about today's payment run. Each role has its own numbers, chart and buttons.</p>
+    </div>
+    <div class="mb-roles rv">
+      <figure><figcaption><b>CFO</b> · direct message</figcaption><img src="../images/cases/brief/msg-cfo.webp" alt="CFO brief: cash today, one payment run to approve, one risk, cash for the last 7 days, three things for today, and the buttons Approve run, Open in platform and Snooze" width="888" height="1226" loading="lazy" decoding="async"></figure>
+      <figure><figcaption><b>Treasurer</b> · direct message</figcaption><img src="../images/cases/brief/msg-treasurer.webp" alt="Treasurer brief: EUR/USD rate, unhedged dollars, forwards due, the rate for the last 7 days, three things for today, and the buttons Prepare forwards, Open FX view and Ask a question" width="888" height="1232" loading="lazy" decoding="async"></figure>
+      <figure><figcaption><b>Accounts payable</b> · #payables channel</figcaption><img src="../images/cases/brief/msg-ap.webp" alt="Accounts payable brief: payments today, flagged payments, invoices on hold, payments by day this week, three things for today, and the buttons Review flagged, Open payment run and Snooze" width="888" height="1226" loading="lazy" decoding="async"></figure>
+    </div>
+    <p class="note">Companies, people and numbers are demo data.</p>
+  </section>
+
+  <!-- ============ НАСТРОЙКИ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>04</i>Settings</div>
+        <h2>Each company decides what every role sees</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">The brief is set up in the platform. An admin adds roles and picks the time, the time zone, the days and where the brief goes: a direct message or a channel. For each role they turn sections on and off, drag them into order, and choose the chart and up to three buttons.</p>
+        <p class="t">A live preview shows the exact Slack message before it goes out, and <b>Send test to me</b> sends it to yourself first.</p>
+      </div>
+    </div>
+    <div class="stage zoomable rv" style="height: 640px" tabindex="0" role="button" aria-label="Morning brief settings, click to zoom in">
+      <div class="glow"></div>
+      <div class="stage-in stage-fade">
+        <div class="shot bare"><img class="mb-shot" src="../images/cases/brief/settings.webp" alt="Morning brief settings in the treasury platform: roles, delivery time and days, sections, chart, buttons, instant alerts and a Slack preview" width="2880" height="1976" loading="lazy" decoding="async"></div>
+      </div>
+      <span class="hint"><svg><use href="#i-search"/></svg>Click to zoom</span>
+    </div>
+    <p class="note">Settings for the CFO brief, with a live preview. Demo data.</p>
+    <div class="triad rv">
+      <div class="tr" style="--t: 79, 194, 140"><span class="ico"><svg><use href="#i-tap"/></svg></span><small>Buttons</small><h3>Three at most</h3><p>A message is not a menu. The limit keeps every brief about the next step.</p></div>
+      <div class="tr" style="--t: 230, 165, 60"><span class="ico"><svg><use href="#i-bell"/></svg></span><small>Alerts</small><h3>Only two right away</h3><p>Cash below the buffer and a big currency move send a message at once. Everything else waits for the morning.</p></div>
+      <div class="tr" style="--t: 91, 141, 239"><span class="ico"><svg><use href="#i-eye"/></svg></span><small>Personal</small><h3>Hide it for yourself</h3><p>People can hide a section in Slack without changing the brief for the whole role.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ AI ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>05</i>AI</div>
+        <h2>AI writes the words, the platform gives the numbers</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">The summary line and the Today list are written by AI from the platform data, in plain language and in the order things are due.</p>
+        <p class="t">The numbers, the chart and the buttons come straight from the platform, so the AI never makes up a figure. Every Today item opens its source in the platform, and <b>Ask a question</b> answers only from the company's own data.</p>
+      </div>
+    </div>
+    <div class="mb-two rv">
+      <div class="tr" style="--t: 140, 120, 255"><span class="ico"><svg><use href="#i-spark"/></svg></span><small>Written by AI</small><h3>The words</h3><p>The greeting, the one line summary and the three things to do today.</p></div>
+      <div class="tr" style="--t: 79, 194, 140"><span class="ico"><svg><use href="#i-chart"/></svg></span><small>From the platform</small><h3>The facts</h3><p>Every number, the chart, the buttons and the link behind each item.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ ДАЛЬШЕ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>06</i>Next</div>
+        <h2>How I would know it works</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">The feature has not launched yet, so there are no results to show. After launch I would watch three signals.</p>
+    </div>
+    <div class="triad rv">
+      <div class="tr" style="--t: 91, 141, 239"><span class="ico"><svg><use href="#i-clock"/></svg></span><small>Signal 1</small><h3>Read before 9:00</h3><p>How many briefs people open before the first meeting of the day.</p></div>
+      <div class="tr" style="--t: 79, 194, 140"><span class="ico"><svg><use href="#i-tap"/></svg></span><small>Signal 2</small><h3>Done from Slack</h3><p>How many approvals and reviews start from the buttons and not from the dashboard.</p></div>
+      <div class="tr" style="--t: 230, 165, 60"><span class="ico"><svg><use href="#i-eye"/></svg></span><small>Signal 3</small><h3>Sections hidden</h3><p>What people hide for themselves shows what is noise for each role.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ НАВИГАЦИЯ ВНИЗУ ============ -->
+  <nav class="pager rv" aria-label="More cases">
+    <a class="pg pg-prev" style="--c: 165, 175, 55" href="ifreq">
+      <span class="pg-th" aria-hidden="true"><img src="../images/cases/ifreq/app-card.jpg" alt="" width="387" height="841"></span>
+      <span><span class="pg-l"><svg><use href="#i-back"/></svg>Previous case</span><b>IFREQ Football<br>Mobile App and Dashboard</b></span>
+    </a>
+    <a class="pg pg-next" style="--c: 40, 170, 110" href="ukrsibbank">
+      <span><span class="pg-l">Next case<svg><use href="#i-next"/></svg></span><b>UKRSIBBANK<br>Omnichannel CRM</b></span>
+      <span class="pg-th wide" aria-hidden="true"><img src="../images/cases/ukrsib-crm.jpg" alt="" width="1100" height="715"></span>
+    </a>
+  </nav>
+</main>
+</main>
+<footer class="col" style="margin-top: 72px"><span>© Elvin Garaev</span><span>Senior Product Designer</span></footer>
+</div>
+</body>
+</html>

@@ -13,14 +13,12 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#141413">
+  <meta name="theme-color" content="#10100f">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="../favicon.ico" sizes="32x32">
   <link rel="icon" href="../icon.png" type="image/png">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@1,700&display=block">
+  <link rel="preload" href="../inter-tight-700i-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../case.css">
   <script>
@@ -29,7 +27,7 @@
     /* без ручного выбора тема берётся из настроек системы и браузера, сразу, до первой отрисовки */
     if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     document.documentElement.setAttribute('data-scheme', t);
-    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#141413');
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
     /* страница всегда открывается с начала, до первой отрисовки: и в обычном браузере, и в окне предпросмотра,
        где прокручивается внешняя страница (scrollIntoView прокручивает и её) */
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -125,7 +123,8 @@
       <summary><img src="../images/icons/milli.png" alt="" width="22" height="22">Milli Digital<i class="chev"></i></summary>
       <div class="sub"><a href="xgo">XGo Wallet</a></div>
     </details>
-    <a class="item side-xp" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
+    <a class="item side-xp side-ic" href="../#ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M11 4c.6 4.3 2.7 6.4 7 7-4.3.6-6.4 2.7-7 7-.6-4.3-2.7-6.4-7-7 4.3-.6 6.4-2.7 7-7Z"/><path d="M18.5 15.2c.25 1.6.95 2.3 2.5 2.55-1.55.25-2.25.95-2.5 2.55-.25-1.6-.95-2.3-2.5-2.55 1.55-.25 2.25-.95 2.5-2.55Z"/></svg>AI in my work</a>
+    <a class="item side-ic" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
   </div>
 
   <!-- переключатель светлой и тёмной темы -->
@@ -519,7 +518,7 @@
     </a>
   </nav>
 </main>
-<footer class="col" style="margin-top: 72px"><span>© Elvin Garaev</span><span>Senior/Lead Product Designer</span></footer>
+<footer class="col" style="margin-top: 72px"><span>© Elvin Garaev</span><span>Senior Product Designer</span></footer>
 </div>
 </body>
 </html>
