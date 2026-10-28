@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>P3 Wealth × BlackRock, Onboarding and Dashboard · Elvin Garaev</title>
+  <meta name="description" content="Case study: P3 Wealth, a regulated capital management platform for professional investors with BlackRock fund data. Save and continue onboarding that cut account opening from two days to one, four roles and one tap currency switching.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://elvin-garaev-portfolio.vercel.app/work/p3-wealth">
+  <meta property="og:title" content="P3 Wealth × BlackRock, Onboarding and Dashboard · Elvin Garaev">
+  <meta property="og:description" content="Case study: P3 Wealth, a regulated capital management platform for professional investors with BlackRock fund data. Save and continue onboarding that cut account opening from two days to one, four roles and one tap currency switching.">
+  <meta property="og:image" content="https://elvin-garaev-portfolio.vercel.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#10100f">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preload" href="../inter-tight-700i-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../case.css">
+  <script>
+    document.documentElement.classList.add('js');
+    var t = null; try { t = localStorage.getItem('eg-theme'); } catch (e) {}
+    /* без ручного выбора тема берётся из настроек системы и браузера, сразу, до первой отрисовки */
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-scheme', t);
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
+    /* страница всегда открывается с начала, до первой отрисовки: и в обычном браузере, и в окне предпросмотра,
+       где прокручивается внешняя страница (scrollIntoView прокручивает и её) */
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var go = null; try { go = sessionStorage.getItem('eg-goto'); } catch (e) {}
+    if (!location.hash && !go) { try { document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {} }
+    setTimeout(function () { if (!window.__egReady) document.documentElement.classList.remove('js'); }, 3000);
+  </script>
+  <script src="../script.js" defer></script>
+  <script src="../case.js" defer></script>
+  <script src="../live.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3l2 5-2 1a12 12 0 0 0 6 6l1-2 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M4 13 6 5h12l2 8v6H4z"/><path d="M4 13h5l1 2h4l1-2h5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .6 3.4 2.4 3.7 5.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20 11l-8 8a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-6 16-3-7z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17v.5"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 7.5 3.8 2.8-1.5 4.4H9.7l-1.5-4.4z"/><path d="M12 7.5V3.2M15.8 10.3l4.1-1.4M14.3 14.7l2.6 3.6M9.7 14.7l-2.6 3.6M8.2 10.3 4.1 8.9"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.3C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18M7 14.5h4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M10.5 13.5 3 11l1.2-1.6 8.3.9 4.6-5.1a1.9 1.9 0 0 1 2.7 2.7l-5.1 4.6.9 8.3L14 22l-2.5-7.5"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M9 4 4.5 6.3l1.7 3.9L8 9.4V20h8V9.4l1.8.8 1.7-3.9L15 4a3 3 0 0 1-6 0z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="m16 10.5 5-3v9l-5-3"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4M8.2 13.2l7.6 4"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V10M10 2.5h4M18.5 6.5 20 5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4.5" y="5" width="15" height="10.5" rx="1.5"/><path d="M2.5 19h19"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V6M6.5 11.5 12 6l5.5 5.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4 3.5 7.5 7 11M3.5 7.5H17M17 13l3.5 3.5L17 20M20.5 16.5H7"/></symbol>
+  <symbol id="i-finger" viewBox="0 0 24 24"><path d="M7.5 18.5a10 10 0 0 0 1-4.5v-2a3.5 3.5 0 0 1 7 0v1.5M12 12v2.5a14 14 0 0 1-1.5 6.5M15.5 16a17 17 0 0 1-1 4.5M5 15.5a12 12 0 0 0 .5-3.5V12a6.5 6.5 0 0 1 12.2-3.1M19 12.5v1a20 20 0 0 1-.4 4"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M16 13.5h1.5"/></symbol>
+  <symbol id="i-sale" viewBox="0 0 24 24"><path d="M3 14h3.5l3 2h5a1.5 1.5 0 0 0 0-3H11"/><path d="M6.5 14v6H3"/><path d="M14.5 16l4.4-2.5a1.5 1.5 0 0 1 1.6 2.5L15 19.5H9.5"/><circle cx="14" cy="7" r="3.5"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><path d="M4.5 14v-2.5a7.5 7.5 0 0 1 15 0V14"/><rect x="3" y="13" width="4" height="6" rx="1.6"/><rect x="17" y="13" width="4" height="6" rx="1.6"/><path d="M19 19c0 1.4-1.8 2.3-4.5 2.3"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M10 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20H10"/><path d="M15 8l4 4-4 4M19 12H9.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-node" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="16" height="6.5" rx="1.6"/><path d="M8 7.3h.01M8 16.8h.01M12 7.3h4M12 16.8h4"/></symbol>
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3M14.5 10h4M14.5 13.5h3"/></symbol>
+  <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a5 5 0 0 1-4.2-2.3L4.6 15a1.5 1.5 0 0 1 2.4-1.8L9 15"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6.5" rx="5.5" ry="2.5"/><path d="M3.5 6.5v4c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5v-4"/><path d="M9.5 15.4c.9 1 2.9 1.6 5 1.6 3 0 5.5-1.1 5.5-2.5v-4c0-1.2-1.9-2.2-4.4-2.4"/><path d="M3.5 10.5v4c0 1.4 2.5 2.5 5.5 2.5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol>
+</svg>
+<div class="light" aria-hidden="true"></div>
+<div class="frame" aria-hidden="true"></div>
+
+<aside class="sidebar" id="sidebar" aria-label="Site navigation">
+  <div class="side-scroll">
+    <a class="item" href="../"><span class="mark">EG</span>Home</a>
+    <div class="side-label">Cases</div>
+    <details class="group" open>
+      <summary><img src="../images/icons/ukrsib.png" alt="" width="22" height="22">UKRSIBBANK<i class="chev"></i></summary>
+      <div class="sub"><a href="ukrsibbank">Omnichannel CRM</a><a href="safe">Banking Safe</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/ifreq.png" alt="" width="22" height="22">IFREQ<i class="chev"></i></summary>
+      <div class="sub"><a href="ifreq">Football App and Dashboard</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/barva.png" alt="" width="22" height="22">BARVA.TECH<i class="chev"></i></summary>
+      <div class="sub"><a class="on" href="p3-wealth" aria-current="page">P3 Wealth × BlackRock</a><a href="p3-marine">P3 Marine</a><a href="cryptoswift">CryptoSwift</a></div>
+    </details>
+    <details class="group" open>
+      <summary><img src="../images/icons/milli.png" alt="" width="22" height="22">Milli Digital<i class="chev"></i></summary>
+      <div class="sub"><a href="xgo">XGo Wallet</a></div>
+    </details>
+    <a class="item side-xp side-ic" href="../#ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M11 4c.6 4.3 2.7 6.4 7 7-4.3.6-6.4 2.7-7 7-.6-4.3-2.7-6.4-7-7 4.3-.6 6.4-2.7 7-7Z"/><path d="M18.5 15.2c.25 1.6.95 2.3 2.5 2.55-1.55.25-2.25.95-2.5 2.55-.25-1.6-.95-2.3-2.5-2.55 1.55-.25 2.25-.95 2.5-2.55Z"/></svg>AI in my work</a>
+    <a class="item side-ic" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
+  </div>
+
+  <!-- переключатель светлой и тёмной темы -->
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>Light</button>
+    <button type="button" data-set="dark" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>Dark</button>
+  </div>
+
+  <!-- профиль внизу: по нажатию открывается меню -->
+  <div class="profile">
+    <div class="pop" id="pop" hidden>
+      <button type="button" id="open-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c.9-3.6 3.7-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>About</button>
+      <div class="sep"></div>
+      <a class="mail" href="mailto:e.garaev.dg55@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><span>Email<small>e.garaev.dg55@gmail.com</small></span></a>
+      <a href="https://www.linkedin.com/in/elvin-garaev-4798ba255/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><path d="M8 10.5V16M8 7.6v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.4-2.6s2.1.9 2.1 2.6V16"/></svg>LinkedIn<span class="ext" aria-hidden="true">↗</span></a>
+      <a href="https://t.me/el13xx" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 4.5 3.8 11.1c-.8.3-.8 1.4 0 1.7l4.1 1.4 1.6 4.9c.2.7 1.1.9 1.6.4l2.3-2.2 4.2 3.1c.6.4 1.4.1 1.6-.6L21.6 5.6c.2-.8-.4-1.4-1.1-1.1Z"/><path d="m8 14.2 9-6.6"/></svg>Telegram<span class="ext" aria-hidden="true">↗</span></a>
+    </div>
+    <button class="me" type="button" id="me" aria-expanded="false" aria-controls="pop">
+      <img src="../images/elvin/avatar.jpg" alt="" width="40" height="40"><span class="who"><b>Elvin Garaev</b><small>Product Designer</small></span><svg class="updown" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 6 3-3 3 3M5 10l3 3 3-3"/></svg>
+    </button>
+  </div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+<header class="topbar">
+  <a class="logo" href="../" aria-label="Elvin Garaev, back to top">EG</a>
+  <button class="burger" type="button" id="menu-open" aria-expanded="false" aria-controls="sidebar"><span></span><b class="sr">Open menu</b></button>
+</header>
+<div class="about" id="about" role="dialog" aria-modal="true" aria-label="About Elvin Garaev" hidden>
+  <div class="about-scroll">
+  <div class="letter-wrap">
+    <figure class="snap snap-left"><img src="../images/elvin/about-antalya.jpg" alt="Elvin at sunset in Antalya" width="480" height="640"></figure>
+    <figure class="snap snap-right"><img src="../images/elvin/about-child.jpg" alt="Elvin as a child" width="480" height="600"></figure>
+    <div class="close-row"><button class="close-about" type="button" id="close-about" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <article class="letter">
+      <p class="hello">Hi, I’m Elvin Garaev, a Product Designer originally from Azerbaijan.</p>
+      <p>When I was five, my family moved to Kharkiv, Ukraine, where I spent most of my childhood and school years. I later studied <b>International Economics and Business</b> at V. N. Karazin Kharkiv National University, where I spent six years building a strong foundation in economics and business.</p>
+      <p>Before design, sports were a huge part of my life. I competed professionally in both <b>judo and football</b>, which taught me discipline, consistency, and how to work toward long-term goals.</p>
+      <p>I’ve been working in digital and product design for over five years. Today, I focus mainly on <b>FinTech, Banking, Web3, and AI</b> products. With my background in economics and business, I’ve always been especially interested in products connected to finance, where design has to work together with complex business logic and real user needs.</p>
+      <p>Outside of work, I enjoy an active lifestyle, playing football, going to the gym, traveling, and reading books about marketing and economics.</p>
+    </article>
+  </div>
+  </div>
+</div>
+
+<div class="page" id="top">
+<main class="col cs p3w" id="main">
+
+  <nav class="crumbs" aria-label="Case navigation"><a href="../#cases"><svg><use href="#i-back"/></svg>All cases</a><a href="p3-marine">Next: P3 Marine<svg><use href="#i-next"/></svg></a></nav>
+
+  <!-- ============ ОБЛОЖКА ============ -->
+  <header class="cs-hero">
+    <div class="cs-brand">
+      <img class="for-dark" src="../images/logos/p3-wealth.png" alt="P3 Wealth">
+      <img class="for-light" src="../images/logos/p3-wealth-light.png" alt="P3 Wealth">
+      <span class="x" aria-hidden="true">×</span>
+      <img class="bk" src="../images/logos/blackrock.svg" alt="BlackRock" width="201" height="29">
+      <div class="cs-tags"><span>Fintech</span><span>Wealth management</span><span>B2B</span><span>Web</span></div>
+    </div>
+    <h1>P3 Wealth<span class="g">A capital management platform, built from zero</span></h1>
+    <p class="cs-lede">P3 Wealth is a regulated platform where <b>professional investors manage the capital of wealthy clients</b>: they invest it in BlackRock funds and other assets, track every position and report back, and the platform earns a share of the profit. I designed the whole product <b>from zero</b>: the structure, the design system, dashboards and charts, onboarding, roles, statements and the documentation developers built from.</p>
+    <div class="cs-meta">
+      <div><small>Role</small><b>Product Designer</b></div>
+      <div><small>Company</small><b>BARVA.TECH</b></div>
+      <div><small>Timeline</small><b>2023 to 2024</b></div>
+      <div><small>Platform</small><b>Web, desktop</b></div>
+      <div><small>Status</small><b>Live</b></div>
+    </div>
+  </header>
+
+  <div class="stage live rv">
+    <div class="glow"></div>
+    <div class="stage-in">
+      <div class="shot"><div class="p3d" data-fit="1200" data-max="0.86"><header class="p3-top"><img src="../images/logos/p3-wealth-light.png" alt="P3 Wealth" width="58" height="31"><nav><span class="on">DASHBOARD</span><span>TRANSACTIONS</span><span>REPORTS</span><span>FUNDS</span><span>INVOICE</span></nav><div class="p3-cur" role="group" aria-label="Currency"><button type="button" data-set-cur="EUR" aria-pressed="false">EUR</button><button type="button" data-set-cur="USD" aria-pressed="true">USD</button><button type="button" data-set-cur="GBP" aria-pressed="false">GBP</button></div><span class="p3-user">EC</span></header><section class="p3-band"><div class="p3-kpis"><span class="p3-sub">Subscribe / Redeem</span><div><small>AUM</small><b data-money="48200000">$48,200,000</b></div><div><small>Total earnings</small><b data-money="1497000">$1,497,000</b></div><div class="p3-seg" role="group" aria-label="Chart"><button type="button" data-set-metric="aum" aria-pressed="true">AUM</button><button type="button" data-set-metric="yield" aria-pressed="false">Yield</button></div></div><div class="p3-chart"><div class="p3-y"><span>$49.7M</span><span>$44.0M</span><span>$38.3M</span></div><svg viewBox="0 0 1000 170" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="p3fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcae9c" stop-opacity="0.32"/><stop offset="1" stop-color="#dcae9c" stop-opacity="0"/></linearGradient></defs><line class="gl" x1="0" y1="0" x2="1000" y2="0"/><line class="gl" x1="0" y1="85" x2="1000" y2="85"/><line class="gl" x1="0" y1="170" x2="1000" y2="170"/><path class="ar" d="M0.0 147.5 L90.9 135.6 L181.8 126.7 L272.7 129.6 L363.6 107.3 L454.5 98.4 L545.5 85.0 L636.4 76.1 L727.3 56.7 L818.2 49.3 L909.1 35.9 L1000.0 22.5 L1000 170 L0 170 Z"/><path class="ln" d="M0.0 147.5 L90.9 135.6 L181.8 126.7 L272.7 129.6 L363.6 107.3 L454.5 98.4 L545.5 85.0 L636.4 76.1 L727.3 56.7 L818.2 49.3 L909.1 35.9 L1000.0 22.5"/></svg><span class="p3-cross"></span><span class="p3-dot"></span><span class="p3-tip"></span><div class="p3-x"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div></div></section><section class="p3-table"><table><thead><tr><th>Name</th><th>AUM</th><th>Monthly earnings</th><th>WAM / WAL</th><th>Fund size (bn)</th><th>1 day yield</th></tr></thead><tbody><tr><td>ICS US Treasury Fund</td><td data-money="15400000">$15,400,000</td><td data-money="616000">$616,000</td><td>13 / 48</td><td>21.5</td><td>5.25%</td></tr><tr><td>ICS Sterling Government Liquidity Fund</td><td data-money="25300000">$25,300,000</td><td data-money="50000">$50,000</td><td>4 / 4</td><td>4.5</td><td>5.03%</td></tr><tr><td>ICS Euro Government Liquidity Fund</td><td data-money="7500000">$7,500,000</td><td data-money="306000">$306,000</td><td>7 / 7</td><td>1.5</td><td>3.56%</td></tr></tbody></table><footer><span>★ Data sourced from <u>BlackRock</u></span><span>The dashboard updates daily · Last updated 20.12.2023</span></footer></section></div></div>
+    </div>
+    <span class="hint try"><svg><use href="#i-swap"/></svg>Try it: switch EUR, USD and GBP</span>
+  </div>
+  <p class="note">Interactive recreation of the investor dashboard. Fund names and figures from the product, monthly trend and exchange rates are demo data.</p>
+
+  <!-- ============ КАК УСТРОЕН ============ -->
+  <section class="sec" style="margin-top: 96px">
+    <div class="label">How it works</div>
+    <h2>Wealthy clients, professional investors and BlackRock funds in one place</h2>
+    <p class="t">Clients and family offices hand their capital to professional investors. On P3 Wealth those investors put it to work, follow every position and report back. When the portfolio earns, the platform takes its share. All of it is regulated by the FCA.</p>
+    <div class="flow3 rv">
+      <div class="fn" style="--fd: 0.1s"><span class="ico"><svg><use href="#i-users"/></svg></span><b>Wealthy clients</b><small>Individuals and family offices who trust their capital to professionals</small></div>
+      <div class="fa" style="--fd: 0.3s"><span>Capital</span></div>
+      <div class="fn core" style="--fd: 0.4s"><span class="lg"><img class="for-dark" src="../images/logos/p3-wealth.png" alt="P3 Wealth"><img class="for-light" src="../images/logos/p3-wealth-light.png" alt="P3 Wealth"></span><b>Professional investors</b><small>Manage portfolios, subscribe and redeem, see AUM and yield, send statements</small></div>
+      <div class="fa" style="--fd: 0.6s"><span>Invest</span></div>
+      <div class="fn" style="--fd: 0.7s"><span class="bkl"><img src="../images/logos/blackrock.svg" alt="BlackRock" width="201" height="29"></span><b>BlackRock funds</b><small>And other assets, with live fund data flowing back into the platform</small></div>
+      <div class="fret" style="--fd: 0.9s">Returns go back to the clients, and <b>P3 Wealth earns a share of the profit</b></div>
+    </div>
+  </section>
+
+  <!-- ============ ЧТО Я СДЕЛАЛ ============ -->
+  <section class="sec">
+    <div class="label">What I designed</div>
+    <h2>The whole product, from the first wireframe to the last spec</h2>
+    <div class="roles6 scope rv">
+      <div class="role" style="--fd: 0.1s"><span class="ico"><svg><use href="#i-grid"/></svg></span><h3>Product structure</h3><p>Information architecture and the flows for every role, from first sign up to monthly reports.</p></div>
+      <div class="role" style="--fd: 0.18s"><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Design system</h3><p>Tokens, components and states built for a product made of numbers, tables and forms.</p></div>
+      <div class="role" style="--fd: 0.26s"><span class="ico"><svg><use href="#i-chart"/></svg></span><h3>Dashboards and charts</h3><p>AUM, yield and performance, fund tables and one tap switching between three currencies.</p></div>
+      <div class="role" style="--fd: 0.34s"><span class="ico"><svg><use href="#i-check"/></svg></span><h3>Onboarding</h3><p>A multi step flow with save and continue, cosigners in parallel and disclosures in context.</p></div>
+      <div class="role" style="--fd: 0.42s"><span class="ico"><svg><use href="#i-shield"/></svg></span><h3>Roles and security</h3><p>Four roles with their own interfaces, permissions and visible trust signals.</p></div>
+      <div class="role" style="--fd: 0.5s"><span class="ico"><svg><use href="#i-file"/></svg></span><h3>Statements and specs</h3><p>Monthly statements for investors and documentation for every component and flow for developers.</p></div>
+    </div>
+    <div class="stats rv">
+      <div class="st"><b>0 <em>→ 1</em></b><span>designed from zero, end to end</span></div>
+      <div class="st"><b data-to="4">4</b><span>roles, each with its own interface</span></div>
+      <div class="st"><b data-to="3">3</b><span>currencies, one tap apart</span></div>
+      <div class="st"><b>2 <em>→ 1</em></b><span>days to open an account</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ЗАДАЧА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>01</i>The brief</div>
+        <h2>A regulated business that needed a product</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">The business model, the regulation and the BlackRock data were there. The product that professional investors would actually use every day was not. My job was to design it: keep a regulated system exactly as strict, and make it feel simple for people who move millions.</p>
+      </div>
+    </div>
+    <div class="fails rv">
+      <div class="fail" style="--fd: 0.1s"><span>1</span><b>Institutions with many signatories</b><small>Opening an account meant forms, documents and sign off from several people.</small></div>
+      <div class="fail" style="--fd: 0.2s"><span>2</span><b>Trust at this level of money</b><small>Investors expect security, transparency and clarity on every screen.</small></div>
+      <div class="fail" style="--fd: 0.3s"><span>3</span><b>Roles in a regulated world</b><small>Investors, managers, admins and compliance see very different things.</small></div>
+      <div class="fail" style="--fd: 0.4s"><span>4</span><b>Many systems, one interface</b><small>Payments, fund data, reporting and compliance had to feel like one product.</small></div>
+    </div>
+  </section>
+
+  <!-- ============ ИССЛЕДОВАНИЕ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>02</i>Research</div>
+        <h2>We talked to the people who move the money</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">The platform is only for professional investors, so we went straight to them. Experienced people who had mostly managed their money through a relationship manager and phone calls, now asked to do it all themselves online.</p>
+    </div>
+    <div class="rs4 rv">
+      <div class="role" style="--fd: 0.1s"><span class="ico"><svg><use href="#i-chat"/></svg></span><h3>Interviews</h3><p>With professional investors about how they track, move and approve money today.</p></div>
+      <div class="role" style="--fd: 0.2s"><span class="ico"><svg><use href="#i-eye"/></svg></span><h3>Competitive review</h3><p>Saxo Bank and private banking portals, the tools these investors already trust.</p></div>
+      <div class="role" style="--fd: 0.3s"><span class="ico"><svg><use href="#i-users"/></svg></span><h3>Four personas</h3><p>Emma, Ivan, Diana and Mitch, each with a story, goals and pain points.</p></div>
+      <div class="role" style="--fd: 0.4s"><span class="ico"><svg><use href="#i-check"/></svg></span><h3>Usability tests</h3><p>Three rounds on every key flow before it shipped.</p></div>
+    </div>
+    <div class="pers rv"><article class="per" style="--fd: 0.1s"><div class="per-h"><i>EC</i><span><b>Emma Clarke</b><small>Partner, family office · London</small></span></div><p>Moves client capital between funds every week, across euros, dollars and pounds.</p><dl><div><dt>Goal</dt><dd>See every position and its yield in one place, in any of the three currencies.</dd></div><div><dt>Pain point</dt><dd>Monthly totals arrive as PDFs and get rebuilt by hand in a spreadsheet.</dd></div></dl></article><article class="per" style="--fd: 0.2s"><div class="per-h"><i>IP</i><span><b>Ivan Petrov</b><small>Professional investor · Zurich</small></span></div><p>Spent years working through a relationship manager who explained every number on the phone.</p><dl><div><dt>Goal</dt><dd>Act on his own without calling anyone first.</dd></div><div><dt>Pain point</dt><dd>A number without a source feels like a risk, not a detail.</dd></div></dl></article><article class="per" style="--fd: 0.3s"><div class="per-h"><i>DK</i><span><b>Diana Kovacs</b><small>Operations lead, institution · Dublin</small></span></div><p>Opens accounts that need several signatories, a compliance review and BlackRock approval.</p><dl><div><dt>Goal</dt><dd>Get every signature without chasing people one by one.</dd></div><div><dt>Pain point</dt><dd>One missing cosigner blocks the whole account for days.</dd></div></dl></article><article class="per" style="--fd: 0.4s"><div class="per-h"><i>MR</i><span><b>Mitch Ross</b><small>Fund manager · Dubai</small></span></div><p>Looks after a dozen client portfolios between meetings, mostly on a tablet.</p><dl><div><dt>Goal</dt><dd>Compare funds and rebalance quickly, wherever he is.</dd></div><div><dt>Pain point</dt><dd>Switching systems and currencies to answer one client question.</dd></div></dl></article></div>
+    <p class="note">Personas redrawn for the portfolio. Names and details are illustrative.</p>
+    <div class="thought rv">
+      <div class="was" style="--fd: 0.2s"><small>The user we thought we had</small><h3>Wants every number on one screen</h3><p>We expected professionals to ask for maximum density, like a trading terminal.</p></div>
+      <div class="is" style="--fd: 0.35s"><small>The user we actually had</small><h3>Needs to understand before acting</h3><p>Used to a relationship manager explaining things on the phone. For them confusion didn't feel like complexity, it felt like risk.</p></div>
+    </div>
+    <div class="quote rv">
+      <div class="qm">“</div>
+      <div><blockquote>I need to see exactly where my money is, what it's doing and what I can do about it, without calling anyone to explain.</blockquote><cite>Ivan, professional investor persona</cite></div>
+    </div>
+    <div class="insight rv">
+      <h3>Professional investors don't trust what they don't understand.</h3>
+      <p>So clarity became part of compliance: every number with its source, every action with its consequence, and nothing that makes an investor reach for the phone. <b style="color:var(--text);font-weight:500">And nothing that forces them to finish everything in one go.</b></p>
+    </div>
+  </section>
+
+  <!-- ============ ДИЗАЙН-СИСТЕМА ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>03</i>Design system</div>
+        <h2>A design system built for numbers</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">I built the design system from scratch: color and type tokens, inputs with every validation state, buttons, dropdowns, phone and currency fields, tables and chart elements. Error messages were written to guide, not to alarm, because a professional investor who feels lost stops trusting the product.</p>
+        <p class="t">Every component came with documentation, so developers could build screens from the system without guessing.</p>
+      </div>
+    </div>
+    <div class="vw rv" style="--vh: auto; --vhm: auto; --ar: 1040 / 518"><div class="win2"><div class="win2-bar"><i></i><i></i><i></i><span>P3 Wealth · Design system</span></div><div class="vw-view" style=""><figure class="vw-f on"><div class="pan"><div class="dsb pu" data-fit="1040"><div class="dsb-cols" style="grid-template-columns: 1fr 1fr 0.9fr"><div><h6>Navy · structure</h6><div class="dsb-sw"><div class="" style="background:#14163a"><span>#14163a</span></div><div class="" style="background:#2a2c55"><span>#2a2c55</span></div><div class="" style="background:#4b4d75"><span>#4b4d75</span></div><div class="lt" style="background:#8e90ab"><span>#8e90ab</span></div><div class="lt" style="background:#c7c8d6"><span>#c7c8d6</span></div></div><div class="dsb-grp"><h6>Rose gold · action</h6><div class="dsb-sw"><div class="" style="background:#9a6658"><span>#9a6658</span></div><div class="" style="background:#b0807b"><span>#b0807b</span></div><div class="" style="background:#c9a39b"><span>#c9a39b</span></div><div class="lt" style="background:#dfc4bd"><span>#dfc4bd</span></div><div class="lt" style="background:#f2e6e2"><span>#f2e6e2</span></div></div></div><div class="dsb-grp"><h6>Whites · five grades</h6><div class="dsb-sw"><div class="lt" style="background:#ffffff"><span>#ffffff</span></div><div class="lt" style="background:#f8f8f9"><span>#f8f8f9</span></div><div class="lt" style="background:#f1f1f4"><span>#f1f1f4</span></div><div class="lt" style="background:#e9e9ee"><span>#e9e9ee</span></div><div class="lt" style="background:#ece7e2"><span>#ece7e2</span></div></div></div><div class="dsb-grp"><h6>System</h6><div class="dsb-sw" style="grid-template-columns: repeat(2, 1fr)"><div style="background:#e0574f"><span>#e0574f</span></div><div style="background:#2f9e6a"><span>#2f9e6a</span></div></div></div></div><div><h6>Typography</h6><div class="dsb-ty"><div><small>H1</small><span style="font-size:30px;font-weight:600;letter-spacing:-0.02em">Portfolio</span><em>32 · Medium</em></div><div><small>H2</small><span style="font-size:23px;font-weight:600">Statements</span><em>24 · Medium</em></div><div><small>H3</small><span style="font-size:17px;font-weight:500">Bond fund</span><em>18 · Regular</em></div><div><small>Body</small><span style="font-size:13.5px">The dashboard updates daily.</span><em>14 · Regular</em></div><div><small>Caption</small><span style="font-size:11.5px;color:#8a8d99">Data sourced from BlackRock</span><em>12 · Regular</em></div><div><small>Numbers</small><span class="mono" style="font-size:18px">$48,200,000</span><em>Simplon Mono</em></div></div><p style="margin:12px 0 0;font-size:11.5px;color:#8a8d99">Simplon Norm for text, Simplon Mono for every figure in tables.</p></div><div><h6>Buttons</h6><div class="dsb-btns" style="grid-template-columns: repeat(2, auto)"><span class="pu-btn r" style="">Subscribe</span><span class="pu-btn n" style="">Export</span><span class="pu-btn r" style="background:#9a6658">Hover</span><span class="pu-btn n" style="background:#14163a">Hover</span><span class="pu-btn dis" style="">Disabled</span><span class="pu-btn o" style="">Requisites</span></div><h6 style="margin-top:20px">Inputs</h6><div class="dsb-ins"><div class="pu-in foc"><label>Company name</label>Northgate Capital</div><div class="pu-in"><label>Phone</label><span><span class="pfx-flag"></span>+44 20 7946 0321</span></div><div><div class="pu-in err phd">Email</div><div class="pu-hint">Please enter a valid email address</div></div><div class="pu-in phd">Country of jurisdiction<span class="r"><svg><use href="#i-down"/></svg></span></div><div class="dsb-msg ok"><svg><use href="#i-check"/></svg>Changes saved</div></div></div></div></div></div></figure></div></div><p class="vw-cap">Navy for structure, rose gold for action, whites in five grades, Simplon Norm for text and Simplon Mono for figures. Redrawn from the original system.</p></div>
+    <div class="tnum rv" data-mode="prop">
+      <div>
+        <h3>Numbers you can scan</h3>
+        <p>Every figure in tables uses a monospaced font, Simplon Mono, so digits line up in columns. In testing it cut read errors by <b style="color:var(--text);font-weight:500">23%</b>.</p>
+        <div class="tg" role="group" aria-label="Number style"><button type="button" data-set-mode="prop" aria-pressed="true">Proportional</button><button type="button" data-set-mode="mono" aria-pressed="false">Monospaced</button></div>
+      </div>
+      <table><tbody>
+        <tr><td>ICS US Treasury</td><td>$15,400,000</td><td>$616,000</td></tr>
+        <tr><td>ICS Sterling Government</td><td>$25,300,000</td><td>$50,000</td></tr>
+        <tr><td>ICS Euro Government</td><td>$7,500,000</td><td>$306,000</td></tr>
+        <tr><td>Total</td><td>$48,200,000</td><td>$972,000</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <!-- ============ ДАШБОРДЫ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>04</i>Dashboards and charts</div>
+        <h2>Tables and charts you can read at a glance</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">Investors hold funds in euros, dollars and pounds, so the currency became a switch in the header: one tap, and every balance, table and chart updates. You can try it in the dashboard at the top of this page.</p>
+        <p class="t">The performance chart went through three iterations. Tabs made people unsure whether a click would take them to another page, so the final version toggles between <b>AUM and yield</b> with a clear active state. Every BlackRock number carries its source and update date.</p>
+      </div>
+    </div>
+    <div class="vw rv" data-auto="4600" style="--vh: 600px; --vhm: 420px">
+      <div class="tabs2" role="group" aria-label="Dashboard screens">
+        <button type="button" aria-pressed="true" data-cap="<b>Before the first investment.</b> The dashboard is never empty: it shows where the money will appear and points to Subscribe / Redeem.">First visit</button>
+        <button type="button" aria-pressed="false" data-cap="<b>AUM.</b> Positions per fund, monthly statements with earned, redeemed and subscribed, and the AUM chart for each fund.">AUM</button>
+        <button type="button" aria-pressed="false" data-cap="<b>Yield.</b> The same chart switches to yield, so investors compare funds without leaving the page.">Yield</button>
+        <button type="button" aria-pressed="false" data-cap="<b>Funds.</b> Every BlackRock money market fund side by side: rating, credit quality, maturity, eligible investments and dealing cut off times.">Funds</button>
+        <button type="button" aria-pressed="false" data-cap="<b>Bank details.</b> Where to send money for each currency, in one table instead of a PDF. Account numbers hidden here.">Bank details</button>
+        <button type="button" aria-pressed="false" data-cap="<b>Monthly statement.</b> The same numbers as a PDF that investors download and forward to their accountants.">Statement</button>
+      </div>
+      <div class="win2"><div class="win2-bar"><i></i><i></i><i></i><span>P3 Wealth · Dashboard</span></div>
+        <div class="vw-view">
+          <figure class="vw-f on"><img class="pan" src="../images/cases/p3wealth/real/dash-empty.webp" alt="Dashboard of a new investor before the first subscription" width="1800" height="3131" loading="lazy" decoding="async"></figure>
+          <figure class="vw-f"><img class="pan" src="../images/cases/p3wealth/real/dash-aum.webp" alt="Dashboard with fund positions, monthly statements and the AUM chart" width="1800" height="3131" loading="lazy" decoding="async"></figure>
+          <figure class="vw-f"><img class="pan" src="../images/cases/p3wealth/real/dash-yield.webp" alt="Dashboard with the yield chart" width="1800" height="3131" loading="lazy" decoding="async"></figure>
+          <figure class="vw-f"><img class="pan" src="../images/cases/p3wealth/real/funds.webp" alt="Comparison of BlackRock money market funds" width="1800" height="2491" loading="lazy" decoding="async"></figure>
+          <figure class="vw-f"><img class="pan" src="../images/cases/p3wealth/real/funds-req.webp" alt="Bank details for EUR, GBP and USD with account numbers hidden" width="1800" height="2495" loading="lazy" decoding="async"></figure>
+          <figure class="vw-f fit"><img src="../images/cases/p3wealth/real/statement-a4.webp" alt="Monthly statement as an A4 document" width="1190" height="1684" loading="lazy" decoding="async"></figure>
+        </div>
+        <span class="scroll-hint"><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Scroll inside</span>
+      </div>
+      <p class="vw-cap"></p>
+    </div>
+    <p class="note">Screens from the product. Fund data from BlackRock as of December 2023.</p>
+    <div class="split" style="margin-top: 72px">
+      <div><h2 style="font-size: 22px">Every screen on three widths</h2></div>
+      <p class="t" style="margin-top: 0">Investors check the dashboard on a large monitor in the office and on a tablet between meetings. Each screen was designed for <b>1440, 1024 and 768</b>, with tables that keep their meaning instead of just getting smaller.</p>
+    </div>
+    <div class="bpr rv" style="--bh: 620px; --bhm: 380px">
+      <div class="tabs2" role="group" aria-label="Screen width">
+        <button type="button" data-w="1440" aria-pressed="true">Desktop <b>1440</b></button>
+        <button type="button" data-w="1024" aria-pressed="false">Laptop <b>1024</b></button>
+        <button type="button" data-w="768" aria-pressed="false">Tablet <b>768</b></button>
+      </div>
+      <div class="bpr-stage"><div class="bpr-frame"><div class="bpr-in">
+        <img class="on" data-w="1440" src="../images/cases/p3wealth/real/dash-aum.webp" alt="Dashboard at 1440 pixels" width="1800" height="3131" loading="lazy" decoding="async">
+        <img data-w="1024" src="../images/cases/p3wealth/real/dash-1024.webp" alt="Dashboard at 1024 pixels" width="737" height="1621" loading="lazy" decoding="async">
+        <img data-w="768" src="../images/cases/p3wealth/real/dash-768.webp" alt="Dashboard at 768 pixels" width="614" height="1705" loading="lazy" decoding="async">
+      </div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ ОНБОРДИНГ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>05</i>Onboarding</div>
+        <h2>Save and continue, on any device</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">Professional investors open accounts between meetings, not in one free afternoon. So we added <b>Save and continue</b>: the investor saves their progress, gets a secure link by email and picks up on any device, at the same step, with every answer in place.</p>
+        <p class="t">Approvals stopped blocking the investor too. Compliance, BlackRock and cosigners get their requests at the same time and sign off in parallel. Now an account started in the morning is <b>ready by the evening</b>, not the next day.</p>
+      </div>
+    </div>
+    <div class="tl tl2 rv"><div class="tl-in">
+      <div class="tl-row">
+        <header><b>Before</b><small>About 8 hours of work and approvals, spread over two working days.</small></header>
+        <div class="tl-lane">
+          <span class="act" style="--l: 0%; --w: 14.5%; --fd: 0.1s">Forms and documents</span>
+          <span class="wait" style="--l: 15%; --w: 26.6%; --fd: 0.2s"><svg><use href="#i-clock"/></svg>Waiting for compliance</span>
+          <span class="night" style="--l: 42%; --w: 16%; --fd: 0.3s">Overnight</span>
+          <span class="wait" style="--l: 58.4%; --w: 17.4%; --fd: 0.4s"><svg><use href="#i-clock"/></svg>Waiting for BlackRock</span>
+          <span class="wait" style="--l: 76.2%; --w: 15.4%; --fd: 0.5s"><svg><use href="#i-clock"/></svg>Cosigners in turn</span>
+          <span class="done" style="--l: 92%; --w: 8%; --fd: 0.6s"><svg><use href="#i-check"/></svg>Ready</span>
+        </div>
+      </div>
+      <div class="tl-row">
+        <header><b>After</b><small>Start in the morning, account ready by the evening.</small></header>
+        <div class="tl-lane">
+          <span class="act" style="--l: 0%; --w: 9%; --fd: 0.8s"><svg><use href="#i-laptop"/></svg>Laptop</span>
+          <span class="act" style="--l: 12.5%; --w: 8.5%; --fd: 0.9s"><svg><use href="#i-app"/></svg>Phone</span>
+          <span class="act" style="--l: 24%; --w: 9%; --fd: 1s"><svg><use href="#i-laptop"/></svg>Laptop</span>
+          <span class="done" style="--l: 33.5%; --w: 8.2%; --fd: 1.1s"><svg><use href="#i-check"/></svg>Ready</span>
+          <span class="night" style="--l: 42%; --w: 16%; --fd: 0.3s"></span>
+          <span class="free" style="--l: 58.4%; --w: 41.6%; --fd: 1.2s">Day 2 is no longer needed</span>
+        </div>
+        <div class="tl-lane thin">
+          <span class="bg" style="--l: 4%; --w: 29%; --fd: 1.1s">Approvals in parallel</span>
+        </div>
+      </div>
+      <div class="tl-x"><span style="--l: 0%">Day 1, 9:00</span><span style="--l: 21%">13:00</span><span style="--l: 42%">18:00</span><span style="--l: 58.4%">Day 2, 9:00</span><span style="--l: 79%">13:00</span><span style="--l: 100%">18:00</span></div>
+    </div></div>
+    <p class="note">Schematic of the onboarding journey before and after.</p>
+    <div class="sc rv" data-s="0">
+      <div class="sc-side">
+        <ol class="sc-steps">
+          <li><button type="button" data-go="1"><i>1</i>Save on the laptop</button></li>
+          <li><button type="button" data-go="2"><i>2</i>Get a secure link</button></li>
+          <li><button type="button" data-go="3"><i>3</i>Continue on the phone</button></li>
+        </ol>
+        <button type="button" class="sc-replay"><svg><use href="#i-refresh"/></svg>Replay</button>
+      </div>
+      <div class="sc-lap">
+        <div class="sc-win" data-fit="720">
+          <div class="sc-bar"><i></i><i></i><i></i><span>P3 Wealth · Open an account</span></div>
+          <div class="sc-body">
+            <aside class="sc-nav"><img src="../images/logos/p3-wealth.png" alt="" width="46" height="24">
+              <ol><li class="ok"><i>✓</i>Investor type</li><li class="ok"><i>✓</i>Identity</li><li class="ok"><i>✓</i>Suitability</li><li class="cur"><i>4</i>Source of wealth</li><li><i>5</i>Bank details</li><li><i>6</i>Documents</li><li><i>7</i>Review and sign</li></ol>
+            </aside>
+            <div class="sc-form">
+              <small>Step 4 of 7</small><h4>Source of wealth</h4><p>Tell us where the funds you plan to invest come from.</p>
+              <div class="sc-f"><label>Main source</label><span>Sale of a business<em>▾</em></span></div>
+              <div class="sc-f"><label>Country</label><span>United Kingdom<em>▾</em></span></div>
+              <div class="sc-f"><label>Amount</label><span>£1M to £5M<em>▾</em></span></div>
+              <div class="sc-f"><label>Supporting document</label><span>sale_agreement.pdf<em>Uploaded</em></span></div>
+              <div class="sc-toast"><i>✓</i>Progress saved. Link sent to emma.clarke@mail.com</div>
+              <div class="sc-act"><button type="button" class="sc-save">Save and continue later</button><button type="button" class="sc-next" tabindex="-1">Next</button></div>
+            </div>
+          </div>
+          <div class="sc-modal"><div><h5>Continue on any device</h5><p>We will email you a secure link. Your answers stay saved, so you can pick up right where you left off.</p><div class="sc-f"><label>Email</label><span>emma.clarke@mail.com</span></div><button type="button" class="sc-send">Send link</button></div></div>
+        </div>
+      </div>
+      <div class="sc-ph"><div class="iph"><div class="scr">
+        <div class="sc-lock"><b>18:42</b><small>Thursday, 14 March</small></div>
+        <button type="button" class="sc-note"><i>P3</i><span><b>P3 Wealth</b>Continue your application. You are on step 4 of 7.</span></button>
+        <div class="sc-app"><small>Step 4 of 7</small><h6>Welcome back, Emma</h6><p>Everything you entered is saved.</p><div class="pg4"><i></i></div>
+          <div class="sc-f"><label>Main source</label><span>Sale of a business</span></div>
+          <div class="sc-f"><label>Country</label><span>United Kingdom</span></div>
+          <div class="sc-f"><label>Amount</label><span>£1M to £5M</span></div>
+          <span class="sc-go">Continue</span></div>
+      </div></div></div>
+    </div>
+    <p class="note">Interactive demo, recreated for the portfolio. Click the steps or the buttons inside.</p>
+    <div class="feats rv">
+      <article class="ft">
+        <div class="pic"><div class="frag">
+          <div class="fh">Open an account<span class="all">7 steps</span></div>
+          <div class="stepc"><b>Step 1 of 7</b><span><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="opt on"><span>1 Investor type</span><small>Now</small></div>
+          <div class="opt"><span>2 Identity</span></div>
+          <div class="opt"><span>3 Suitability</span></div>
+          <div class="opt"><span>4 Source of wealth</span></div>
+        </div></div>
+        <div class="tx"><h3>The whole path from screen one</h3><p>A step counter on the first screen shows how long the journey is, so nobody gives up halfway wondering.</p></div>
+      </article>
+      <article class="ft">
+        <div class="pic"><div class="pages14"><i class="keep" style="--x0: 16px; --r0: -10.4deg; --x1: 70px; --fd: 0.50s"></i><i class="" style="--x0: 34px; --r0: -8.8deg; --x1: 70px; --fd: 0.53s"></i><i class="" style="--x0: 52px; --r0: -7.2deg; --x1: 70px; --fd: 0.56s"></i><i class="" style="--x0: 70px; --r0: -5.6deg; --x1: 70px; --fd: 0.59s"></i><i class="" style="--x0: 88px; --r0: -4.0deg; --x1: 130px; --fd: 0.62s"></i><i class="" style="--x0: 106px; --r0: -2.4deg; --x1: 130px; --fd: 0.65s"></i><i class="" style="--x0: 124px; --r0: -0.8deg; --x1: 130px; --fd: 0.68s"></i><i class="keep" style="--x0: 142px; --r0: 0.8deg; --x1: 130px; --fd: 0.71s"></i><i class="" style="--x0: 160px; --r0: 2.4deg; --x1: 130px; --fd: 0.74s"></i><i class="" style="--x0: 178px; --r0: 4.0deg; --x1: 130px; --fd: 0.77s"></i><i class="" style="--x0: 196px; --r0: 5.6deg; --x1: 130px; --fd: 0.80s"></i><i class="" style="--x0: 214px; --r0: 7.2deg; --x1: 190px; --fd: 0.83s"></i><i class="" style="--x0: 232px; --r0: 8.8deg; --x1: 190px; --fd: 0.86s"></i><i class="keep" style="--x0: 250px; --r0: 10.4deg; --x1: 190px; --fd: 0.89s"></i><b>14 screens <em>→ 3</em></b></div></div>
+        <div class="tx"><h3>Disclosures in context</h3><p>Fourteen compliance screens became three. Legal text now sits next to the decision it explains.</p></div>
+      </article>
+      <article class="ft">
+        <div class="pic"><div class="frag">
+          <div class="fh">Cosigners<span class="all">Notified at once</span></div>
+          <div class="sg"><span><i>EC</i>Emma Clarke</span><em>Signed</em></div>
+          <div class="sg"><span><i>JC</i>James Clarke</span><em>Signed</em></div>
+          <div class="sg"><span><i>HT</i>Harbor Trust</span><em class="w">Waiting</em></div>
+          <div class="sg"><span><i>NG</i>Northgate Capital</span><em class="w">Waiting</em></div>
+        </div></div>
+        <div class="tx"><h3>Cosigners in parallel</h3><p>Every signatory gets their request at the same time instead of waiting in a chain. Institution setup completion grew by 30%.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ ПРОФИЛЬ И ДОКУМЕНТЫ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>06</i>Accounts and paperwork</div>
+        <h2>Signatories, access and forms inside the account</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">An institutional account has authorised signatories, authorised dealers and people who only need to look. The profile shows who is who and when each person accepted the invitation, and an investor can invite a colleague with <b>read only access</b> in a minute.</p>
+        <p class="t">The paperwork moved inside too. BlackRock's account amendment form for the Institutional Cash Series became a guided web form in the platform instead of a PDF sent back and forth by email.</p>
+      </div>
+    </div>
+    <div class="vw rv" data-auto="4600" style="--vh: auto; --vhm: auto; --ar: 1040 / 553"><div class="tabs2" role="group" aria-label="Account screens"><button type="button" aria-pressed="true" data-cap="<b>Profile.</b> Company details, authorised signatories, dealers and additional users on one page, with the date each person accepted the invitation.">Profile</button><button type="button" aria-pressed="false" data-cap="<b>Read only access.</b> Investors invite advisers and accountants who only need to look, and nothing they see can move money.">Invite a viewer</button><button type="button" aria-pressed="false" data-cap="<b>Documents.</b> Onboarding documents stay in the account with their status, ready to download, and removing one always asks first.">Documents</button><button type="button" aria-pressed="false" data-cap="<b>Amend the account.</b> The BlackRock amendment form as seven guided sections instead of a PDF sent by email.">Amend the account</button></div><div class="win2"><div class="win2-bar"><i></i><i></i><i></i><span>P3 Wealth · Account</span></div><div class="vw-view" style=""><figure class="vw-f on"><div class="pan"><div class="pu" data-fit="1040"><div class="pu-top"><img src="../images/logos/p3-wealth-light.png" alt="" width="64" height="30"><nav><span>DASHBOARD</span><span>TRANSACTIONS</span><span>REPORTS</span><span>FUNDS</span><span>INVOICE</span></nav><span class="me"><svg><use href="#i-users"/></svg>EMMA@NORTHGATE.CO</span></div><div style="padding:26px 26px 30px"><div class="pu-row sp"><h4>Profile</h4><div class="pu-row"><span class="pu-btn o">Amend the account</span><span class="pu-btn on2">Edit</span></div></div><dl class="pfx-dl"><dt>Company name</dt><dd>Northgate Capital</dd><dt>Company phone number</dt><dd>+44 20 7946 0321</dd><dt>P3 number</dt><dd>2344 5234 4672</dd><dt>Email</dt><dd>emma@northgate.co</dd><dt>Password</dt><dd>••••••••••••</dd></dl><div class="pfx-3"><div><h5>Authorised signatories</h5><div class="pfx-p"><span><small>Accepted the invitation: 20.12.2023</small><b>Grace Williams</b></span></div><div class="pfx-p"><span><small>Accepted the invitation: 23.12.2023</small><b>Sophia Jones</b></span></div><div class="pfx-p"><span><small>Accepted the invitation: 23.12.2023</small><b>Cristian Foden</b></span></div></div><div><h5>Authorised dealers</h5><div class="pfx-p"><span><small>Accepted the invitation: 20.12.2023</small><b>Grace Williams</b></span></div><div class="pfx-p"><span><small>Accepted the invitation: 23.12.2023</small><b>Sophia Jones</b></span></div></div><div><h5>Additional users</h5><div class="pfx-p"><span><small>Accepted the invitation: 04.01.2024</small><b>Oliver Hart</b></span><span class="pu-btn on2">Remove</span></div><div class="pfx-p"><span><small>Accepted the invitation: 11.01.2024</small><b>Mia Chen</b></span><span class="pu-btn on2">Remove</span></div><div class="pfx-add"><i>+</i>Add new invitation</div></div></div></div></div></div></figure><figure class="vw-f"><div class="pan"><div class="pu" data-fit="1040"><div class="pu-top"><img src="../images/logos/p3-wealth-light.png" alt="" width="64" height="30"><nav><span>DASHBOARD</span><span>TRANSACTIONS</span><span>REPORTS</span><span>FUNDS</span><span>INVOICE</span></nav><span class="me"><svg><use href="#i-users"/></svg>EMMA@NORTHGATE.CO</span></div><div style="padding:24px 26px 30px"><div class="pfx-form"><h5>Invite users for read only access</h5><div class="pfx-user"><header><span>User 1</span><b>✕ Remove</b></header><div class="pu-grid2"><div class="pu-in"><label>Name</label>Oliver Hart</div><div class="pu-in"><label>Email</label>oliver@hartadvisory.co</div><div class="pu-in"><label>Phone</label><span><span class="pfx-flag"></span>+44 7700 900877</span></div><div class="pu-in"><label>Role</label>Adviser</div></div></div><div class="pfx-user"><header><span>User 2</span><b>✕ Remove</b></header><div class="pu-grid2"><div class="pu-in"><label>Name</label>Mia Chen</div><div class="pu-in"><label>Email</label>mia@northgate.co</div><div class="pu-in"><label>Phone</label><span><span class="pfx-flag"></span>+44 7700 900135</span></div><div class="pu-in"><label>Role</label>Accountant</div></div></div><div class="pfx-add"><i>+</i>Add new invitation</div><span class="pu-btn r w">Send an invitation</span></div></div></div></div></figure><figure class="vw-f"><div class="pan"><div class="pu" data-fit="1040"><div class="pu-top"><img src="../images/logos/p3-wealth-light.png" alt="" width="64" height="30"><nav><span>DASHBOARD</span><span>TRANSACTIONS</span><span>REPORTS</span><span>FUNDS</span><span>INVOICE</span></nav><span class="me"><svg><use href="#i-users"/></svg>EMMA@NORTHGATE.CO</span></div><div style="padding:26px 26px 30px;position:relative"><div class="pu-row sp"><h4>Onboarding documents</h4><span class="pu-btn on2">Onboarding documents remove</span></div><table class="pu-tbl pfx-doc"><thead><tr><th>File</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody><tr><td>Customer agreement</td><td>05.07.2023</td><td class="s-ok">Signed</td><td><span class="pu-btn on2">Download</span></td></tr><tr><td>Deposit funds</td><td>05.07.2023</td><td class="s-ok">Signed</td><td><span class="pu-btn on2">Download</span></td></tr><tr><td>Source of wealth</td><td>06.07.2023</td><td class="s-ok">Signed</td><td><span class="pu-btn on2">Download</span></td></tr><tr><td>Account amendment form</td><td>11.01.2024</td><td class="s-wait">In review</td><td><span class="pu-btn on2">Download</span></td></tr></tbody></table><div style="position:absolute;right:60px;top:110px;width:260px;padding:18px;border-radius:12px;background:#fff;box-shadow:0 24px 60px rgba(0,0,0,0.18),inset 0 0 0 1px #ececf0;text-align:center"><h5 style="font-size:16px">Remove the document?</h5><p style="margin:6px 0 12px;font-size:12px;color:#4a4c5c">Source of wealth will be removed from the account.</p><div class="pu-grid2"><span class="pu-btn n">Yes</span><span class="pu-btn on2">No</span></div></div></div></div></div></figure><figure class="vw-f"><div class="pan"><div class="pu" data-fit="1040"><div class="pu-top"><img src="../images/logos/p3-wealth-light.png" alt="" width="64" height="30"><nav><span>DASHBOARD</span><span>TRANSACTIONS</span><span>REPORTS</span><span>FUNDS</span><span>INVOICE</span></nav><span class="me"><svg><use href="#i-users"/></svg>EMMA@NORTHGATE.CO</span></div><div style="padding:24px 26px 30px"><div class="pu-crumb">Institutional Cash Series plc</div><h4 style="margin-top:4px">Account amendment form</h4><div class="pfx-amend"><ol><li class="ok">Account registration details</li><li class="ok">Change of address</li><li class="on">Signatories and dealers to add</li><li class="">Signatories and dealers to remove</li><li class="">Distribution option</li><li class="">Electronic reporting</li><li class="">Bank details for redemptions</li></ol><div><h5>3. Authorised signatories and dealers to be added</h5><p style="margin:6px 0 0;font-size:12px;color:#4a4c5c">Please indicate the specific authority of each person. An authorised dealer can place subscriptions and redemptions.</p><table class="pu-tbl"><thead><tr><th>Name</th><th>Role</th><th class="c">Signatory</th><th class="c">Dealer</th></tr></thead><tbody><tr><td>Oliver Hart</td><td>Signatory</td><td class="c"><span class="chk"></span></td><td class="c"></td></tr><tr><td>Mia Chen</td><td>Signatory and Dealer</td><td class="c"><span class="chk"></span></td><td class="c"><span class=chk></span></td></tr></tbody></table><div class="pu-row" style="margin-top:16px;gap:10px"><span class="pu-btn o">Back</span><span class="pu-btn r">Next section</span></div></div></div></div></div></div></figure></div></div><p class="vw-cap"></p></div>
+    <p class="note">Redrawn from the product screens with demo names.</p>
+  </section>
+
+  <!-- ============ РОЛИ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>07</i>Roles and security</div>
+        <h2>Four roles, four interfaces</h2>
+      </div>
+      <p class="t" style="margin-top: 30px">Investors, fund managers, administrators and compliance officers use the same platform for very different jobs. Each role gets its own interface, not a locked version of someone else's. What a role doesn't need is <b>hidden, not disabled</b>, so nobody ever lands on an access denied screen.</p>
+    </div>
+    <div class="rsw rv" data-role="inv">
+      <div class="rsw-list" role="group" aria-label="Choose a role">
+        <button type="button" data-set-role="inv" aria-pressed="true"><b>Investor</b><small>Sees their money and acts on it</small></button>
+        <button type="button" data-set-role="fm" aria-pressed="false"><b>Fund manager</b><small>Looks after client portfolios</small></button>
+        <button type="button" data-set-role="adm" aria-pressed="false"><b>Administrator</b><small>Manages users and access</small></button>
+        <button type="button" data-set-role="cmp" aria-pressed="false"><b>Compliance officer</b><small>Reviews and approves</small></button>
+      </div>
+      <div class="rsw-app">
+        <nav class="rsw-nav" aria-label="Demo menu"><img src="../images/logos/p3-wealth.png" alt="" width="46" height="24">
+          <span data-r="inv fm" data-f="inv">Dashboard</span>
+          <span data-r="inv fm">Funds</span>
+          <span data-r="inv">Subscribe / Redeem</span>
+          <span data-r="inv fm">Statements</span>
+          <span data-r="fm adm cmp" data-f="fm">Clients</span>
+          <span data-r="cmp" data-f="cmp">Approvals</span>
+          <span data-r="adm" data-f="adm">Users and roles</span>
+          <span data-r="adm cmp">Audit log</span>
+          <span data-r="inv fm adm cmp">Documents</span>
+        </nav>
+        <div class="rsw-main">
+          <div class="rp" data-p="inv"><small>Dashboard</small><h5>Good morning, Emma</h5>
+            <div class="kp"><div><em>AUM</em><b>$48.2M</b></div><div><em>Total earnings</em><b>$1.50M</b></div></div>
+            <div class="ls"><div><span>ICS US Treasury Fund</span><b>5.25%</b></div><div><span>ICS Sterling Government Liquidity</span><b>5.03%</b></div><div><span>ICS Euro Government Liquidity</span><b>3.56%</b></div></div>
+            <span class="btn">Subscribe / Redeem</span></div>
+          <div class="rp" data-p="fm"><small>Clients</small><h5>Client portfolios</h5>
+            <div class="ls"><div><span>Emma Clarke</span><b>$48.2M</b><span class="tag ok">Up to date</span></div><div><span>Northgate Capital</span><b>$12.4M</b><span class="tag">Rebalance</span></div><div><span>Harbor Family Office</span><b>$8.9M</b><span class="tag ok">Up to date</span></div><div><span>Westbrook Partners</span><b>$5.1M</b><span class="tag ok">Up to date</span></div></div></div>
+          <div class="rp" data-p="adm"><small>Users and roles</small><h5>Who can see what</h5>
+            <div class="ls"><div><span>Investors</span><b>Dashboard, funds, statements</b></div><div><span>Fund managers</span><b>Clients, funds, statements</b></div><div><span>Administrators</span><b>Users, roles, audit log</b></div><div><span>Compliance officers</span><b>Approvals, clients, audit log</b></div></div></div>
+          <div class="rp" data-p="cmp"><small>Approvals</small><h5>3 approvals waiting</h5>
+            <div class="ls"><div><span>New investor · Northgate Capital</span><span class="tag">KYC review</span></div><div><span>Subscription · £2,000,000</span><span class="tag">Source of wealth</span></div><div><span>Cosigner added · Harbor Trust</span><span class="tag">Signature</span></div></div>
+            <span class="btn">Review next</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Interactive demo with demo data. Switch roles to see the menu and the screen change.</p>
+    <div class="split" style="margin-top: 72px">
+      <div><h2 style="font-size: 22px">Security investors can see</h2></div>
+      <p class="t" style="margin-top: 0">For money at this level, being safe isn't enough. People need to see that it's safe, so every protection also had to make sense on screen.</p>
+    </div>
+    <div class="trust rv">
+      <div class="trow" style="--fd: 0.1s"><i><svg><use href="#i-lock"/></svg></i><b>Secure resume links</b><p>Save and continue sends a link only to the investor's verified email. The application itself stays on the platform, never in the inbox.</p></div>
+      <div class="trow" style="--fd: 0.2s"><i><svg><use href="#i-users"/></svg></i><b>Roles decide what you see</b><p>Each role gets only its own tools and data. Nothing is greyed out, it simply isn't there.</p></div>
+      <div class="trow" style="--fd: 0.3s"><i><svg><use href="#i-check"/></svg></i><b>Every approval has an owner</b><p>Compliance, BlackRock and cosigners each sign off in their own step, so it's always clear who approved what and when.</p></div>
+      <div class="trow" style="--fd: 0.4s"><i><svg><use href="#i-chart"/></svg></i><b>Every number has a source</b><p>BlackRock data carries a source label and an update date, so investors know exactly how fresh it is.</p></div>
+      <div class="trow" style="--fd: 0.5s"><i><svg><use href="#i-shield"/></svg></i><b>Compliance in context</b><p>FCA disclosures appear where they matter instead of in a wall of text, with zero compliance violations in the design.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ РЕЗУЛЬТАТ ============ -->
+  <section class="sec">
+    <div class="label"><i>08</i>Impact</div>
+    <h2>What changed</h2>
+    <div class="stats six rv">
+      <div class="st"><b>2 <em>→ 1</em></b><span>days to open an account</span></div>
+      <div class="st"><b data-to="30" data-pre="+" data-suf="%">+30%</b><span>completion of institution setup</span></div>
+      <div class="st"><b>14 <em>→ 3</em></b><span>compliance screens in onboarding</span></div>
+      <div class="st"><b data-to="23" data-pre="−" data-suf="%">−23%</b><span>read errors with monospaced numbers</span></div>
+      <div class="st"><b data-to="0">0</b><span>compliance violations in the design</span></div>
+      <div class="st"><b data-to="4">4</b><span>roles, each with its own interface</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ВЫВОДЫ ============ -->
+  <section class="sec">
+    <div class="split">
+      <div>
+        <div class="label"><i>09</i>Reflection</div>
+        <h2>What I learned</h2>
+      </div>
+      <div>
+        <p class="t" style="margin-top: 30px">Building a regulated product from zero taught me that clarity is part of compliance. When professional investors understand every number, they trust the platform, and they stop calling someone to explain it.</p>
+        <p class="t">The fastest onboarding is one you can pause. Save and continue and parallel approvals turned two working days into one, because they fit how professionals actually work: between meetings, on different devices.</p>
+        <p class="t">If I started again, I would bring compliance officers into research as early as investors. Much of the waiting came from approvals, and they knew best where it could be removed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ НАВИГАЦИЯ ВНИЗУ ============ -->
+  <nav class="pager rv" aria-label="More cases">
+    <a class="pg pg-prev" style="--c: 255, 140, 185" href="xgo">
+      <span class="pg-th" aria-hidden="true"><img src="../images/cases/xgo-wallet.jpg" alt="" width="360" height="752"></span>
+      <span><span class="pg-l"><svg><use href="#i-back"/></svg>Previous case</span><b>XGo Wallet<br>Crypto and Fiat Mobile Wallet</b></span>
+    </a>
+    <a class="pg pg-next" style="--c: 55, 150, 235" href="p3-marine">
+      <span><span class="pg-l">Next case<svg><use href="#i-next"/></svg></span><b>P3 Marine<br>Yacht Management Platform</b></span>
+      <span class="pg-th wide" aria-hidden="true"><img src="../images/cases/p3-marine.jpg" alt="" width="1100" height="688"></span>
+    </a>
+  </nav>
+</main>
+<footer class="col" style="margin-top: 72px"><span>© Elvin Garaev</span><span>Senior Product Designer</span></footer>
+</div>
+</body>
+</html>
