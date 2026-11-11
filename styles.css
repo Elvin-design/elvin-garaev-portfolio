@@ -1,12 +1,3 @@
-/*
-  Стили сайта Elvin Garaev.
-  Цвета — токены: блок :root ниже (тёмная тема, по умолчанию) и :root[data-scheme="light"] (светлая).
-  Чтобы поменять цвет на всём сайте, меняй его только там.
-  На компьютере сайдбар лежит прямо на фоне, а контент — в «окне»: скруглённой панели с отступом 8px от краёв.
-  Сайдбар открыт на экранах от 1024px (на 1024–1279px он уже), на более узких прячется в меню-бургер.
-*/
-
-/* шрифт логотипа EG: лежит на сайте, без запроса к Google */
 @font-face {
   font-family: "Inter Tight"; font-style: italic; font-weight: 700; font-display: swap;
   src: url("inter-tight-700i-latin.woff2") format("woff2");
@@ -14,21 +5,20 @@
 }
 
 :root {
-  /* ---------- тёмная тема (фон и поверхности на 20% темнее прежних) ---------- */
-  --bg: #10100f;              /* фон страницы и сайдбара */
-  --window: #141312;          /* «окно» с контентом */
+  --bg: #10100f;
+  --window: #141312;
   --window-rgb: 20, 19, 18;
-  --card: #1e1e1d;            /* карточки кейсов */
-  --pop: #1e1e1d;             /* меню профиля */
-  --letter: #1e1e1d;          /* письмо About */
-  --pill: #232322;            /* активный пункт меню и переключатель темы */
+  --card: #1e1e1d;
+  --pop: #1e1e1d;
+  --letter: #1e1e1d;
+  --pill: #232322;
   --pill-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   --frame-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
   --pop-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
 
   --text: #faf9f5;
   --sub: rgba(250, 249, 245, 0.64);
-  --dim: rgba(250, 249, 245, 0.46);
+  --dim: rgba(250, 249, 245, 0.5);
   --muted: rgba(250, 249, 245, 0.62);
   --letter-text: rgba(250, 249, 245, 0.74);
   --side-text: rgba(250, 249, 245, 0.9);
@@ -42,35 +32,30 @@
   --side-hover: rgba(255, 255, 255, 0.05);
   --seg: rgba(255, 255, 255, 0.05);
 
-  /* сила цветной подсветки карточек */
   --tint-a: 0.22;
   --tint-b: 0.11;
   --tint-c: 0.26;
   --tint-cur: 0.22;
   --shine: rgba(255, 255, 255, 0.09);
 
-  /* экраны внутри карточек */
   --win-ring: rgba(255, 255, 255, 0.14);
-  --gw1: 0.24;                /* цветной ореол над экраном */
-  --gw2: 0.14;                /* цветное свечение вокруг экрана */
+  --gw1: 0.24;
+  --gw2: 0.14;
   --win-bar: #181716;
   --win-dot: #2f2e2d;
   --drop: rgba(0, 0, 0, 0.6);
 
-  /* окно About */
   --about-scrim: rgba(10, 10, 9, 0.6);
   --close-bg: #242422;
   --close-hover: #2e2e2c;
   --letter-ring: rgba(255, 255, 255, 0.08);
   --letter-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
 
-  /* градиенты: имя и строка направлений в заголовке */
   --focus: #efb78a;
   --grad: linear-gradient(100deg, #efb78a 0%, #e5866c 30%, #dc6690 58%, #9585e0 100%);
   --grad-name: linear-gradient(100deg, #efb78a 0%, #e5866c 52%, #dc6690 100%);
-  --light-op: 0.5;            /* белый свет сверху страницы: только в тёмной теме, в два раза тусклее прежнего */
+  --light-op: 0.5;
 
-  /* шрифт как на yanhladchenko.com: системный San Francisco (на Windows — Segoe UI) */
   --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-logo: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -80,7 +65,6 @@
   color-scheme: dark;
 }
 
-/* ---------- светлая тема: цвета yanhladchenko.com ---------- */
 :root[data-scheme="light"] {
   --bg: #f8f8f8;
   --window: #f9f9f7;
@@ -95,7 +79,7 @@
 
   --text: #121217;
   --sub: #5d5d5d;
-  --dim: #7a7a82;
+  --dim: #6c6c74;
   --muted: #5d5d5d;
   --letter-text: #3d3d3d;
   --side-text: #121217;
@@ -109,7 +93,6 @@
   --side-hover: rgba(18, 18, 23, 0.04);
   --seg: rgba(18, 18, 23, 0.05);
 
-  /* в светлой теме карточки белые: цвет бренда — только еле заметный намёк сверху */
   --tint-a: 0.07;
   --tint-b: 0;
   --tint-c: 0.1;
@@ -158,7 +141,6 @@ a { color: inherit; }
   font-size: 14px; font-weight: 600; text-decoration: none; transition: top 0.2s ease; }
 .skip:focus { top: calc(env(safe-area-inset-top, 0px) + 12px); }
 
-/* ---------- свет сверху (только тёмная тема) ---------- */
 .light {
   position: absolute; top: 0; left: var(--side-w); right: 0; height: 820px; z-index: 0; pointer-events: none; opacity: var(--light-op);
   background: url("images/light-desktop.jpg") center top / 100% 100% no-repeat;
@@ -168,10 +150,8 @@ a { color: inherit; }
   transform-origin: 50% 0;
 }
 
-/* ---------- «окно»: рамка закрашивает фоном всё вокруг скруглённой панели с контентом ---------- */
 .frame { display: none; }
 
-/* ---------- сайдбар ---------- */
 .sidebar {
   position: fixed; left: 0; top: 0; bottom: 0; width: var(--side-w); z-index: 20;
   display: flex; flex-direction: column;
@@ -180,18 +160,27 @@ a { color: inherit; }
 }
 .side-scroll { flex: 1; min-height: 0; overflow-y: auto; display: grid; align-content: start; gap: 1px; scrollbar-width: none; }
 .side-scroll::-webkit-scrollbar { display: none; }
-.item, .group summary {
+.item {
   display: flex; align-items: center; gap: 10px; min-height: 35px; padding: 7px 10px; border-radius: 12px;
-  color: var(--side-text); text-decoration: none; font-size: 14px; line-height: 21px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
+  color: var(--side-text); text-decoration: none; font-size: 14px; line-height: 21px; cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
-.item:hover, .group summary:hover { background: var(--side-hover); }
+.item:hover { background: var(--side-hover); }
+.item.on { background: var(--pill); color: var(--text); box-shadow: var(--pill-shadow); }
+.item img { width: 20px; height: 20px; flex: none; border-radius: 5px; box-shadow: 0 0 0 1px var(--line); }
+.item svg { width: 20px; height: 20px; flex: none; padding: 2px; color: var(--sub); }
 .mark {
   width: 20px; height: 20px; flex: none; border-radius: 6px; background: var(--text); color: var(--bg); display: grid; place-items: center;
   font-family: var(--font-logo); font-style: italic; font-weight: 700; font-size: 9.5px; letter-spacing: -0.02em;
 }
 .side-label { margin: 14px 10px 4px; font-size: 12px; line-height: 18px; font-weight: 500; color: var(--dim); }
-.group summary { list-style: none; }
+.side-gap { height: 8px; }
+.group summary {
+  display: flex; align-items: center; gap: 10px; min-height: 35px; padding: 7px 10px; border-radius: 12px; color: var(--side-text);
+  font-size: 14px; line-height: 21px; cursor: pointer; list-style: none; transition: background 0.15s ease, color 0.15s ease;
+}
 .group summary::-webkit-details-marker { display: none; }
+.group summary:hover { background: var(--side-hover); }
 .group summary img { width: 20px; height: 20px; flex: none; border-radius: 5px; }
 .chev { margin-left: auto; width: 6px; height: 6px; border-right: 1.5px solid var(--dim); border-bottom: 1.5px solid var(--dim); rotate: -45deg; transition: rotate 0.25s ease; }
 .group[open] .chev { rotate: 45deg; }
@@ -202,10 +191,7 @@ a { color: inherit; }
 }
 .sub a:hover { background: var(--side-hover); color: var(--text); }
 .sub a.on { background: var(--pill); color: var(--text); box-shadow: var(--pill-shadow); }
-.side-xp { margin-top: 6px; }
-.side-xp svg { width: 20px; height: 20px; flex: none; padding: 2px; color: var(--sub); }
 
-/* переключатель темы */
 .theme { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 8px 2px 0; padding: 3px; border-radius: 12px; background: var(--seg); }
 .theme button {
   display: flex; align-items: center; justify-content: center; gap: 6px; height: 30px; padding: 0 8px; border: 0; border-radius: 9px; background: none;
@@ -216,7 +202,6 @@ a { color: inherit; }
 .theme button[aria-pressed="true"] { background: var(--pill); color: var(--text); box-shadow: var(--pill-shadow); }
 
 .profile { position: relative; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
-/* только кнопка профиля в сайдбаре: в макетах кейсов тоже есть элементы с классом me */
 button.me {
   width: 100%; display: flex; align-items: center; gap: 10px; padding: 7px 10px; border: 0; border-radius: 12px; background: none; color: var(--text);
   cursor: pointer; text-align: left; font: inherit; transition: background 0.15s ease;
@@ -243,14 +228,12 @@ button.me .updown { width: 16px; height: 16px; flex: none; color: var(--dim); }
 .pop .sep { height: 1px; background: var(--line); margin: 4px 8px; }
 .pop .mail small { display: block; font-size: 12px; color: var(--dim); margin-top: 1px; }
 
-/* ---------- верхняя панель и выезжающее меню (узкие экраны) ---------- */
 .topbar { display: none; }
 .logo { font-family: var(--font-logo); font-style: italic; font-weight: 700; font-size: 22px; letter-spacing: -0.02em; text-decoration: none; color: var(--text); width: fit-content; }
 .burger { width: 44px; height: 44px; margin-right: -10px; border: 0; background: none; color: var(--text); cursor: pointer; display: grid; place-items: center; border-radius: 12px; }
 .burger span { display: block; width: 22px; height: 11px; border-top: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor; }
 .scrim { position: fixed; inset: 0; z-index: 19; background: rgba(0, 0, 0, 0.45); }
 
-/* ---------- About: письмо с фотографиями ---------- */
 .about {
   position: fixed; inset: 0; z-index: 40;
   background: var(--about-scrim);
@@ -284,7 +267,6 @@ button.me .updown { width: 16px; height: 16px; flex: none; color: var(--dim); }
 .snap-right { width: 220px; right: -194px; top: 270px; rotate: 7deg; animation: snap-right-in 0.9s var(--expo) 0.22s both; }
 @keyframes snap-left-in { from { opacity: 0; translate: 110px 24px; rotate: 0deg; } }
 @keyframes snap-right-in { from { opacity: 0; translate: -110px 24px; rotate: 0deg; } }
-/* крестик сидит на правом верхнем углу письма; если письмо длиннее экрана (телефон), он не уезжает при прокрутке */
 .close-row { position: sticky; top: calc(env(safe-area-inset-top, 0px) - 6px); z-index: 4; height: 0; display: flex; justify-content: flex-end; animation: rise-in 0.6s var(--expo); }
 .close-about {
   flex: none; translate: 16px -22px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--close-bg); color: var(--text);
@@ -293,11 +275,9 @@ button.me .updown { width: 16px; height: 16px; flex: none; color: var(--dim); }
 .close-about svg { width: 17px; height: 17px; }
 @media (hover: hover) { .close-about:hover { background: var(--close-hover); } }
 
-/* ---------- колонка контента ---------- */
 .page { position: relative; z-index: 2; padding-inline: 32px; }
 .col { max-width: 1092px; margin-inline: auto; }
 
-/* ---------- первый экран ---------- */
 .hero { padding-top: 128px; }
 h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; }
 .l1 { display: block; }
@@ -307,12 +287,10 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
 .lede b { color: var(--text); font-weight: 500; }
 .mbr { display: none; }
 
-/* ---------- заголовки разделов: маленькие серые подписи ---------- */
 .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 64px 0 12px; scroll-margin-top: 24px; }
 .sec-head h2 { margin: 0; font-size: 13px; line-height: 19.5px; font-weight: 500; color: var(--dim); }
 .sec-head span { font-size: 13px; line-height: 19.5px; color: var(--dim); }
 
-/* ---------- кейсы: бенто-сетка ---------- */
 .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
 .tile {
   --c: 40, 170, 110; --cap: 112px; --inset: 28px;
@@ -326,9 +304,6 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
   box-shadow: inset 0 0 0 1px var(--stroke), inset 0 1px 0 var(--top-hl); transition: box-shadow 0.4s ease;
 }
 .tile:focus-visible { outline-offset: 4px; border-radius: 16px; }
-/* цвет бренда: заметный оттенок сверху, но главный цвет карточки — фон.
-   ::before — сам оттенок,
-   ::after — вспышка при появлении и усиление при наведении */
 .glow { position: absolute; inset: 0; z-index: 0; }
 .glow::before, .glow::after { content: ""; position: absolute; inset: 0; transform-origin: 50% 0; pointer-events: none; }
 .glow::before { background:
@@ -340,7 +315,6 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
 .glow::after { opacity: 0; transition: opacity 0.6s ease;
   background: radial-gradient(ellipse 75% 52% at 50% 0%, rgba(var(--c), var(--tint-c)), rgba(var(--c), 0) 72%); }
 .shine { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 60% 40% at 55% -10%, var(--shine), rgba(255, 255, 255, 0) 75%); }
-/* свет за курсором: координаты --mx и --my задаёт script.js */
 .tile::before {
   content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.45s ease;
   background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(var(--c), var(--tint-cur)), rgba(var(--c), 0) 70%);
@@ -349,7 +323,6 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
 .brand img { display: block; width: auto; max-width: none; }
 .brand .x { font-size: 16px; color: var(--dim); font-weight: 300; }
 .brand .white { filter: brightness(0) invert(1); }
-/* у логотипов две версии: для тёмной темы (белый текст) и для светлой (тёмный текст, фирменные цвета те же) */
 .brand .for-light { display: none; }
 :root[data-scheme="light"] .brand .for-dark { display: none; }
 :root[data-scheme="light"] .brand .for-light { display: block; }
@@ -359,13 +332,11 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
   background: var(--glass); color: var(--text); font-size: 14px; transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* картинка в карточке занимает всё над подписью и растворяется книзу */
 .art {
   position: absolute; left: 0; right: 0; top: 0; bottom: var(--cap); z-index: 3; overflow: hidden; transition: transform 0.7s var(--expo);
   -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 44px), transparent);
   mask-image: linear-gradient(180deg, #000 calc(100% - 44px), transparent);
 }
-/* блик, который один раз проходит по экрану во время появления */
 .art::after {
   content: ""; position: absolute; inset: -20% -60%; z-index: 6; pointer-events: none; translate: -60% 0;
   background: linear-gradient(105deg, rgba(255, 255, 255, 0) 44%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 56%);
@@ -374,7 +345,6 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
   position: absolute; top: 80px; left: calc(50% - var(--w) / 2); width: var(--w); border-radius: 12px 12px 0 0; overflow: hidden; background: var(--win-bar); filter: brightness(0.97);
   box-shadow: 0 0 0 1px var(--win-ring), 0 -30px 80px -30px rgba(var(--c), var(--gw1)), 0 40px 110px var(--drop), 0 0 140px rgba(var(--c), var(--gw2));
 }
-/* экран сайта во всю ширину карточки: от края логотипа до такого же отступа справа */
 .art:not(.duo) > .win { left: var(--inset); width: calc(100% - 2 * var(--inset)); }
 .win .bar { position: relative; height: 26px; background: var(--win-bar); display: flex; align-items: center; gap: 7px; padding-left: 12px; border-bottom: 1px solid var(--line); }
 .win .bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--win-dot); }
@@ -404,13 +374,6 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
 .tile.n .txt h3 { font-size: 16px; }
 .txt p { margin: 4px 0 0; font-size: 13px; line-height: 1.5; color: var(--sub); text-wrap: balance; }
 
-/* выбранный в сайдбаре кейс горит так же, как при наведении, плюс мягкое кольцо вокруг */
-.tile.picked { box-shadow: var(--tile-shadow), 0 0 0 4px rgba(var(--c), 0.16), 0 24px 70px -28px rgba(var(--c), 0.5); }
-.tile.picked::after { box-shadow: inset 0 0 0 1.5px rgba(var(--c), 0.9), inset 0 1px 0 var(--top-hl); }
-.tile.picked .art { transform: translateY(-6px); }
-.tile.picked .go { background: rgba(var(--c), 0.5); color: #fff; }
-.tile.picked .glow::after { opacity: 0.8; }
-
 @media (hover: hover) and (pointer: fine) {
   .tile:hover .art { transform: translateY(-6px); }
   .tile:hover::after { box-shadow: inset 0 0 0 1px rgba(var(--c), 0.75), inset 0 1px 0 var(--top-hl); }
@@ -419,17 +382,17 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
   .tile:hover::before { opacity: 1; }
 }
 
-/* ---------- опыт ---------- */
 .xp { display: grid; }
 .job { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); }
 .job:last-child { border-bottom: 1px solid var(--line); }
 .job-logo { width: 40px; height: 40px; border-radius: 10px; box-shadow: 0 0 0 1px var(--line); }
 .job h3 { margin: 0; font-size: 15px; line-height: 22px; font-weight: 600; }
+.job { scroll-margin-top: 24px; }
+.job-type { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 6px; background: var(--glass); color: var(--sub); font-size: 11.5px; line-height: 18px; font-weight: 500; vertical-align: 1px; }
 .job-co { margin: 1px 0 0; font-size: 14px; line-height: 21px; }
 .job-meta { margin: 1px 0 0; font-size: 13px; line-height: 19.5px; color: var(--dim); font-variant-numeric: tabular-nums; }
 .job-about { margin: 10px 0 0; max-width: 700px; font-size: 14px; line-height: 22px; color: var(--sub); text-wrap: pretty; }
 
-/* ---------- контакты и подвал ---------- */
 .contact { margin-top: 112px; padding: 64px 0 56px; border-top: 1px solid var(--line); }
 .contact h2 { margin: 0; font-size: 32px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; text-wrap: balance; }
 .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
@@ -445,7 +408,6 @@ h1 { margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spa
 }
 footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px 0 40px; border-top: 1px solid var(--line); font-size: 13px; color: var(--dim); }
 
-/* ---------- анимация «Подъём»: карточка появляется заново каждый раз, когда возвращается в поле зрения ---------- */
 .js .light { opacity: 0; transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1); }
 .js .hero .l1, .js .hero .dirs {
   opacity: 0; translate: 0 22px;
@@ -454,7 +416,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
 .js .hero .l1 { transition-delay: 0.05s; }
 .js .hero .dirs { transition-delay: 0.14s; }
 .js .hero .lede { opacity: 0; translate: 0 12px; transition: opacity 0.8s var(--expo) 0.24s, translate 0.8s var(--expo) 0.24s; }
-/* сайдбар и верхняя панель не появляются с анимацией: они всегда на месте */
 .topbar { transition: translate 0.4s var(--expo), background-color 0.3s ease, box-shadow 0.3s ease; }
 .ready .light { opacity: var(--light-op); }
 .ready .hero .l1, .ready .hero .dirs { opacity: 1; translate: 0 0; }
@@ -474,10 +435,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
 .js .tile.in, .js .tile.in .art, .js .tile.in .txt > * { opacity: 1; translate: 0 0; }
 .js .tile.in .glow, .js .tile.in .shine, .js .tile.in .brand, .js .tile.in .go { opacity: 1; }
 
-/* движение внутри карточек: начинается в момент --in, когда карточка уже проявляется.
-   fx-zoom — экран наплывает и встаёт на место, fx-grow — вырастает снизу,
-   fx-together — телефоны съезжаются с боков, fx-spread — второй телефон выезжает из-за первого,
-   fx-rise — телефон поднимается снизу, duo — маленький экран наезжает на большой */
 .js .tile .win, .js .tile .ph, .js .tile .poster {
   transition: opacity 0.45s ease-out var(--in), translate 1.1s var(--soft) var(--in), scale 1.15s var(--ease) var(--in), rotate 1.1s var(--soft) var(--in);
 }
@@ -492,7 +449,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
 .js .tile .duo .win.small { --in: calc(var(--d, 0s) + 0.5s); opacity: 0; translate: 240px 90px; rotate: 4deg; }
 .js .tile.in .art .win, .js .tile.in .art .ph, .js .tile.in .art .poster { opacity: 1; translate: 0 0; scale: 1; rotate: 0deg; }
 
-/* свет в карточке: вспышка и блик по экрану вместе с появлением; после появления карточка стоит спокойно */
 @keyframes lamp { 0% { opacity: 0; scale: 0.35; } 35% { opacity: 1; } 100% { opacity: 0; scale: 1.15; } }
 @keyframes sweep { from { translate: -60% 0; } to { translate: 60% 0; } }
 .js .tile.in .glow::after { animation: lamp 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--d, 0s) + 0.25s); }
@@ -509,9 +465,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
   .about, .letter, .snap, .pop, .close-row, .glow::after, .art::after { animation: none !important; }
 }
 
-/* ---------- адаптив ---------- */
-
-/* компьютер: контент в «окне», сайдбар прямо на фоне */
 @media (min-width: 1024px) {
   .frame {
     display: block; position: fixed; z-index: 15; pointer-events: none; top: 8px; right: 8px; bottom: 8px; left: var(--side-w); border-radius: 16px;
@@ -521,7 +474,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
   .page { padding-inline: calc(var(--side-w) + 52px) 60px; }
 }
 
-/* ноутбук с узким окном: сайдбар остаётся открытым, но становится уже */
 @media (min-width: 1024px) and (max-width: 1279px) {
   :root { --side-w: 232px; }
   .page { padding-inline: calc(var(--side-w) + 32px) 40px; }
@@ -532,7 +484,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
   .snap-right { width: 184px; right: -144px; top: 280px; }
 }
 
-/* 900–1279px: узкие карточки чуть шире широких (7 к 5), порядок карточек тот же */
 @media (min-width: 900px) and (max-width: 1279px) {
   .tile { grid-column: span 7; height: 460px; --cap: 128px; --inset: 24px; }
   .tile.n { grid-column: span 5; --cap: 148px; }
@@ -540,7 +491,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
   .go { top: 18px; right: 18px; }
 }
 
-/* планшет и телефон: сайдбар прячется в меню-бургер */
 @media (max-width: 1023px) {
   .light { left: 0; }
   .sidebar { translate: -100% 0; border-right: 1px solid var(--line); transition: translate 0.45s var(--expo); }
@@ -549,10 +499,8 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
     display: flex; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 6; justify-content: space-between; align-items: center;
     padding: 12px 32px; background: rgba(var(--window-rgb), 0); box-shadow: 0 1px 0 transparent;
   }
-  /* при прокрутке у панели появляется подложка, чтобы она не висела в воздухе */
   .topbar.stuck { background: rgba(var(--window-rgb), 0.8); -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 1px 0 var(--line); }
   .hero { padding-top: 64px; }
-  /* фото в About поднимаются над письмом и чуть заходят на его край */
   .letter-wrap { padding-top: 172px; }
   .snap { z-index: 3; top: 0; }
   .snap-left { width: 140px; left: calc(50% - 150px); rotate: -7deg; }
@@ -575,7 +523,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
   .duo .win.small { display: none; }
   .go { top: 16px; right: 16px; }
   .job { gap: 14px; padding: 18px 0; }
-  /* на телефоне период и город — двумя строками, чтобы ничего не повисало */
   .job-meta .sep { display: none; }
   .job-meta .where { display: block; }
   .contact { margin-top: 72px; padding: 48px 0; }
@@ -591,11 +538,9 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 24px
   footer { flex-direction: column; gap: 6px; }
 }
 
-/* ---------- переход между страницами: сайдбар и верхняя панель стоят на месте, плавно меняется только контент справа ---------- */
 @view-transition { navigation: auto; }
 .sidebar { view-transition-name: eg-side; }
 .topbar { view-transition-name: eg-top; }
-/* при смене темы сайдбар меняется вместе со всей страницей */
 html.vt-theme .sidebar, html.vt-theme .topbar { view-transition-name: none; }
 ::view-transition-group(eg-side), ::view-transition-group(eg-top) { animation: none; }
 ::view-transition-old(eg-side), ::view-transition-old(eg-top) { display: none; }
@@ -608,9 +553,6 @@ html:not(.vt-theme)::view-transition-new(root) { animation: eg-page-in 0.45s cub
   @view-transition { navigation: none; }
 }
 
-/* ---------- AI in my work ---------- */
-.side-ic svg { width: 20px; height: 20px; flex: none; padding: 2px; color: var(--sub); }
-.item.on { background: var(--pill); color: var(--text); box-shadow: var(--pill-shadow); }
 #ai .sec-head { margin-top: 110px; }
 #ai .sec-head h2 { flex: none; }
 #ai .sec-head span { text-align: right; }
@@ -649,7 +591,6 @@ html:not(.vt-theme)::view-transition-new(root) { animation: eg-page-in 0.45s cub
 :root[data-scheme="light"] .ai-tool .on-light { display: block; }
 :root[data-scheme="light"] .ai-tool .on-dark { display: none; }
 .ai-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--sub); }
-/* три светлых сообщения веером в карточке Morning brief */
 #ai-brief .bf img { position: absolute; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 70px -24px rgba(0, 0, 0, 0.65); }
 #ai-brief .art { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 110px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 110px), transparent); }
 #ai-brief .bf-c { left: 41%; width: 44%; top: 74px; z-index: 3; }

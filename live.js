@@ -1,14 +1,9 @@
-/*
-  Живые блоки в кейсах: переключатель валют и график, демо «сохранить и продолжить»,
-  переключатель ролей и сравнение цифр. Данные внутри демо вымышленные.
-*/
 (function () {
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function each(sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); }
   function press(group, btn) { Array.prototype.forEach.call(group, function (x) { x.setAttribute('aria-pressed', String(x === btn)); }); }
 
-  /* ---------- дашборд P3: EUR / USD / GBP и график AUM / Yield ---------- */
   each('.p3d', function (d) {
     var RATES = { USD: 1, EUR: 0.92, GBP: 0.79 };
     var SYM = { USD: '$', EUR: '€', GBP: '£' };
@@ -58,7 +53,6 @@
       b.addEventListener('click', function () { metric = b.getAttribute('data-set-metric'); press(metBtns, b); draw(); hide(); });
     });
 
-    /* подсказка на графике: месяц и значение под курсором */
     function hide() { chart.classList.remove('hover'); }
     chart.addEventListener('pointermove', function (e) {
       var r = svg.getBoundingClientRect();
@@ -76,7 +70,6 @@
     draw(); setMoney(false);
   });
 
-  /* ---------- демо «сохранить и продолжить»: ноутбук → письмо → телефон ---------- */
   each('.sc', function (sc) {
     var steps = sc.querySelectorAll('.sc-steps button');
     var timers = [], seen = false;
@@ -114,7 +107,6 @@
     }
   });
 
-  /* ---------- роли: меню и экран меняются вместе с ролью ---------- */
   each('.rsw', function (w) {
     var btns = w.querySelectorAll('[data-set-role]');
     Array.prototype.forEach.call(btns, function (b) {
@@ -122,14 +114,12 @@
     });
   });
 
-  /* ---------- цифры: пропорциональные и моноширинные ---------- */
   each('.tnum', function (t) {
     var btns = t.querySelectorAll('[data-set-mode]');
     Array.prototype.forEach.call(btns, function (b) {
       b.addEventListener('click', function () { t.setAttribute('data-mode', b.getAttribute('data-set-mode')); press(btns, b); });
     });
   });
-  /* ---------- P3 Marine: сумма расхода решает, кто его одобряет ---------- */
   each('.appr', function (w) {
     var range = w.querySelector('input[type="range"]'), out = w.querySelector('.appr-amt');
     var items = w.querySelectorAll('.appr-chain li'), res = w.querySelector('.appr-out');
@@ -145,7 +135,6 @@
     range.addEventListener('input', update); update();
   });
 
-  /* ---------- P3 Marine: карта экипажа, пополнение, блокировка и работа без связи ---------- */
   each('.crew', function (w) {
     var bal = 1240, online = true, blocked = false, k = 0;
     var balEl = w.querySelector('.cw-card b'), list = w.querySelector('.cw-list'), logBtn = w.querySelector('.cw-log');
@@ -187,7 +176,6 @@
     });
   });
 
-  /* ---------- P3 Marine: один экран на пяти разрешениях ---------- */
   each('.bp', function (w) {
     var stage = w.querySelector('.bp-stage'), frame = w.querySelector('.bp-frame'), btns = w.querySelectorAll('.bp-tabs button');
     function fitTo(px) {
@@ -203,7 +191,6 @@
     fitTo(1440);
   });
 
-  /* ---------- реальные экраны: вкладки и шаги сами листаются, длинный экран сам плавно едет вниз ---------- */
   function seen(el, on, off) {
     if (!('IntersectionObserver' in window)) { on(); return; }
     new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) on(); else if (off) off(); }); }, { threshold: 0.3 }).observe(el);
@@ -252,7 +239,6 @@
   each('.vw', function (w) { switcher(w, '.tabs2 button'); });
   each('.stp', function (w) { switcher(w, '.stp-list button'); });
 
-  /* ---------- длинная страница едет вниз и обратно, не перехватывая прокрутку страницы ---------- */
   each('.long', function (w) {
     var view = w.querySelector('.vw-view'), img = view && view.querySelector('img');
     if (!img || reduce) return;
@@ -274,7 +260,6 @@
     seen(w, function () { if (run) return; run = true; last = 0; requestAnimationFrame(frame); }, function () { run = false; });
   });
 
-  /* ---------- настоящие разрешения: рамка сужается, картинка меняется ---------- */
   each('.bpr', function (w) {
     var btns = w.querySelectorAll('.tabs2 button'), frame = w.querySelector('.bpr-frame'), imgs = w.querySelectorAll('.bpr-frame img[data-w]');
     var widest = parseInt(btns[0].getAttribute('data-w'), 10);
@@ -286,7 +271,6 @@
     set(widest);
   });
 
-  /* ---------- карта экипажа: заблокировать, разблокировать, активировать, сменить PIN ---------- */
   each('.cdx-demo', function (w) {
     var cdx = w.querySelector('.cdx'), btns = w.querySelectorAll('.tabs2 button'), cap = w.querySelector('.vw-cap');
     var dlg = cdx.querySelector('.cdx-dlg'), h = dlg.querySelector('h5'), p = dlg.querySelector('p'), inp = dlg.querySelector('.pu-in'), ok = dlg.querySelector('.cdx-ok'), no = dlg.querySelector('.no2');
@@ -332,8 +316,6 @@
     seen(w, function () { if (!visible) { visible = true; setTimeout(loop, 900); } }, function () { visible = false; clearTimeout(timer); });
     state('active'); if (cap) cap.innerHTML = btns[0].getAttribute('data-cap');
   });
-  /* ================= CryptoSwift ================= */
-  /* демо-курсы в фунтах: общий тикер для всех блоков страницы */
   var CS_BASE = { BTC: 34620, ETH: 1812, USDT: 0.7905, USDC: 0.7902 };
   var CS_DEC = { BTC: 5, ETH: 4, USDT: 2, USDC: 2 };
   var csRate = { BTC: 34620, ETH: 1812, USDT: 0.7905, USDC: 0.7902 }, csDir = {}, csSubs = [], csTimer = null;
@@ -358,7 +340,6 @@
     el.classList.remove('up', 'dn'); void el.offsetWidth; el.classList.add(dir > 0 ? 'up' : 'dn');
     clearTimeout(el._ft); el._ft = setTimeout(function () { el.classList.remove('up', 'dn'); }, 900);
   }
-  /* код для оплаты: 25 × 25 модулей с тремя «глазками», как у настоящего QR */
   function csQR(el, seed) {
     var N = 25, s = (seed >>> 0) || 7, html = '';
     function rnd() { s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; }
@@ -381,7 +362,6 @@
   function csClock(sec) { var m = Math.floor(sec / 60), x = sec % 60; return (m < 10 ? '0' : '') + m + ':' + (x < 10 ? '0' : '') + x; }
   if (document.querySelector('.cx-ns, .fx, .payx')) csTickStart();
 
-  /* ---------- новая продажа: цена в фунтах, монета, режим, затем статус сделки ---------- */
   each('.cx-ns', function (cx) {
     var view = cx.querySelector('.cx-view'), price = cx.querySelector('.cx-price'), pin = price.closest('.cx-in'), ph = cx.querySelector('.cx-ph');
     var coinB = cx.querySelectorAll('.cx-coins button'), modeB = cx.querySelectorAll('.cx-radios button'), chips = cx.querySelectorAll('.cx-chips button');
@@ -442,7 +422,6 @@
       tm.textContent = csClock(held);
       clock = setInterval(function () { held = Math.max(0, held - 1); tm.textContent = csClock(held); }, 1000);
       view.classList.add('on');
-      /* на телефоне форма длиннее экрана: новый экран сделки показываем с начала, как в приложении */
       if (user) { var top = cx.getBoundingClientRect().top; if (top < 0) window.scrollBy({ top: top - 76, behavior: reduce ? 'auto' : 'smooth' }); }
       var T = reduce ? 0 : 1;
       var SEQ = [['Checking the payment', 'The customer\'s wallet is screened before anything else.'],
@@ -498,7 +477,6 @@
     validate(); update();
   });
 
-  /* ---------- история продаж: фильтры, поиск и карточка сделки ---------- */
   each('.cx-sl', function (cx) {
     var rows = Array.prototype.slice.call(cx.querySelectorAll('button.cx-tr')), fb = cx.querySelectorAll('.cx-filt button'), q = cx.querySelector('.cx-search input');
     var empty = cx.querySelector('.cx-empty'), drw = cx.querySelector('.cx-drw'), tl = drw.querySelectorAll('.cx-tl li');
@@ -548,7 +526,6 @@
     seen(cx, function () { if (!visible) { visible = true; timer = setTimeout(loop, 1200); } }, function () { visible = false; clearTimeout(timer); });
   });
 
-  /* ---------- до и после: крипта скачет, фунты стоят на месте ---------- */
   each('.fx', function (w) {
     var bBig = w.querySelector('.before .fx-big'), aC = w.querySelector('.fx-c2'), pB = w.querySelector('.before .fx-spark path');
     var pBase = w.querySelector('.after .fx-spark .base'), GBP = 300000, hist = [], visible = false;
@@ -570,7 +547,6 @@
     draw(0);
   });
 
-  /* ---------- оплата глазами покупателя, статус у продавца меняется вместе с ней ---------- */
   each('.payx', function (w) {
     var pg = w.querySelector('.pg2'); if (!pg) return;
     var cb = pg.querySelectorAll('.pg2-coins button'), amt = pg.querySelector('.pg2-c'), q = pg.querySelector('.pg2-q'), addr = pg.querySelector('.pg2-addr span');
@@ -626,7 +602,6 @@
     setCoin('ETH'); reset();
   });
 
-  /* ---------- аналитика: неделя, месяц, год ---------- */
   each('.anx', function (w) {
     var btns = w.querySelectorAll('.anx-seg button'), bars = w.querySelector('.anx-bars'), xs = w.querySelector('.anx-x'), yl = w.querySelectorAll('.anx-yl span'), sub = w.querySelector('.anx-sub');
     var K = {}; ['vol', 'vd', 'cnt', 'cd', 'avg', 'ad', 'out'].forEach(function (n) { K[n] = w.querySelector('.k-' + n); });
@@ -673,7 +648,6 @@
     set(0, false);
   });
 
-  /* ---------- навигация: тёмная и светлая ---------- */
   each('.navx', function (w) {
     var cx = w.querySelector('.cx'), btns = w.querySelectorAll('[data-nav]'), user = false, visible = false, timer = null;
     function set(v) { cx.classList.toggle('light', v === 'light'); Array.prototype.forEach.call(btns, function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-nav') === v)); }); }
@@ -682,7 +656,6 @@
     seen(w, function () { if (!visible) { visible = true; loop(); } }, function () { visible = false; clearTimeout(timer); });
   });
 
-  /* ---------- пять разрешений: рамка меняет размер, форма перестраивается сама ---------- */
   each('.bpc', function (w) {
     var stage = w.querySelector('.bpc-stage'), frame = w.querySelector('.bpc-frame'), btns = w.querySelectorAll('.tabs2 button'), cap = w.querySelector('.bpc-cap');
     var mq = window.matchMedia('(max-width: 899px)'), cur = 0, user = false, visible = false, timer = null;
@@ -702,13 +675,11 @@
     set(0);
   });
 
-  /* ---------- маленькие переключатели: режим продажи в карточке ---------- */
   each('[data-flip]', function (el) {
     var ms = parseInt(el.getAttribute('data-flip'), 10) || 2600, t = null;
     if (reduce) return;
     seen(el, function () { if (!t) t = setInterval(function () { el.classList.toggle('alt'); }, ms); }, function () { clearInterval(t); t = null; });
   });
-  /* ================= Banking Safe ================= */
   function ubMoney(v) { return Math.round(v).toLocaleString('en-US').replace(/,/g, '\u00a0'); }
   function ubCount(el, from, to) {
     if (reduce) { el.textContent = ubMoney(to); return; }
@@ -716,7 +687,6 @@
     (function step(t) { var q = Math.min(1, (t - t0) / 700); q = 1 - Math.pow(1 - q, 3); el.textContent = ubMoney(from + (to - from) * q); if (q < 1) requestAnimationFrame(step); })(t0);
   }
 
-  /* ---------- сейф от вкладки «Накопичення» до первых пополнений ---------- */
   each('.sf:not(.pst)', function (w) {
     var ub = w.querySelector('.ub'); if (!ub) return;
     var scr = ub.querySelectorAll('.ub-scr'), steps = w.querySelectorAll('.sf-steps button');
@@ -794,7 +764,6 @@
     go(0);
   });
 
-  /* ---------- A/B: только баланс или прогресс ---------- */
   each('.abx', function (w) {
     var phones = Array.prototype.slice.call(w.querySelectorAll('.abx-c .ub')), add = w.querySelector('.add'), rst = w.querySelector('.rst');
     var GOAL = 60000, bal = 0, user = false, visible = false, timer = null, k = 0, SEQ = [9000, 21000, 33000, 43800];
@@ -817,7 +786,6 @@
     seen(w, function () { if (!visible) { visible = true; loop(); } }, function () { visible = false; clearTimeout(timer); });
   });
 
-  /* ---------- регулярные пополнения: день, неделя, месяц ---------- */
   each('.atx', function (w) {
     var btns = w.querySelectorAll('[data-f]'), dec = w.querySelector('.dec'), inc = w.querySelector('.inc'), v = w.querySelector('.atx-amt .v');
     var when = w.querySelector('.when'), how = w.querySelector('.how'), fl = w.querySelector('.fl'), tg = w.querySelector('.tg'), ok = w.querySelector('.atx-ok');
@@ -850,7 +818,6 @@
     render();
   });
 
-  /* ---------- семь шагов исследования ---------- */
   each('.rsx', function (w) {
     var btns = w.querySelectorAll('.rsx-line button'), panes = w.querySelectorAll('.rsx-pane'), pr = w.querySelector('.rsx-line .rsx-pr');
     var auto = parseInt(w.getAttribute('data-auto') || '5200', 10), cur = 0, user = false, visible = false, timer = null;
@@ -865,7 +832,6 @@
     seen(w, function () { if (!visible) { visible = true; loop(); } }, function () { visible = false; clearTimeout(timer); });
     set(0);
   });
-  /* ---------- настоящие экраны: шаги слева, телефон справа, длинный экран сам едет вниз ---------- */
   each('.pst', function (w) {
     var btns = w.querySelectorAll('.sf-steps button'), imgs = w.querySelectorAll('.pst-scr > img, .pst-scr > .pst-i'), scr = w.querySelector('.pst-scr');
     var auto = parseInt(w.getAttribute('data-auto') || '3600', 10), cur = 0, user = false, visible = false, timer = null;

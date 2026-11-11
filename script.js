@@ -1,8 +1,5 @@
-/* Статистика посещений Vercel Web Analytics: сколько людей, из каких стран, с каких устройств и откуда пришли */
 (function () {
   if (location.protocol === 'file:') return;
-  /* свои заходы не считаем: статистика не отправляется с устройств, где стоит часовой пояс Турции,
-     и из браузеров, где сайт один раз открыли по ссылке с ?notrack (вернуть подсчёт: ссылка с ?track) */
   var skip = false;
   try {
     if (/[?&]notrack\b/.test(location.search)) localStorage.setItem('va-disable', '1');
@@ -20,10 +17,6 @@
   s.src = '/_vercel/insights/script.js';
   document.head.appendChild(s);
 })();
-/*
-  Поведение сайта: меню на узких экранах, меню профиля, окно About, выбор кейса в сайдбаре
-  и анимация «Подъём» при прокрутке. Библиотеки не нужны.
-*/
 (function () {
   'use strict';
 
@@ -31,10 +24,8 @@
   var body = document.body;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* ---------- любая страница открывается с начала, в том числе по кнопкам «назад» и «вперёд» ---------- */
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   function cleanUrlEarly() { if (location.hash && history.replaceState) history.replaceState(history.state, '', location.pathname + location.search); }
-  /* к началу страницы мгновенно; scrollIntoView, а не scrollTo, чтобы в окне предпросмотра прокрутилась и внешняя страница */
   function toTop(smooth) {
     var behavior = smooth && !reduceMotion.matches ? 'smooth' : 'instant';
     try { root.scrollIntoView({ block: 'start', behavior: behavior }); } catch (e) { window.scrollTo(0, 0); }
@@ -43,45 +34,48 @@
     if (e.persisted) { cleanUrlEarly(); toTop(false); }
   });
 
-  /* ---------- светлая и тёмная тема: выбор запоминается ---------- */
   var themeBtns = document.querySelectorAll('.theme [data-set]');
   var metaTheme = document.querySelector('meta[name="theme-color"]');
-  function applyTheme(t) {
+  var sysLight = window.matchMedia('(prefers-color-scheme: light)');
+  function systemTheme() { return sysLight.matches ? 'light' : 'dark'; }
+  function savedTheme() {
+    var v = null;
+    try { v = localStorage.getItem('eg-theme'); } catch (e) {}
+    return v === 'light' || v === 'dark' ? v : null;
+  }
+  function applyTheme() {
+    var t = savedTheme() || systemTheme();
     root.setAttribute('data-scheme', t);
     themeBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === t)); });
     if (metaTheme) metaTheme.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
   }
-  applyTheme(root.getAttribute('data-scheme') === 'light' ? 'light' : 'dark');
-  var sysLight = window.matchMedia('(prefers-color-scheme: light)');
-  function onSystemTheme(e) {
-    var saved = null;
-    try { saved = localStorage.getItem('eg-theme'); } catch (err) {}
-    if (saved !== 'light' && saved !== 'dark') applyTheme(e.matches ? 'light' : 'dark');
-  }
-  if (sysLight.addEventListener) sysLight.addEventListener('change', onSystemTheme);
-  else if (sysLight.addListener) sysLight.addListener(onSystemTheme);
+  applyTheme();
+  if (sysLight.addEventListener) sysLight.addEventListener('change', applyTheme);
+  else if (sysLight.addListener) sysLight.addListener(applyTheme);
+  window.addEventListener('storage', function (e) { if (e.key === 'eg-theme' || e.key === null) applyTheme(); });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) applyTheme(); });
   themeBtns.forEach(function (b) {
     b.addEventListener('click', function () {
       var t = b.getAttribute('data-set');
       if (t === root.getAttribute('data-scheme')) return;
-      try { localStorage.setItem('eg-theme', t); } catch (e) {}
-      /* плавная смена темы там, где браузер это умеет */
-      if (document.startViewTransition && !reduceMotion.matches) {
-        root.classList.add('vt-theme');
-        var vt = document.startViewTransition(function () { applyTheme(t); });
-        vt.finished.then(done, done);
-      } else applyTheme(t);
+      try {
+        if (t === systemTheme()) localStorage.removeItem('eg-theme');
+        else localStorage.setItem('eg-theme', t);
+      } catch (e) {}
+      if (!document.startViewTransition || reduceMotion.matches) { applyTheme(); return; }
+      root.classList.add('vt-theme');
+      var vt = document.startViewTransition(applyTheme);
       function done() { root.classList.remove('vt-theme'); }
+      vt.finished.then(done, done);
+      setTimeout(applyTheme, 600);
     });
   });
 
-  /* ---------- верхняя панель на узких экранах: подложка появляется при прокрутке ---------- */
   var topbar = document.querySelector('.topbar');
   function onTopbarScroll() { topbar.classList.toggle('stuck', window.scrollY > 4); }
   window.addEventListener('scroll', onTopbarScroll, { passive: true });
   onTopbarScroll();
 
-  /* ---------- сайдбар как выезжающее меню на экранах уже 1024px ---------- */
   var sidebar = document.getElementById('sidebar');
   var scrim = document.getElementById('scrim');
   var sideScroll = sidebar.querySelector('.side-scroll');
@@ -105,7 +99,6 @@
   if (narrow.addEventListener) narrow.addEventListener('change', onNarrowChange);
   else if (narrow.addListener) narrow.addListener(onNarrowChange);
 
-  /* ---------- меню профиля ---------- */
   var me = document.getElementById('me');
   var pop = document.getElementById('pop');
   function setPop(open) {
@@ -117,7 +110,6 @@
     if (!pop.hidden && !pop.contains(e.target)) setPop(false);
   });
 
-  /* ---------- окно About: закрывается крестиком в углу, кликом по фону и клавишей Esc ---------- */
   var about = document.getElementById('about');
   var aboutScroll = about.querySelector('.about-scroll');
   var openAbout = document.getElementById('open-about');
@@ -153,85 +145,11 @@
       else if (!pop.hidden) { setPop(false); me.focus(); }
       else if (sidebar.classList.contains('open')) { setDrawer(false); burger.focus(); }
     } else if (e.key === 'Tab' && !about.hidden) {
-      /* фокус остаётся внутри открытого окна */
       e.preventDefault();
       closeAbout.focus();
     }
   });
 
-  /* ---------- кейс из сайдбара: прокрутка в центр экрана и подсветка ---------- */
-  var links = {};
-  var inBand = {};
-  var picked = null;
-  var pickedY = 0;
-  var arrived = false;
-  var settle = null;
-  /* ссылка на кейс внутри главной ведёт к карточке (#case-…), ссылка с data-case — на отдельную страницу кейса */
-  sidebar.querySelectorAll('.sub a').forEach(function (a) {
-    var href = a.getAttribute('href') || '';
-    var id = a.getAttribute('data-case') || (href.charAt(0) === '#' ? href.slice(1) : '');
-    if (id) links[id] = a;
-  });
-
-  /* в сайдбаре выделен выбранный кейс, а если ничего не выбрано — тот, что сейчас в середине экрана */
-  function syncLinks() {
-    Object.keys(links).forEach(function (id) {
-      var on = picked ? picked.id === id : !!inBand[id];
-      links[id].classList.toggle('on', on);
-      if (on) links[id].setAttribute('aria-current', 'location');
-      else links[id].removeAttribute('aria-current');
-    });
-  }
-  function waitForStop() {
-    clearTimeout(settle);
-    settle = setTimeout(function () { arrived = true; pickedY = window.scrollY; }, 180);
-  }
-  function pick(tile, smooth) {
-    if (picked && picked !== tile) picked.classList.remove('picked');
-    picked = tile;
-    arrived = false;
-    tile.classList.add('picked');
-    syncLinks();
-    smooth = smooth && !reduceMotion.matches;
-    if (!smooth) root.style.scrollBehavior = 'auto';
-    try { tile.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' }); }
-    catch (err) { tile.scrollIntoView(); }
-    if (!smooth) root.style.scrollBehavior = '';
-    waitForStop();
-  }
-  function unpick() {
-    if (!picked) return;
-    picked.classList.remove('picked');
-    picked = null;
-    syncLinks();
-  }
-  window.addEventListener('scroll', function () {
-    if (!picked) return;
-    if (!arrived) { waitForStop(); return; }
-    /* подсветка гаснет, когда уходишь от карточки примерно на треть экрана */
-    if (Math.abs(window.scrollY - pickedY) > window.innerHeight * 0.35) unpick();
-  }, { passive: true });
-
-  Object.keys(links).forEach(function (id) {
-    links[id].addEventListener('click', function (e) {
-      if ((links[id].getAttribute('href') || '').charAt(0) !== '#') return;
-      var tile = document.getElementById(id);
-      if (!tile) return;
-      e.preventDefault();
-      pick(tile, true);
-    });
-  });
-
-  if ('IntersectionObserver' in window) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) { inBand[entry.target.id] = entry.isIntersecting; });
-      syncLinks();
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-    document.querySelectorAll('.tile[id]').forEach(function (t) { spy.observe(t); });
-  }
-
-  /* ---------- места на странице (#top, #experience, #cases…) открываются без #хвоста в адресе:
-     перезагрузка, кнопки «назад» и «вперёд» и кнопка Home всегда начинают сверху ---------- */
   function cleanUrl() {
     if (location.hash && history.replaceState) history.replaceState(history.state, '', location.pathname + location.search);
   }
@@ -242,10 +160,8 @@
     if (!el) return;
     try { el.scrollIntoView({ behavior: behavior, block: 'start' }); } catch (e) { el.scrollIntoView(); }
   }
-  /* ссылка вида #about открывает письмо, вида #case-… — показывает и подсвечивает кейс, остальные ведут к своему блоку */
   function goTo(id, smooth) {
     if (id === 'about') setAbout(true);
-    else if (links[id] && document.getElementById(id)) pick(document.getElementById(id), smooth);
     else scrollToId(id, smooth);
   }
   function fromHash(smooth) {
@@ -263,7 +179,6 @@
     if (!id || id === 'main' || url.origin !== location.origin) return;
     e.preventDefault();
     if (url.pathname === location.pathname) { goTo(id, true); cleanUrl(); return; }
-    /* другая страница: место запоминается, а адрес остаётся без #хвоста */
     try { sessionStorage.setItem('eg-goto', id); } catch (err) {}
     location.href = url.pathname + url.search;
   });
@@ -274,12 +189,10 @@
   else if (location.hash) window.addEventListener('load', function () { setTimeout(function () { fromHash(false); }, 60); });
   else if (!pending) toTop(false);
   else {
-    /* сразу, чтобы страница открылась на нужном месте, и ещё раз после загрузки картинок и шрифтов */
     goTo(pending, false);
     window.addEventListener('load', function () { setTimeout(function () { goTo(pending, false); }, 60); });
   }
 
-  /* ---------- анимация «Подъём» ---------- */
   try {
     if (reduceMotion.matches || !('IntersectionObserver' in window)) {
       root.classList.remove('js');
@@ -290,7 +203,6 @@
 
     var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
 
-    /* карточки одного ряда появляются по очереди, слева направо */
     function stagger() {
       var rows = {};
       tiles.forEach(function (t) {
@@ -305,7 +217,6 @@
     }
     stagger();
 
-    /* свет внутри карточки идёт за курсором */
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
       tiles.forEach(function (t) {
         t.addEventListener('pointermove', function (e) {
@@ -326,11 +237,9 @@
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('in');
-        /* всё появляется один раз и дальше остаётся на месте */
         io.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
-    /* карточки больше не сбрасываются, когда уходят с экрана */
     var away = { observe: function () {}, unobserve: function () {} };
 
     var started = false;
@@ -340,10 +249,9 @@
       root.classList.add('ready');
       setTimeout(function () {
         document.querySelectorAll('.tile, .reveal').forEach(function (el) { io.observe(el); });
-  
+
       }, 250);
     }
-    /* анимация начинается сразу после разметки: страница не ждёт загрузки шрифтов */
     requestAnimationFrame(start);
     setTimeout(start, 300);
   } catch (err) {

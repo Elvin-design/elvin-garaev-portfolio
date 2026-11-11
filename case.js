@@ -1,16 +1,10 @@
-/*
-  Поведение страниц кейсов: подгонка макетов под ширину экрана, приближение экрана по клику,
-  появление блоков при прокрутке (повторяется при каждом возвращении) и счётчики цифр.
-*/
 (function () {
   'use strict';
 
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- макеты фиксированной ширины (интерфейсы, схемы) уменьшаются под колонку ---------- */
   var fits = Array.prototype.slice.call(document.querySelectorAll('[data-fit]'));
-  /* схемы с data-flow на телефоне не уменьшаются, а перестраиваются в столбик (это делает CSS) */
   var phone = window.matchMedia('(max-width: 899px)');
   function fit() {
     fits.forEach(function (el) {
@@ -25,7 +19,6 @@
   var t;
   window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(fit, 100); });
 
-  /* ---------- приближение экрана по клику: камера едет к точке, куда нажали ---------- */
   document.querySelectorAll('.zoomable').forEach(function (stage) {
     var shot = stage.querySelector('.shot');
     function toggle(e) {
@@ -43,7 +36,6 @@
     });
   });
 
-  /* ---------- счётчики: цифра набегает от нуля ---------- */
   function count(scope) {
     scope.querySelectorAll('[data-to]').forEach(function (el) {
       var to = parseFloat(el.getAttribute('data-to'));
@@ -62,7 +54,6 @@
     });
   }
 
-  /* ---------- появление блоков: при входе на экран и заново после того, как блок целиком ушёл ---------- */
   var blocks = Array.prototype.slice.call(document.querySelectorAll('.rv'));
   if (reduce || !('IntersectionObserver' in window)) {
     blocks.forEach(function (b) { b.classList.add('in'); count(b); });
@@ -77,7 +68,6 @@
       enter.unobserve(entry.target);
     });
   }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
-  /* блок появляется один раз и дальше остаётся на месте; уходя с экрана, только сбрасывает приближение */
   var away = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) entry.target.classList.remove('zoomed');

@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>CryptoSwift, Crypto Payments for Merchants · Elvin Garaev</title>
   <meta name="description" content="Case study: CryptoSwift, a B2B platform where merchants accept crypto and get paid in pounds, dollars or euros. A full redesign with fiat first pricing, status first sales, invoices, analytics and five breakpoints.">
+  <link rel="canonical" href="https://elvin-garaev-portfolio.vercel.app/work/cryptoswift">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://elvin-garaev-portfolio.vercel.app/work/cryptoswift">
   <meta property="og:title" content="CryptoSwift, Crypto Payments for Merchants · Elvin Garaev">
   <meta property="og:description" content="Case study: CryptoSwift, a B2B platform where merchants accept crypto and get paid in pounds, dollars or euros. A full redesign with fiat first pricing, status first sales, invoices, analytics and five breakpoints.">
-  <meta property="og:image" content="https://elvin-garaev-portfolio.vercel.app/og-image.jpg">
+  <meta property="og:image" content="https://elvin-garaev-portfolio.vercel.app/images/og/cryptoswift.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -21,20 +22,7 @@
   <link rel="preload" href="../inter-tight-700i-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../case.css">
-  <script>
-    document.documentElement.classList.add('js');
-    var t = null; try { t = localStorage.getItem('eg-theme'); } catch (e) {}
-    /* без ручного выбора тема берётся из настроек системы и браузера, сразу, до первой отрисовки */
-    if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-scheme', t);
-    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', t === 'light' ? '#f8f8f8' : '#10100f');
-    /* страница всегда открывается с начала, до первой отрисовки: и в обычном браузере, и в окне предпросмотра,
-       где прокручивается внешняя страница (scrollIntoView прокручивает и её) */
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    var go = null; try { go = sessionStorage.getItem('eg-goto'); } catch (e) {}
-    if (!location.hash && !go) { try { document.documentElement.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {} }
-    setTimeout(function () { if (!window.__egReady) document.documentElement.classList.remove('js'); }, 3000);
-  </script>
+  <script src="../theme.js"></script>
   <script src="../script.js" defer></script>
   <script src="../case.js" defer></script>
   <script src="../live.js" defer></script>
@@ -108,32 +96,42 @@
     <a class="item" href="../"><span class="mark">EG</span>Home</a>
     <div class="side-label">Cases</div>
     <details class="group" open>
-      <summary><img src="../images/icons/ukrsib.png" alt="" width="22" height="22">UKRSIBBANK<i class="chev"></i></summary>
-      <div class="sub"><a href="ukrsibbank">Omnichannel CRM</a><a href="safe">Banking Safe</a></div>
+      <summary><img src="../images/icons/ukrsib.png" alt="" width="20" height="20">UKRSIBBANK<i class="chev"></i></summary>
+      <div class="sub">
+        <a href="ukrsibbank">Omnichannel CRM</a>
+        <a href="safe">Banking Safe</a>
+      </div>
     </details>
     <details class="group" open>
-      <summary><img src="../images/icons/ifreq.png" alt="" width="22" height="22">IFREQ<i class="chev"></i></summary>
-      <div class="sub"><a href="ifreq">Football App and Dashboard</a></div>
+      <summary><img src="../images/icons/ifreq.png" alt="" width="20" height="20">IFREQ<i class="chev"></i></summary>
+      <div class="sub">
+        <a href="ifreq">Football App and Dashboard</a>
+      </div>
     </details>
     <details class="group" open>
-      <summary><img src="../images/icons/barva.png" alt="" width="22" height="22">BARVA.TECH<i class="chev"></i></summary>
-      <div class="sub"><a href="p3-wealth">P3 Wealth × BlackRock</a><a href="p3-marine">P3 Marine</a><a class="on" href="cryptoswift" aria-current="page">CryptoSwift</a></div>
+      <summary><img src="../images/icons/barva.png" alt="" width="20" height="20">BARVA.TECH<i class="chev"></i></summary>
+      <div class="sub">
+        <a href="p3-wealth">P3 Wealth × BlackRock</a>
+        <a href="p3-marine">P3 Marine</a>
+        <a href="cryptoswift" class="on" aria-current="page">CryptoSwift</a>
+      </div>
     </details>
     <details class="group" open>
-      <summary><img src="../images/icons/milli.png" alt="" width="22" height="22">Milli Digital<i class="chev"></i></summary>
-      <div class="sub"><a href="xgo">XGo Wallet</a></div>
+      <summary><img src="../images/icons/milli.png" alt="" width="20" height="20">Milli Digital<i class="chev"></i></summary>
+      <div class="sub">
+        <a href="xgo">XGo Wallet</a>
+      </div>
     </details>
-    <a class="item side-xp side-ic" href="../#ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M11 4c.6 4.3 2.7 6.4 7 7-4.3.6-6.4 2.7-7 7-.6-4.3-2.7-6.4-7-7 4.3-.6 6.4-2.7 7-7Z"/><path d="M18.5 15.2c.25 1.6.95 2.3 2.5 2.55-1.55.25-2.25.95-2.5 2.55-.25-1.6-.95-2.3-2.5-2.55 1.55-.25 2.25-.95 2.5-2.55Z"/></svg>AI in my work</a>
-    <a class="item side-ic" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
+    <div class="side-gap"></div>
+    <a class="item" href="../#ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M11 4c.6 4.3 2.7 6.4 7 7-4.3.6-6.4 2.7-7 7-.6-4.3-2.7-6.4-7-7 4.3-.6 6.4-2.7 7-7Z"/><path d="M18.5 15.2c.25 1.6.95 2.3 2.5 2.55-1.55.25-2.25.95-2.5 2.55-.25-1.6-.95-2.3-2.5-2.55 1.55-.25 2.25-.95 2.5-2.55Z"/></svg>AI in my work</a>
+    <a class="item" href="../#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="4.8" cy="7" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17" r=".9"/></svg>Experience</a>
   </div>
 
-  <!-- переключатель светлой и тёмной темы -->
   <div class="theme" role="group" aria-label="Color theme">
     <button type="button" data-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>Light</button>
     <button type="button" data-set="dark" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>Dark</button>
   </div>
 
-  <!-- профиль внизу: по нажатию открывается меню -->
   <div class="profile">
     <div class="pop" id="pop" hidden>
       <button type="button" id="open-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c.9-3.6 3.7-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>About</button>
@@ -143,7 +141,7 @@
       <a href="https://t.me/el13xx" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 4.5 3.8 11.1c-.8.3-.8 1.4 0 1.7l4.1 1.4 1.6 4.9c.2.7 1.1.9 1.6.4l2.3-2.2 4.2 3.1c.6.4 1.4.1 1.6-.6L21.6 5.6c.2-.8-.4-1.4-1.1-1.1Z"/><path d="m8 14.2 9-6.6"/></svg>Telegram<span class="ext" aria-hidden="true">↗</span></a>
     </div>
     <button class="me" type="button" id="me" aria-expanded="false" aria-controls="pop">
-      <img src="../images/elvin/avatar.jpg" alt="" width="40" height="40"><span class="who"><b>Elvin Garaev</b><small>Product Designer</small></span><svg class="updown" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 6 3-3 3 3M5 10l3 3 3-3"/></svg>
+      <img src="../images/elvin/avatar.jpg" alt="" width="40" height="40"><span class="who"><b>Elvin Garaev</b><small>Senior Product Designer</small></span><svg class="updown" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 6 3-3 3 3M5 10l3 3 3-3"/></svg>
     </button>
   </div>
 </aside>
@@ -174,7 +172,6 @@
 
   <nav class="crumbs" aria-label="Case navigation"><a href="../#cases"><svg><use href="#i-back"/></svg>All cases</a><a href="ukrsibbank">Next: UKRSIBBANK CRM<svg><use href="#i-next"/></svg></a></nav>
 
-  <!-- ============ ОБЛОЖКА ============ -->
   <header class="cs-hero">
     <div class="cs-brand">
       <img class="for-dark" src="../images/logos/cryptoswift-color.png" alt="CryptoSwift" width="101" height="27">
@@ -201,7 +198,6 @@
   </div>
   <p class="note">Interactive recreation of the New sale screen. The merchant, the customer and the exchange rates are demo data.</p>
 
-  <!-- ============ КАК УСТРОЕН ============ -->
   <section class="sec" style="margin-top: 96px">
     <div class="label">How it works</div>
     <h2>The customer pays in crypto, the merchant gets paid in pounds</h2>
@@ -216,7 +212,6 @@
     </div>
   </section>
 
-  <!-- ============ ЧТО Я СДЕЛАЛ ============ -->
   <section class="sec">
     <div class="label">What I designed</div>
     <h2>A full redesign, from the audit to the last breakpoint</h2>
@@ -236,7 +231,6 @@
     </div>
   </section>
 
-  <!-- ============ ПРОБЛЕМА ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -254,7 +248,6 @@
     </div>
   </section>
 
-  <!-- ============ ИССЛЕДОВАНИЕ ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -283,7 +276,6 @@
     </div>
   </section>
 
-  <!-- ============ ФИАТ ПРЕЖДЕ ВСЕГО ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -347,7 +339,6 @@
     </div>
   </section>
 
-  <!-- ============ СТАТУС ПРЕЖДЕ ВСЕГО ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -369,7 +360,6 @@
     <p class="note">Interactive recreation of the sales history with demo sales.</p>
   </section>
 
-  <!-- ============ СТОРОНА ПОКУПАТЕЛЯ ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -418,7 +408,6 @@
     <p class="note">Concept drawn for the portfolio with demo rates. Switch the coin or pay with the wallet button.</p>
   </section>
 
-  <!-- ============ ДОВЕРИЕ ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -437,7 +426,6 @@
     </div>
   </section>
 
-  <!-- ============ СЧЕТА И АНАЛИТИКА ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -482,7 +470,6 @@
     <p class="note">Recreated with demo data.</p>
   </section>
 
-  <!-- ============ ДИЗАЙН-СИСТЕМА ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -523,13 +510,12 @@
     <p class="note">Live recreation: the same screen reflows at every width.</p>
   </section>
 
-  <!-- ============ РЕЗУЛЬТАТ ============ -->
   <section class="sec">
     <div class="label"><i>09</i>Impact</div>
     <h2>What changed</h2>
     <div class="stats six rv">
       <div class="st"><b data-to="28" data-pre="+" data-suf="%">+28%</b><span>merchant onboarding completion after the sale flow was simplified</span></div>
-      <div class="st"><b data-to="40" data-pre="−" data-suf="%">−40%</b><span>support requests about conversion, projected</span></div>
+      <div class="st"><b data-to="4">4</b><span>coins and 3 payout currencies in one sale flow</span></div>
       <div class="st"><b data-to="60" data-suf="+">60+</b><span>UI inconsistencies resolved by the design system</span></div>
       <div class="st"><b data-to="5">5</b><span>breakpoints, each with its own layout</span></div>
       <div class="st"><b data-to="2">2</b><span>new features: invoices and analytics</span></div>
@@ -537,7 +523,6 @@
     </div>
   </section>
 
-  <!-- ============ ВЫВОДЫ ============ -->
   <section class="sec">
     <div class="split">
       <div>
@@ -552,15 +537,14 @@
     </div>
   </section>
 
-  <!-- ============ НАВИГАЦИЯ ВНИЗУ ============ -->
   <nav class="pager rv" aria-label="More cases">
-    <a class="pg pg-prev" style="--c: 25, 150, 160" href="safe">
-      <span class="pg-th" aria-hidden="true"><img src="../images/cases/safe-goal.jpg" alt="" width="360" height="779"></span>
-      <span><span class="pg-l"><svg><use href="#i-back"/></svg>Previous case</span><b>Banking Safe<br>Goal Based Savings</b></span>
+    <a class="pg pg-prev" style="--c: 255, 140, 185" href="xgo">
+      <span class="pg-th" aria-hidden="true"><img src="../images/cases/xgo-wallet.jpg" alt="" width="360" height="752"></span>
+      <span><span class="pg-l"><svg><use href="#i-back"/></svg>Previous case</span><b>XGo Wallet<br>Crypto and Fiat Mobile Wallet</b></span>
     </a>
     <a class="pg pg-next" style="--c: 40, 170, 110" href="ukrsibbank">
       <span><span class="pg-l">Back to the first case<svg><use href="#i-next"/></svg></span><b>UKRSIBBANK<br>Omnichannel CRM</b></span>
-      <span class="pg-th wide" aria-hidden="true"><img src="../images/cases/ukrsib-crm.jpg" alt="" width="1100" height="715"></span>
+      <span class="pg-th wide" aria-hidden="true"><img src="../images/cases/ukrsib-crm.jpg" alt="" width="1200" height="760"></span>
     </a>
   </nav>
 </main>
