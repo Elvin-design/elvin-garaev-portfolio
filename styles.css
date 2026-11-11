@@ -611,3 +611,5 @@ html:not(.vt-theme)::view-transition-new(root) { animation: eg-page-in 0.45s cub
   .ai-flow .top { flex-direction: column; gap: 4px; }
   .ai-st-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+.sidebar .group summary, .sidebar .sub a, .sidebar .item, .theme button { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
